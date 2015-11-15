@@ -2,8 +2,8 @@
 // Created by joseph on 15/11/15.
 //
 
-#ifndef MAMEUISEN_GAME_H
-#define MAMEUISEN_GAME_H
+#ifndef MAMEUISEN_ROM_H
+#define MAMEUISEN_ROM_H
 
 #include <string>
 #include <vector>
@@ -61,4 +61,4 @@ public:
 };
 
 
-#endif //MAMEUISEN_GAME_H
+#endif //MAMEUISEN_ROM_H

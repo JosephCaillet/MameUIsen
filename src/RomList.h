@@ -26,9 +26,14 @@ public:
 		return name;
 	}
 
-	const std::vector<Rom*>& getRomList() const
+	const Rom* getRom(int romNumber) const
 	{
-		return romList;
+		return romList[romNumber];
+	}
+
+	const int getRomListSize() const
+	{
+		return romList.size();
 	}
 
 	//Member functions

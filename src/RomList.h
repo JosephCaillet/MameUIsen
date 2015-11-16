@@ -18,7 +18,7 @@ private:
 public:
 	//Constructor
 	RomList(const std::string& name) : name(name)
-	{ }
+	{}
 
 	//Getters
 	const std::string& getName() const
@@ -31,7 +31,7 @@ public:
 		return romList[romNumber];
 	}
 
-	const int getRomListSize() const
+	const unsigned long getRomListSize() const
 	{
 		return romList.size();
 	}

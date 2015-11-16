@@ -2,13 +2,14 @@
 // Created by joseph on 15/11/15.
 //
 
-#ifndef MAMEUISEN_ROMSET_H
-#define MAMEUISEN_ROMSET_H
+#ifndef MAMEUISEN_ROMLIST_H
+#define MAMEUISEN_ROMLIST_H
 
 #include <string>
+#include <vector>
 #include "Rom.h"
 
-class RomSet
+class RomList
 {
 private:
 	std::string name;
@@ -16,7 +17,7 @@ private:
 
 public:
 	//Constructor
-	RomSet(const std::string& name) : name(name)
+	RomList(const std::string& name) : name(name)
 	{ }
 
 	//Getters
@@ -43,4 +44,4 @@ public:
 };
 
 
-#endif //MAMEUISEN_ROMSET_H
+#endif //MAMEUISEN_ROMLIST_H

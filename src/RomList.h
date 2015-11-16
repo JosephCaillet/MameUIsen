@@ -17,7 +17,7 @@ private:
 
 public:
 	//Constructor
-	RomList(const std::string& name) : name(name)
+	RomList(const std::string& name="") : name(name)
 	{}
 
 	//Getters

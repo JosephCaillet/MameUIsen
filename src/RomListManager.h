@@ -13,7 +13,7 @@ class RomListManager
 {
 private:
 	std::vector<Rom> roms;
-	std::vector<RomList> romSets;
+	std::vector<RomList> romListsArray;
 	int currentRomSetIndex;//begin at 1
 
 public:

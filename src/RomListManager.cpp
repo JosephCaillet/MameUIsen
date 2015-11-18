@@ -61,7 +61,7 @@ void RomListManager::loadCategories()
 			{
 				size_t* pos = new size_t;
 				int categoryNumber = stoi(line, pos);
-				romListsArray[categoryNumber-1] = RomList(line.substr(*pos, string::npos));
+				romListsArray[categoryNumber-1] = RomList(line.substr(*pos+1, string::npos));
 				delete pos;
 			}
 

@@ -14,7 +14,7 @@ class RomListManager
 private:
 	std::vector<Rom> roms;
 	std::vector<RomList> romListsArray;
-	int currentRomSetIndex;//begin at 1
+	int currentRomSetIndex = 0;//begin at 1
 
 public:
 	//Constructor
@@ -23,11 +23,12 @@ public:
 	//Getters
 	RomList& getPreviousRomList();
 	RomList& getNextRomList();
-
+	int getCurrentRomSetIndex();
+	int getRomSetNumber();
 private:
 	//Member functions
 	void loadCategories();
-	void loadGames();
+	void loadRoms();
 	void updateCurrentRomSetIndex(char sign);
 };
 

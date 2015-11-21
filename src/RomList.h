@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 #include "Rom.h"
 
 class RomList
@@ -17,7 +18,7 @@ private:
 
 public:
 	//Constructor
-	RomList(const std::string& name="") : name(name)
+	RomList(const std::string& name="") : name(name), romList(0, nullptr)
 	{}
 
 	//Getters
@@ -26,7 +27,7 @@ public:
 		return name;
 	}
 
-	const Rom* getRom(int romNumber) const
+	Rom* getRom(int romNumber) const
 	{
 		return romList[romNumber];
 	}

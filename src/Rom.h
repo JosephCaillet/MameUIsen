@@ -13,11 +13,11 @@ private:
 	std::string description;
 	std::string filename;
 	std::string manufacturer;
-	int year;
+	std::string year;
 
 public:
 	//Constructor
-	Rom(const std::string& description, const std::string& filename, const std::string& manufacturer, int year)
+	Rom(const std::string& description="", const std::string& filename="", const std::string& manufacturer="", const std::string year="")
 			: description(description), filename(filename), manufacturer(manufacturer), year(year)
 	{}
 
@@ -37,7 +37,7 @@ public:
 		return manufacturer;
 	}
 
-	int getYear() const
+	const std::string getYear() const
 	{
 		return year;
 	}

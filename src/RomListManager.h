@@ -14,7 +14,7 @@ class RomListManager
 private:
 	std::vector<Rom> roms;
 	std::vector<RomList> romListsArray;
-	int currentRomSetIndex = 0;//begin at 1
+	int currentRomSetIndex = 0;//begin at 1, but set to zero, because the first get method called will be getNEXTRomlist().
 
 public:
 	//Constructor

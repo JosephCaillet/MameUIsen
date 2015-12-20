@@ -6,6 +6,7 @@
 #define MAMEUISEN_ROM_H
 
 #include <string>
+#include <SFML/Graphics.hpp>
 
 class Rom
 {
@@ -14,6 +15,9 @@ private:
 	std::string filename;
 	std::string manufacturer;
 	std::string year;
+	sf::Texture texture;
+	sf::Sprite sprite;
+
 
 public:
 	//Constructor
@@ -40,6 +44,16 @@ public:
 	const std::string getYear() const
 	{
 		return year;
+	}
+
+	const sf::Texture& getTexture() const
+	{
+		return texture;
+	}
+
+	const sf::Sprite& getSprite() const
+	{
+		return sprite;
 	}
 };
 

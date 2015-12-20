@@ -1,10 +1,16 @@
 #include <iostream>
 #include "RomListManager.h"
+#include "Configuration.h"
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
+	Configuration configuration;
+	cout << configuration.getMame_path();
+	cout << configuration.getRom_path();
+	cout << configuration.getScreenshots_path();
+
 	RomListManager romListManager;
 
 	int choice = 0;
@@ -75,8 +81,9 @@ int main(int argc, char* argv[])
 
 								if(choice == 1)
 								{
-									string cmd("mame -rompath ../roms ");
+									string cmd(configuration.getMame_path() + " -rompath " + configuration.getRom_path() + " ");
 									cmd += rom->getFilename();
+									cout << endl << cmd << endl;
 									system(cmd.c_str());
 								}
 							}

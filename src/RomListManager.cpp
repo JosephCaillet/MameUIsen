@@ -75,7 +75,6 @@ void RomListManager::loadCategories()
 				romListsArray[categoryNumber] = RomList(line.substr(*pos+1, string::npos));
 				delete pos;
 			}
-
 		}
 	}
 }

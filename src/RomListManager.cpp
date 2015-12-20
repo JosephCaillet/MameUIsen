@@ -113,7 +113,7 @@ void RomListManager::loadRoms()
 			if(line[0] != '#')
 			{
 				istringstream iss(line);
-				while(getline(iss, romProp, ';'))
+				while(getline(iss, romProp, ';'))//String tokenizer
 				{
 					romProperties.push_back(romProp);
 				}
@@ -129,7 +129,7 @@ void RomListManager::loadRoms()
 				Rom* romsPointer = &roms.back();
 				for(unsigned int i=4; i<romProperties.size(); i++)
 				{
-					romListsArray[atoi(romProperties[i].c_str())].addRom(romsPointer);
+					romListsArray[atoi(romProperties[i].c_str())].addRom(romsPointer);//Adding loaded rom pointer to a category
 				}
 			}
 		}

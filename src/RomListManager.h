@@ -25,6 +25,7 @@ public:
 	RomList& getNextRomList();
 	int getCurrentRomSetIndex();
 	int getRomSetNumber();
+
 private:
 	//Member functions
 	void loadCategories();

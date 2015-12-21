@@ -1,6 +1,7 @@
 #include <iostream>
 #include "RomListManager.h"
 #include "Configuration.h"
+#include "MameUIsenWindow.h"
 
 using namespace std;
 
@@ -12,6 +13,8 @@ int main()
 	cout << configuration.getScreenshots_path();
 
 	RomListManager romListManager;
+
+	MameUIsenWindow isenWindow;
 
 	int choice = 0;
 	RomList romList = romListManager.getNextRomList();

@@ -8,7 +8,7 @@
 #include <string>
 #include "ConfigDirectiveToFunction.h"
 
-#define DIRECTIVE_NUMBER 3
+#define DIRECTIVE_NUMBER 5
 
 class Configuration
 {

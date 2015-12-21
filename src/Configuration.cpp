@@ -15,6 +15,8 @@ Configuration::Configuration()
 	directiveToFunction[0] = ConfigDirectiveToFunction("MAME_PATH", &Configuration::setMame_path);
 	directiveToFunction[1] = ConfigDirectiveToFunction("ROMS_PATH", &Configuration::setRom_path);
 	directiveToFunction[2] = ConfigDirectiveToFunction("SCREENSHOTS_PATH", &Configuration::setScreenshots_path);
+	directiveToFunction[3] = ConfigDirectiveToFunction("WINDOW_WIDTH", &Configuration::setWindowWidth);
+	directiveToFunction[4] = ConfigDirectiveToFunction("WINDOW_HEIGHT", &Configuration::setWindowHeight);
 	loadConf();
 }
 

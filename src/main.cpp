@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main(int argc, char* argv[])
+int main()
 {
 	Configuration configuration;
 	cout << configuration.getMame_path();

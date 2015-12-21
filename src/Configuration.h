@@ -13,9 +13,11 @@
 class Configuration
 {
 private:
-	std::string mame_path;
-	std::string rom_path;
-	std::string screenshots_path;
+	std::string mame_path = "mame";
+	std::string rom_path = "../roms";
+	std::string screenshots_path = "../screenshots";
+	int windowWidth = 800;
+	int windowHeight = 600;
 	ConfigDirectiveToFunction directiveToFunction[DIRECTIVE_NUMBER];
 
 private:
@@ -52,6 +54,26 @@ public:
 	void setScreenshots_path(const std::string& screenshots_path)
 	{
 		Configuration::screenshots_path = screenshots_path;
+	}
+
+	int getWindowWidth() const
+	{
+		return windowWidth;
+	}
+
+	void setWindowWidth(const std::string& windowWidth)
+	{
+		Configuration::windowWidth = std::stoi(windowWidth);
+	}
+
+	int getWindowHeight() const
+	{
+		return windowHeight;
+	}
+
+	void setWindowHeight(const std::string& windowHeight)
+	{
+		Configuration::windowHeight = std::stoi(windowHeight);
 	}
 };
 

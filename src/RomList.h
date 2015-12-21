@@ -32,7 +32,7 @@ public:
 		return romList[romNumber];
 	}
 
-	const unsigned long getRomListSize() const
+	unsigned long getRomListSize() const
 	{
 		return romList.size();
 	}

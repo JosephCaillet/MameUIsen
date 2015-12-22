@@ -17,6 +17,7 @@ private:
 
 public:
 	MameUIsenWindow();
+	void lauch();
 };
 
 

@@ -41,6 +41,20 @@ int RomListManager::getRomSetNumber()
 }
 
 //Member Functions
+void RomListManager::loadTextures(Configuration& configuration)
+{
+	for(auto & rom : roms)
+	{
+		sf::Texture& texture = rom.getTexture();
+		bool loadingOk = texture.loadFromFile(configuration.getScreenshots_path() + "/" + rom.getFilename() + ".png");
+		if(loadingOk)
+		{
+			rom.setIsTextureCorrectlyLoaded(true);
+			rom.getSprite().setTexture(rom.getTexture());
+		}
+	}
+}
+
 void RomListManager::loadCategories()
 {
 	ifstream categoriesConfFile("../config/categories.cfg", ios::in);
@@ -90,6 +104,7 @@ void RomListManager::loadRoms()
 	else
 	{
 		string line;
+
 		int nbLines = 0;
 
 		while(getline(romsConfFile, line))
@@ -106,6 +121,7 @@ void RomListManager::loadRoms()
 		romsConfFile.seekg(0);
 
 		string romProp;
+		nbLines = 0;
 		while(getline(romsConfFile, line))
 		{
 			vector<string> romProperties;
@@ -124,12 +140,13 @@ void RomListManager::loadRoms()
 				}
 
 				Rom rom(romProperties[0], romProperties[1], romProperties[2], romProperties[3]);
-				roms.push_back(rom);
-				Rom* romsPointer = &roms.back();
+				cout << rom.getDescription() << endl;
+				roms[nbLines] = rom;
 				for(unsigned int i=4; i<romProperties.size(); i++)
 				{
-					romListsArray[atoi(romProperties[i].c_str())].addRom(romsPointer);//Adding loaded rom pointer to a category
+					romListsArray[atoi(romProperties[i].c_str())].addRom(&roms[nbLines]);//Adding loaded rom pointer to a category
 				}
+				nbLines++;
 			}
 		}
 	}

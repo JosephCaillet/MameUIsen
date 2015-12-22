@@ -7,16 +7,13 @@ using namespace std;
 
 int main()
 {
-	Configuration configuration;
-	cout << configuration.getMame_path();
-	cout << configuration.getRom_path();
-	cout << configuration.getScreenshots_path();
+	//Configuration configuration;
 
-	RomListManager romListManager;
+	//RomListManager romListManager;
 
 	MameUIsenWindow isenWindow;
 
-	int choice = 0;
+	/*int choice = 0;
 	RomList romList = romListManager.getNextRomList();
 
 	//Choosing category
@@ -51,8 +48,8 @@ int main()
 					cout << "\nRoms in category " << romList.getName() << " :\n";
 					for(unsigned int i = 0; i < romList.getRomListSize(); i++)
 					{
-						Rom* rom = romList.getRom(i);
-						cout << "\t" << i + 1 << "/" << romList.getRomListSize() << " : " << rom->getDescription() << endl;
+						Rom& rom = romList.getRom(i);
+						cout << "\t" << i + 1 << "/" << romList.getRomListSize() << " : " << rom.getDescription() << endl;
 					}
 
 					cout << "Roms menu (" << romList.getName() << "):\n";
@@ -75,9 +72,9 @@ int main()
 						{
 							if(choice > 0 && choice <= (int) romList.getRomListSize())
 							{
-								Rom* rom = romList.getRom(choice-1);
-								cout << "\tYou are about to play : " << rom->getDescription();
-								cout << ", realised in " << rom->getYear() << " by " << rom->getManufacturer() << "." << endl;
+								Rom& rom = romList.getRom(choice - 1);
+								cout << "\tYou are about to play : " << rom.getDescription();
+								cout << ", realised in " << rom.getYear() << " by " << rom.getManufacturer() << "." << endl;
 
 								cout << "Launch this rom ? (1 means yes, anything else means no) : ";
 								cin >> choice;
@@ -85,7 +82,7 @@ int main()
 								if(choice == 1)
 								{
 									string cmd(configuration.getMame_path() + " -rompath " + configuration.getRom_path() + " ");
-									cmd += rom->getFilename();
+									cmd += rom.getFilename();
 									cout << endl << cmd << endl;
 									system(cmd.c_str());
 								}
@@ -109,7 +106,7 @@ int main()
 				cout << "Incorect input.\n";
 			}
 		}
-	}
+	}*/
 
 	return 0;
 }

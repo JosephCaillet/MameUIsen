@@ -17,12 +17,13 @@ private:
 	std::string year;
 	sf::Texture texture;
 	sf::Sprite sprite;
+	bool isTextureCorrectlyLoaded = false;
 
 
 public:
 	//Constructor
 	Rom(const std::string& description="", const std::string& filename="", const std::string& manufacturer="", const std::string year="")
-			: description(description), filename(filename), manufacturer(manufacturer), year(year)
+			: description(description), filename(filename), manufacturer(manufacturer), year(year), texture(), sprite()
 	{}
 
 	//Getters
@@ -46,14 +47,25 @@ public:
 		return year;
 	}
 
-	const sf::Texture& getTexture() const
+	sf::Texture& getTexture() const
 	{
-		return texture;
+		return (sf::Texture&) texture;
 	}
 
-	const sf::Sprite& getSprite() const
+	sf::Sprite& getSprite() const
 	{
-		return sprite;
+		return (sf::Sprite&)sprite;
+	}
+
+	bool isIsTextureCorrectlyLoaded() const
+	{
+		return isTextureCorrectlyLoaded;
+	}
+
+	//Setter
+	void setIsTextureCorrectlyLoaded(bool isTextureCorrectlyLoaded)
+	{
+		Rom::isTextureCorrectlyLoaded = isTextureCorrectlyLoaded;
 	}
 };
 

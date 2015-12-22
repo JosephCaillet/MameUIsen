@@ -27,9 +27,9 @@ public:
 		return name;
 	}
 
-	Rom* getRom(int romNumber) const
+	Rom& getRom(int romNumber) const
 	{
-		return romList[romNumber];
+		return *romList[romNumber];
 	}
 
 	unsigned long getRomListSize() const

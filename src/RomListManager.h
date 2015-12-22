@@ -8,6 +8,7 @@
 #include <vector>
 #include "Rom.h"
 #include "RomList.h"
+#include "Configuration.h"
 
 class RomListManager
 {
@@ -25,9 +26,10 @@ public:
 	RomList& getNextRomList();
 	int getCurrentRomSetIndex();
 	int getRomSetNumber();
+	//Member functions
+	void loadTextures(Configuration& configuration);
 
 private:
-	//Member functions
 	void loadCategories();
 	void loadRoms();
 	void updateCurrentRomSetIndex(char sign);

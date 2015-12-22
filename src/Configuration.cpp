@@ -41,7 +41,7 @@ void Configuration::loadConf()
 					size_t pos = line.find(dtf.getDirective());
 					if(pos != string::npos)
 					{
-						(this->*dtf.getSetter()) (line.substr(pos + dtf.getDirective().length()));
+						(this->*dtf.getSetter()) (line.substr(pos + dtf.getDirective().length() + 1));
 					}
 				}
 			}

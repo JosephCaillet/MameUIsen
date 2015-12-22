@@ -34,6 +34,7 @@ Configuration::Configuration()
 	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_YEAR_SIZE", &Configuration::));
 	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_X", &Configuration::));
 	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_SIZE", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_MARGIN_SIZE", &Configuration::));
 	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_MAX_LENGTH", &Configuration::));
 	loadConf();
 }

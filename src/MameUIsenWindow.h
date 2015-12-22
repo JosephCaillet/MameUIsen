@@ -6,6 +6,7 @@
 #define MAMEUISEN_MAMEUISENWINDOW_H
 
 #include <SFML/Graphics.hpp>
+#include <string>
 #include "Configuration.h"
 #include "RomListManager.h"
 
@@ -25,7 +26,11 @@ private:
 
 public:
 	MameUIsenWindow();
+
+private:
+	bool loadFontAndInitSprite();
 	void lauch();
+	void updateCategoryDisplay(const std::string& catName, int catIndex, int catTotal);
 };
 
 

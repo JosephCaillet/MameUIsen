@@ -37,6 +37,9 @@ private:
 	int rom_name_size;
 	int rom_name_margin_size;
 	int rom_name_max_length;
+	int rom_index_x;
+	int rom_index_y;
+	int rom_index_size;
 	std::vector<ConfigDirectiveToFunction> directiveToFunction;
 
 private:
@@ -293,6 +296,36 @@ public:
 	void setRom_name_max_length(const std::string& rom_name_max_length)
 	{
 		Configuration::rom_name_max_length = std::stoi(rom_name_max_length);
+	}
+
+	int getRom_index_x() const
+	{
+		return rom_index_x;
+	}
+
+	void setRom_index_x(const std::string& rom_index_x)
+	{
+		Configuration::rom_index_x = std::stoi(rom_index_x);
+	}
+
+	int getRom_index_size() const
+	{
+		return rom_index_size;
+	}
+
+	void setRom_index_size(const std::string& rom_index_size)
+	{
+		Configuration::rom_index_size = std::stoi(rom_index_size);
+	}
+
+	int getRom_index_y() const
+	{
+		return rom_index_y;
+	}
+
+	void setRom_index_y(const std::string& rom_index_y)
+	{
+		Configuration::rom_index_y = std::stoi(rom_index_y);
 	}
 };
 

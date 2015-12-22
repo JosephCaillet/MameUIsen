@@ -15,6 +15,14 @@ private:
 	Configuration configuration;
 	RomListManager romListManager;
 
+	sf::Sprite screenshot;
+	sf::Font font;
+	sf::Text categoryName;
+	sf::Text categoryIndexProgress;
+	sf::Text romYear;
+	sf::Text romManufacturer;
+	sf::Text romIndexProgress;
+
 public:
 	MameUIsenWindow();
 	void lauch();

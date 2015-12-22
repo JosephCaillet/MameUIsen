@@ -6,9 +6,8 @@
 #define MAMEUISEN_CONFIGURATION_H
 
 #include <string>
+#include <vector>
 #include "ConfigDirectiveToFunction.h"
-
-#define DIRECTIVE_NUMBER 5
 
 class Configuration
 {
@@ -18,7 +17,7 @@ private:
 	std::string screenshots_path = "../screenshots";
 	int windowWidth = 800;
 	int windowHeight = 600;
-	ConfigDirectiveToFunction directiveToFunction[DIRECTIVE_NUMBER];
+	std::vector<ConfigDirectiveToFunction> directiveToFunction;
 
 private:
 	void loadConf();

@@ -12,11 +12,29 @@ using namespace std;
 
 Configuration::Configuration()
 {
-	directiveToFunction[0] = ConfigDirectiveToFunction("MAME_PATH", &Configuration::setMame_path);
-	directiveToFunction[1] = ConfigDirectiveToFunction("ROMS_PATH", &Configuration::setRom_path);
-	directiveToFunction[2] = ConfigDirectiveToFunction("SCREENSHOTS_PATH", &Configuration::setScreenshots_path);
-	directiveToFunction[3] = ConfigDirectiveToFunction("WINDOW_WIDTH", &Configuration::setWindowWidth);
-	directiveToFunction[4] = ConfigDirectiveToFunction("WINDOW_HEIGHT", &Configuration::setWindowHeight);
+	directiveToFunction.push_back(ConfigDirectiveToFunction("MAME_PATH", &Configuration::setMame_path));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("ROMS_PATH", &Configuration::setRom_path));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("SCREENSHOTS_PATH", &Configuration::setScreenshots_path));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("WINDOW_WIDTH", &Configuration::setWindowWidth));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("WINDOW_HEIGHT", &Configuration::setWindowHeight));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("CATEGORY_NAME_X", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("CATEGORY_NAME_Y", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("CATEGORY_NAME_SIZE", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("CATEGORY_INDEX_X", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("CATEGORY_INDEX_Y", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("CATEGORY_INDEX_SIZE", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_SCREENSHOT_X", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_SCREENSHOT_Y", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_SCREENSHOT_SIZE_FACTOR", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_MANUFACTURER_X", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_MANUFACTURER_Y", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_MANUFACTURER_SIZE", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_YEAR_X", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_YEAR_Y", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_YEAR_SIZE", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_X", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_SIZE", &Configuration::));
+	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_MAX_LENGTH", &Configuration::));
 	loadConf();
 }
 

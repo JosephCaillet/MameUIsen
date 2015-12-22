@@ -50,7 +50,6 @@ void RomListManager::loadTextures(Configuration& configuration)
 		if(loadingOk)
 		{
 			rom.setIsTextureCorrectlyLoaded(true);
-			rom.getSprite().setTexture(rom.getTexture());
 		}
 	}
 }
@@ -140,7 +139,6 @@ void RomListManager::loadRoms()
 				}
 
 				Rom rom(romProperties[0], romProperties[1], romProperties[2], romProperties[3]);
-				cout << rom.getDescription() << endl;
 				roms[nbLines] = rom;
 				for(unsigned int i=4; i<romProperties.size(); i++)
 				{

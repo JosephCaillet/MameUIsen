@@ -15,13 +15,6 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration(), romListMan
 
 void MameUIsenWindow::lauch()
 {
-	RomList& romList = romListManager.getNextRomList();
-	Rom& rom = romList.getRom(3);
-	sf::Sprite& sprite= rom.getSprite();
-	sprite.setPosition(sf::Vector2f(5,5));
-	draw(sprite);
-	display();
-	std::system("sleep 5");
 	//Get the first category
 	//Display category name and quantity
 	//Display games titles

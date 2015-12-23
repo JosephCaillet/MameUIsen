@@ -52,14 +52,24 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 void MameUIsenWindow::lauch()
 {
 	RomList& romList = romListManager.getNextRomList();
-
+	cout << romList.getName() << endl;
+	romList = romListManager.getNextRomList();
+	cout << romList.getName() << endl;
+	romList = romListManager.getPreviousRomList();
+	cout << romList.getName() << endl;
+	romList = romListManager.getNextRomList();
+	cout << romList.getName() << endl;
+	romList = romListManager.getNextRomList();
+	cout << romList.getName() << endl;
+	romList = romListManager.getNextRomList();
+	cout << romList.getName() << endl;
 	clear(sf::Color::Black);
 	display();
 	clear(sf::Color::Black);
 	display();
 	updateCategoryDisplay(romList.getName(), romListManager.getCurrentRomSetIndex(), romListManager.getRomSetNumber());
 	display();
-	std::system("sleep 1");
+	std::system("sleep 5");
 	//Get the first category
 	//Display category name and quantity
 	//Display games titles

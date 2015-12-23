@@ -33,5 +33,12 @@ private:
 	void updateCategoryDisplay(const std::string& catName, int catIndex, int catTotal);
 };
 
+enum event
+{
+	NO_EVENT,
+	EXIT,
+	NEXT_ROM, PREVIOUS_ROM,
+	NEXT_CATEGORY, PREVIOUS_CATEGORY
+};
 
 #endif //MAMEUISEN_MAMEUISENWINDOW_H

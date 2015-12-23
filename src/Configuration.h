@@ -18,28 +18,60 @@ private:
 	int windowWidth = 800;
 	int windowHeight = 600;
 	std::string font_path = "../rsc/Fipps-Regular.otf";
+
 	int category_name_x;
 	int category_name_y;
 	int category_name_size;
+	int category_name_color_red = 255;
+	int category_name_color_green  =255;
+	int category_name_color_blue  = 255;
+	int category_name_color_alpha = 255;
+
 	int category_index_x;
 	int category_index_y;
 	int category_index_size;
+	int category_index_color_red = 255;
+	int category_index_color_green  =255;
+	int category_index_color_blue  = 255;
+	int category_index_color_alpha = 255;
+
 	int rom_screenshot_x;
 	int rom_screenshot_y;
 	float rom_screenshot_size_factor;
+
 	int rom_manufacturer_x;
 	int rom_manufacturer_y;
 	int rom_manufacturer_size;
+	int rom_manufacturer_color_red = 255;
+	int rom_manufacturer_color_green  =255;
+	int rom_manufacturer_color_blue  = 255;
+	int rom_manufacturer_color_alpha = 255;
+
 	int rom_year_x;
 	int rom_year_y;
 	int rom_year_size;
+	int rom_year_color_red = 255;
+	int rom_year_color_green  =255;
+	int rom_year_color_blue  = 255;
+	int rom_year_color_alpha = 255;
+
 	int rom_name_x;
 	int rom_name_size;
 	int rom_name_margin_size;
 	int rom_name_max_length;
+	int rom_name_color_red = 255;
+	int rom_name_color_green  =255;
+	int rom_name_color_blue  = 255;
+	int rom_name_color_alpha = 255;
+
 	int rom_index_x;
 	int rom_index_y;
 	int rom_index_size;
+	int rom_index_color_red = 255;
+	int rom_index_color_green  =255;
+	int rom_index_color_blue  = 255;
+	int rom_index_color_alpha = 255;
+
 	std::vector<ConfigDirectiveToFunction> directiveToFunction;
 
 private:
@@ -48,6 +80,7 @@ private:
 public:
 	Configuration();
 
+	//General
 	const std::string& getMame_path() const
 	{
 		return mame_path;
@@ -108,6 +141,7 @@ public:
 		Configuration::font_path = font_path;
 	}
 
+	//Category name
 	int getCategory_name_x() const
 	{
 		return category_name_x;
@@ -138,6 +172,47 @@ public:
 		Configuration::category_name_size = std::stoi(category_name_size);
 	}
 
+	int getCategory_name_color_red() const
+	{
+		return category_name_color_red;
+	}
+
+	void setCategory_name_color_red(const std::string& category_name_color_red)
+	{
+		Configuration::category_name_color_red = std::stoi(category_name_color_red);
+	}
+
+	int getCategory_name_color_green() const
+	{
+		return category_name_color_green;
+	}
+
+	void setCategory_name_color_green(const std::string& category_name_color_green)
+	{
+		Configuration::category_name_color_green = std::stoi(category_name_color_green);
+	}
+
+	int getCategory_name_color_blue() const
+	{
+		return category_name_color_blue;
+	}
+
+	void setCategory_name_color_blue(const std::string& category_name_color_blue)
+	{
+		Configuration::category_name_color_blue = std::stoi(category_name_color_blue);
+	}
+
+	int getCategory_name_color_alpha() const
+	{
+		return category_name_color_alpha;
+	}
+
+	void setCategory_name_color_alpha(const std::string& category_name_color_alpha)
+	{
+		Configuration::category_name_color_alpha = std::stoi(category_name_color_alpha);
+	}
+
+	//Category index
 	int getCategory_index_x() const
 	{
 		return category_index_x;
@@ -168,6 +243,47 @@ public:
 		Configuration::category_index_size = std::stoi(category_index_size);
 	}
 
+	int getCategory_index_color_red() const
+	{
+		return category_index_color_red;
+	}
+
+	void setCategory_index_color_red(const std::string& category_index_color_red)
+	{
+		Configuration::category_index_color_red = std::stoi(category_index_color_red);
+	}
+
+	int getCategory_index_color_green() const
+	{
+		return category_index_color_green;
+	}
+
+	void setCategory_index_color_green(const std::string& category_index_color_green)
+	{
+		Configuration::category_index_color_green = std::stoi(category_index_color_green);
+	}
+
+	int getCategory_index_color_blue() const
+	{
+		return category_index_color_blue;
+	}
+
+	void setCategory_index_color_blue(const std::string& category_index_color_blue)
+	{
+		Configuration::category_index_color_blue = std::stoi(category_index_color_blue);
+	}
+
+	int getCategory_index_color_alpha() const
+	{
+		return category_index_color_alpha;
+	}
+
+	void setCategory_index_color_alpha(const std::string& category_index_color_alpha)
+	{
+		Configuration::category_index_color_alpha = std::stoi(category_index_color_alpha);
+	}
+
+	//Rom screenshot
 	int getRom_screenshot_x() const
 	{
 		return rom_screenshot_x;
@@ -198,6 +314,7 @@ public:
 		Configuration::rom_screenshot_size_factor = std::stof(rom_screenshot_size_factor);
 	}
 
+	//Rom manufacturer
 	int getRom_manufacturer_x() const
 	{
 		return rom_manufacturer_x;
@@ -228,6 +345,47 @@ public:
 		Configuration::rom_manufacturer_size = std::stoi(rom_manufacturer_size);
 	}
 
+	int getRom_manufacturer_color_red() const
+	{
+		return rom_manufacturer_color_red;
+	}
+
+	void setRom_manufacturer_color_red(const std::string& rom_manufacturer_color_red)
+	{
+		Configuration::rom_manufacturer_color_red = std::stoi(rom_manufacturer_color_red);
+	}
+
+	int getRom_manufacturer_color_green() const
+	{
+		return rom_manufacturer_color_green;
+	}
+
+	void setRom_manufacturer_color_green(const std::string& rom_manufacturer_color_green)
+	{
+		Configuration::rom_manufacturer_color_green = std::stoi(rom_manufacturer_color_green);
+	}
+
+	int getRom_manufacturer_color_blue() const
+	{
+		return rom_manufacturer_color_blue;
+	}
+
+	void setRom_manufacturer_color_blue(const std::string& rom_manufacturer_color_blue)
+	{
+		Configuration::rom_manufacturer_color_blue = std::stoi(rom_manufacturer_color_blue);
+	}
+
+	int getRom_manufacturer_color_alpha() const
+	{
+		return rom_manufacturer_color_alpha;
+	}
+
+	void setRom_manufacturer_color_alpha(const std::string& rom_manufacturer_color_alpha)
+	{
+		Configuration::rom_manufacturer_color_alpha = std::stoi(rom_manufacturer_color_alpha);
+	}
+
+	//Rom year
 	int getRom_year_x() const
 	{
 		return rom_year_x;
@@ -258,6 +416,47 @@ public:
 		Configuration::rom_year_size = std::stoi(rom_year_size);
 	}
 
+	int getRom_year_color_red() const
+	{
+		return rom_year_color_red;
+	}
+
+	void setRom_year_color_red(const std::string& rom_year_color_red)
+	{
+		Configuration::rom_year_color_red = std::stoi(rom_year_color_red);
+	}
+
+	int getRom_year_color_green() const
+	{
+		return rom_year_color_green;
+	}
+
+	void setRom_year_color_green(const std::string& rom_year_color_green)
+	{
+		Configuration::rom_year_color_green = std::stoi(rom_year_color_green);
+	}
+
+	int getRom_year_color_blue() const
+	{
+		return rom_year_color_blue;
+	}
+
+	void setRom_year_color_blue(const std::string& rom_year_color_blue)
+	{
+		Configuration::rom_year_color_blue = std::stoi(rom_year_color_blue);
+	}
+
+	int getRom_year_color_alpha() const
+	{
+		return rom_year_color_alpha;
+	}
+
+	void setRom_year_color_alpha(const std::string& rom_year_color_alpha)
+	{
+		Configuration::rom_year_color_alpha = std::stoi(rom_year_color_alpha);
+	}
+
+	//Rom name
 	int getRom_name_x() const
 	{
 		return rom_name_x;
@@ -298,6 +497,47 @@ public:
 		Configuration::rom_name_max_length = std::stoi(rom_name_max_length);
 	}
 
+	int getRom_name_color_red() const
+	{
+		return rom_name_color_red;
+	}
+
+	void setRom_name_color_red(const std::string& rom_name_color_red)
+	{
+		Configuration::rom_name_color_red = std::stoi(rom_name_color_red);
+	}
+
+	int getRom_name_color_green() const
+	{
+		return rom_name_color_green;
+	}
+
+	void setRom_name_color_green(const std::string& rom_name_color_green)
+	{
+		Configuration::rom_name_color_green = std::stoi(rom_name_color_green);
+	}
+
+	int getRom_name_color_blue() const
+	{
+		return rom_name_color_blue;
+	}
+
+	void setRom_name_color_blue(const std::string& rom_name_color_blue)
+	{
+		Configuration::rom_name_color_blue = std::stoi(rom_name_color_blue);
+	}
+
+	int getRom_name_color_alpha() const
+	{
+		return rom_name_color_alpha;
+	}
+
+	void setRom_name_color_alpha(const std::string& rom_name_color_alpha)
+	{
+		Configuration::rom_name_color_alpha = std::stoi(rom_name_color_alpha);
+	}
+
+	//Rom index
 	int getRom_index_x() const
 	{
 		return rom_index_x;
@@ -326,6 +566,46 @@ public:
 	void setRom_index_y(const std::string& rom_index_y)
 	{
 		Configuration::rom_index_y = std::stoi(rom_index_y);
+	}
+
+	int getRom_index_color_red() const
+	{
+		return rom_index_color_red;
+	}
+
+	void setRom_index_color_red(const std::string& rom_index_color_red)
+	{
+		Configuration::rom_index_color_red = std::stoi(rom_index_color_red);
+	}
+
+	int getRom_index_color_green() const
+	{
+		return rom_index_color_green;
+	}
+
+	void setRom_index_color_green(const std::string& rom_index_color_green)
+	{
+		Configuration::rom_index_color_green = std::stoi(rom_index_color_green);
+	}
+
+	int getRom_index_color_blue() const
+	{
+		return rom_index_color_blue;
+	}
+
+	void setRom_index_color_blue(const std::string& rom_index_color_blue)
+	{
+		Configuration::rom_index_color_blue = std::stoi(rom_index_color_blue);
+	}
+
+	int getRom_index_color_alpha() const
+	{
+		return rom_index_color_alpha;
+	}
+
+	void setRom_index_color_alpha(const std::string& rom_index_color_alpha)
+	{
+		Configuration::rom_index_color_alpha = std::stoi(rom_index_color_alpha);
 	}
 };
 

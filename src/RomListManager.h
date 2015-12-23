@@ -22,8 +22,8 @@ public:
 	RomListManager();
 
 	//Getters
-	RomList& getPreviousRomList();
-	RomList& getNextRomList();
+	RomList* getPreviousRomList();
+	RomList* getNextRomList();
 	int getCurrentRomSetIndex();
 	int getRomSetNumber();
 	//Member functions

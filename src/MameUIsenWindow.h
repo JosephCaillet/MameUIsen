@@ -10,6 +10,15 @@
 #include "Configuration.h"
 #include "RomListManager.h"
 
+enum event
+{
+	NO_EVENT,
+	EXIT,
+	LAUNCH_ROM,
+	NEXT_ROM, PREVIOUS_ROM,
+	NEXT_CATEGORY, PREVIOUS_CATEGORY
+};
+
 class MameUIsenWindow : sf::RenderWindow
 {
 private:
@@ -30,15 +39,19 @@ public:
 private:
 	bool loadFontAndInitSprite();
 	void lauch();
-	void updateCategoryDisplay(const std::string& catName, int catIndex, int catTotal);
-};
 
-enum event
-{
-	NO_EVENT,
-	EXIT,
-	NEXT_ROM, PREVIOUS_ROM,
-	NEXT_CATEGORY, PREVIOUS_CATEGORY
+	void updateAllDisplay(const RomList& romList, const Rom& rom, int currentRomIndex);
+	void displayAll(const Rom& rom);
+	void updateCategoryDisplay(const RomList& romList);
+	void displayCategory();
+	void updateRomInfosDisplay(const Rom& rom, int romIndex, int romTotal);
+	void displayRomInfos();
+	void updateScreenshotDisplay(const Rom& rom);
+	void displayScreenshot();
+	void updateRomsNamesDisplay(const Rom& rom);
+	void displayRomsNames(const Rom& rom);
+
+	event getEvent();
 };
 
 #endif //MAMEUISEN_MAMEUISENWINDOW_H

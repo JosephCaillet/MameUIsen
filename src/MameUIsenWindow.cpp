@@ -3,7 +3,6 @@
 //
 
 #include "MameUIsenWindow.h"
-#include <iostream>
 #include <sstream>
 
 using namespace std;
@@ -16,7 +15,8 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration(), romListMan
 		exit(EXIT_FAILURE);
 	}
 	romListManager.initText(configuration, font);
-	create(sf::VideoMode(configuration.getWindowWidth(), configuration.getWindowHeight()), "MameUIsen", sf::Style::Titlebar | sf::Style::Close	);
+	create(sf::VideoMode(configuration.getWindowWidth(), configuration.getWindowHeight()), "MameUIsen", sf::Style::Titlebar | sf::Style::Close);
+	setVerticalSyncEnabled(true);
 	display();
 	lauch();
 }
@@ -49,6 +49,7 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 	romYear.setPosition(configuration.getRom_year_x(), configuration.getRom_year_y());
 	romManufacturer.setPosition(configuration.getRom_manufacturer_x(), configuration.getRom_manufacturer_y());
 	romIndexProgress.setPosition(configuration.getRom_index_x(), configuration.getRom_index_y());
+	screenshot.setPosition(configuration.getRom_screenshot_x(), configuration.getRom_screenshot_y());
 
 	//Color
 	categoryName.setColor(sf::Color(configuration.getCategory_name_color_red(),
@@ -77,45 +78,154 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 
 void MameUIsenWindow::lauch()
 {
-	RomList& romList = romListManager.getNextRomList();
-	romList = romListManager.getNextRomList();
-	romList = romListManager.getPreviousRomList();
-	romList = romListManager.getNextRomList();
-	romList = romListManager.getNextRomList();
-	romList = romListManager.getNextRomList();
-	clear(sf::Color::Black);
-	display();
-	clear(sf::Color::Black);
-	display();
-	updateCategoryDisplay(romList.getName(), romListManager.getCurrentRomSetIndex(), romListManager.getRomSetNumber());
-	display();
-	std::system("sleep 5");
-	//Get the first category
-	//Display category name and quantity
-	//Display games titles
-	//Display image and info about the selected game
-	//If event change current game
-	//	update game list
-	//	Display category name and quantity
-	//	Display games titles
-	//	Display image and info about the selected game
-	//If event change category
-	//	update category
-	//	update game list
-	//	Display category name and quantity
-	//	Display games titles
-	//	Display image and info about the selected game
-	//If exit
-	//	quit
+	RomList* romList = romListManager.getNextRomList();
+	Rom* rom = romList->getRom(1);
+	unsigned int numRom = 1;
+
+	while(isOpen())
+	{
+		event e = getEvent();
+		switch(e)
+		{
+			case NO_EVENT:
+				break;
+			case NEXT_ROM:
+				if(numRom != romList->getRomListSize())
+				{
+					rom = romList->getRom(++numRom);
+				}
+				break;
+			case PREVIOUS_ROM:
+				if(numRom != 1)
+				{
+					rom = romList->getRom(--numRom);
+				}
+				break;
+			case NEXT_CATEGORY:
+				romList = romListManager.getNextRomList();
+				numRom = 1;
+				rom = romList->getRom(1);
+				break;
+			case PREVIOUS_CATEGORY:
+				romList = romListManager.getPreviousRomList();
+				numRom = 1;
+				rom = romList->getRom(1);
+				break;
+			case LAUNCH_ROM:
+			{
+				string cmd(configuration.getMame_path() + " -rompath " + configuration.getRom_path() + " ");
+				cmd += rom->getFilename();
+				system(cmd.c_str());
+				break;
+			}
+			case EXIT:
+				close();
+		}
+		updateAllDisplay(*romList, *rom, numRom);
+		displayAll(*rom);
+	}
 }
 
-void MameUIsenWindow::updateCategoryDisplay(const string& catName, int catIndex, int catTotal)
+void MameUIsenWindow::updateAllDisplay(const RomList& romList, const Rom& rom, int currentRomIndex)
 {
-	categoryName.setString(catName);
-	draw(categoryName);
+	updateCategoryDisplay(romList);
+	updateRomInfosDisplay(rom, currentRomIndex, romList.getRomListSize());
+	updateScreenshotDisplay(rom);
+	updateRomsNamesDisplay(rom);
+}
+
+void MameUIsenWindow::displayAll(const Rom& rom)
+{
+	clear(sf::Color::Black);
+	displayCategory();
+	displayRomInfos();
+	displayScreenshot();
+	displayRomsNames(rom);
+	display();
+}
+
+void MameUIsenWindow::updateCategoryDisplay(const RomList& romList)
+{
+	categoryName.setString(romList.getName());
 
 	stringstream categoryIndex;
-	categoryIndex << catIndex << "/" << catTotal;
+	categoryIndex << romListManager.getCurrentRomSetIndex() << "/" << romListManager.getRomSetNumber();
 	categoryIndexProgress.setString(categoryIndex.str());
+}
+
+void MameUIsenWindow::displayCategory()
+{
+	draw(categoryName);
 	draw(categoryIndexProgress);
+}
+
+void MameUIsenWindow::updateRomInfosDisplay(const Rom& rom, int romIndex, int romTotal)
+{
+	romYear.setString(rom.getYear());
+
+	romManufacturer.setString(rom.getManufacturer());
+
+	stringstream romIndexString;
+	romIndexString << romIndex << "/" << romTotal;
+	romIndexProgress.setString(romIndexString.str());
+}
+
+
+void MameUIsenWindow::displayRomInfos()
+{
+	draw(romYear);
+	draw(romManufacturer);
+	draw(romIndexProgress);
+}
+
+void MameUIsenWindow::updateScreenshotDisplay(const Rom& rom)
+{
+	screenshot.setTexture(rom.getTexture(), true);
+}
+
+void MameUIsenWindow::displayScreenshot()
+{
+	draw(screenshot);
+}
+
+void MameUIsenWindow::updateRomsNamesDisplay(const Rom& rom)
+{
+	rom.getTextSprite().setPosition(configuration.getRom_name_x(), 200);
+}
+
+void MameUIsenWindow::displayRomsNames(const Rom& rom)
+{
+	draw(rom.getTextSprite());
+}
+
+event MameUIsenWindow::getEvent()
+{
+	sf::Event event;
+	pollEvent(event);
+
+	switch(event.type)
+	{
+		case sf::Event::Closed:
+			return EXIT;
+		case sf::Event::KeyPressed:
+			switch(event.key.code)
+			{
+				case sf::Keyboard::Escape:
+					return EXIT;
+				case sf::Keyboard::Up:
+					return PREVIOUS_ROM;
+				case sf::Keyboard::Down:
+					return NEXT_ROM;
+				case sf::Keyboard::Left:
+					return PREVIOUS_CATEGORY;
+				case sf::Keyboard::Right:
+					return NEXT_CATEGORY;
+				case sf::Keyboard::Return:
+					return LAUNCH_ROM;
+				default:
+					return NO_EVENT;
+			}
+		default:
+			return NO_EVENT;
+	}
 }

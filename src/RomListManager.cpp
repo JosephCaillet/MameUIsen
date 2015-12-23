@@ -18,16 +18,16 @@ RomListManager::RomListManager()
 }
 
 //Getters
-RomList& RomListManager::getPreviousRomList()
+RomList* RomListManager::getPreviousRomList()
 {
 	updateCurrentRomSetIndex('-');
-	return romListsArray[currentRomSetIndex-1];
+	return &romListsArray[currentRomSetIndex-1];
 }
 
-RomList& RomListManager::getNextRomList()
+RomList* RomListManager::getNextRomList()
 {
 	updateCurrentRomSetIndex('+');
-	return romListsArray[currentRomSetIndex-1];
+	return &romListsArray[currentRomSetIndex-1];
 }
 
 int RomListManager::getCurrentRomSetIndex()
@@ -64,6 +64,7 @@ void RomListManager::initText(const Configuration& configuration, const sf::Font
 								configuration.getRom_name_color_blue(),
 								configuration.getRom_name_color_alpha()));
 		text.setCharacterSize(configuration.getRom_name_size());
+		text.setString(rom.getDescription());
 	}
 }
 

@@ -16,14 +16,14 @@ private:
 	std::string manufacturer;
 	std::string year;
 	sf::Texture texture;
-	sf::Text nameSprite;
+	sf::Text textSprite;
 	bool isTextureCorrectlyLoaded = false;
 
 
 public:
 	//Constructor
 	Rom(const std::string& description="", const std::string& filename="", const std::string& manufacturer="", const std::string year="")
-			: description(description), filename(filename), manufacturer(manufacturer), year(year), texture(), nameSprite()
+			: description(description), filename(filename), manufacturer(manufacturer), year(year), texture(), textSprite()
 	{}
 
 	//Getters
@@ -52,9 +52,9 @@ public:
 		return (sf::Texture&) texture;
 	}
 
-	sf::Text& getNameSprite() const
+	sf::Text& getTextSprite() const
 	{
-		return (sf::Text&)nameSprite;
+		return (sf::Text&) textSprite;
 	}
 
 	bool isIsTextureCorrectlyLoaded() const

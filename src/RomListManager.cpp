@@ -41,16 +41,29 @@ int RomListManager::getRomSetNumber()
 }
 
 //Member Functions
-void RomListManager::loadTextures(Configuration& configuration)
+void RomListManager::loadTextures(const Configuration& configuration)
 {
 	for(auto & rom : roms)
 	{
-		sf::Texture& texture = rom.getTexture();
-		bool loadingOk = texture.loadFromFile(configuration.getScreenshots_path() + "/" + rom.getFilename() + ".png");
+		bool loadingOk = rom.getTexture().loadFromFile(configuration.getScreenshots_path() + "/" + rom.getFilename() + ".png");
 		if(loadingOk)
 		{
 			rom.setIsTextureCorrectlyLoaded(true);
 		}
+	}
+}
+
+void RomListManager::initText(const Configuration& configuration, const sf::Font& font)
+{
+	for(auto & rom : roms)
+	{
+		sf::Text& text = rom.getTextSprite();
+		text.setFont(font);
+		text.setColor(sf::Color(configuration.getRom_name_color_red(),
+								configuration.getRom_name_color_green(),
+								configuration.getRom_name_color_blue(),
+								configuration.getRom_name_color_alpha()));
+		text.setCharacterSize(configuration.getRom_name_size());
 	}
 }
 

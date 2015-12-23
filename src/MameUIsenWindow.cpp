@@ -15,6 +15,7 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration(), romListMan
 	{
 		exit(EXIT_FAILURE);
 	}
+	romListManager.initText(configuration, font);
 	create(sf::VideoMode(configuration.getWindowWidth(), configuration.getWindowHeight()), "MameUIsen", sf::Style::Titlebar | sf::Style::Close	);
 	display();
 	lauch();
@@ -28,24 +29,28 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 		return false;
 	}
 
+	//Font
 	categoryName.setFont(font);
 	categoryIndexProgress.setFont(font);
 	romYear.setFont(font);
 	romManufacturer.setFont(font);
 	romIndexProgress.setFont(font);
 
+	//Size
 	categoryName.setCharacterSize(configuration.getCategory_name_size());
 	categoryIndexProgress.setCharacterSize(configuration.getCategory_index_size());
 	romYear.setCharacterSize(configuration.getRom_year_size());
 	romManufacturer.setCharacterSize(configuration.getRom_manufacturer_size());
 	romIndexProgress.setCharacterSize(configuration.getRom_index_size());
 
+	//Position
 	categoryName.setPosition(configuration.getCategory_name_x(),configuration.getCategory_name_y());
 	categoryIndexProgress.setPosition(configuration.getCategory_index_x(), configuration.getCategory_index_y());
 	romYear.setPosition(configuration.getRom_year_x(), configuration.getRom_year_y());
 	romManufacturer.setPosition(configuration.getRom_manufacturer_x(), configuration.getRom_manufacturer_y());
 	romIndexProgress.setPosition(configuration.getRom_index_x(), configuration.getRom_index_y());
 
+	//Color
 	categoryName.setColor(sf::Color(configuration.getCategory_name_color_red(),
 									configuration.getCategory_name_color_green(),
 									configuration.getCategory_name_color_blue(),

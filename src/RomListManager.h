@@ -27,7 +27,8 @@ public:
 	int getCurrentRomSetIndex();
 	int getRomSetNumber();
 	//Member functions
-	void loadTextures(Configuration& configuration);
+	void loadTextures(const Configuration& configuration);
+	void initText(const Configuration& configuration, const sf::Font&);
 
 private:
 	void loadCategories();

@@ -46,23 +46,38 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 	romManufacturer.setPosition(configuration.getRom_manufacturer_x(), configuration.getRom_manufacturer_y());
 	romIndexProgress.setPosition(configuration.getRom_index_x(), configuration.getRom_index_y());
 
+	categoryName.setColor(sf::Color(configuration.getCategory_name_color_red(),
+									configuration.getCategory_name_color_green(),
+									configuration.getCategory_name_color_blue(),
+									configuration.getCategory_name_color_alpha()));
+	categoryIndexProgress.setColor(sf::Color(configuration.getCategory_index_color_red(),
+											 configuration.getCategory_index_color_green(),
+											 configuration.getCategory_index_color_blue(),
+											 configuration.getCategory_index_color_alpha()));
+	romYear.setColor(sf::Color(configuration.getRom_year_color_red(),
+							   configuration.getRom_year_color_green(),
+							   configuration.getRom_year_color_blue(),
+							   configuration.getRom_year_color_alpha()));
+	romManufacturer.setColor(sf::Color(configuration.getRom_manufacturer_color_red(),
+									   configuration.getRom_manufacturer_color_green(),
+									   configuration.getRom_manufacturer_color_blue(),
+									   configuration.getRom_manufacturer_color_alpha()));
+	romIndexProgress.setColor(sf::Color(configuration.getRom_index_color_red(),
+										configuration.getRom_index_color_green(),
+										configuration.getRom_index_color_blue(),
+										configuration.getRom_index_color_alpha()));
+
 	return true;
 }
 
 void MameUIsenWindow::lauch()
 {
 	RomList& romList = romListManager.getNextRomList();
-	cout << romList.getName() << endl;
 	romList = romListManager.getNextRomList();
-	cout << romList.getName() << endl;
 	romList = romListManager.getPreviousRomList();
-	cout << romList.getName() << endl;
 	romList = romListManager.getNextRomList();
-	cout << romList.getName() << endl;
 	romList = romListManager.getNextRomList();
-	cout << romList.getName() << endl;
 	romList = romListManager.getNextRomList();
-	cout << romList.getName() << endl;
 	clear(sf::Color::Black);
 	display();
 	clear(sf::Color::Black);

@@ -64,7 +64,15 @@ void RomListManager::initText(const Configuration& configuration, const sf::Font
 								configuration.getRom_name_color_blue(),
 								configuration.getRom_name_color_alpha()));
 		text.setCharacterSize(configuration.getRom_name_size());
-		text.setString(rom.getDescription());
+
+		if(rom.getDescription().length() > configuration.getRom_name_max_length())
+		{
+			text.setString(rom.getDescription().substr(0, configuration.getRom_name_max_length()) + configuration.getRom_name_suffix_max_length());
+		}
+		else
+		{
+			text.setString(rom.getDescription());
+		}
 	}
 }
 

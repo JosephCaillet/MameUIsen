@@ -60,7 +60,8 @@ Configuration::Configuration()
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_TO_DISPLAY_UNDER_SELECTED", &Configuration::setRom_name_to_display_under_selected));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_SIZE", &Configuration::setRom_name_size));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_MARGIN_SIZE", &Configuration::setRom_name_margin_size));
-	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_MAX_LENGTH", &Configuration::));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_MAX_LENGTH", &Configuration::setRom_name_max_length));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_SUFFIX_MAX_LENGTH", &Configuration::setRom_name_suffix_max_length));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_COLOR_RED", &Configuration::setRom_name_color_red));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_COLOR_GREEN", &Configuration::setRom_name_color_green));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_COLOR_BLUE", &Configuration::setRom_name_color_blue));
@@ -107,6 +108,7 @@ void Configuration::loadConf()
 						{
 							cerr << "Incorrect value for directive " << dtf.getDirective() << " line " << numLine << ". Default value will be used.";
 						}
+						break;
 					}
 				}
 			}

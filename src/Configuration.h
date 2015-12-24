@@ -62,6 +62,7 @@ private:
 	int rom_name_size;
 	int rom_name_margin_size;
 	int rom_name_max_length;
+	std::string rom_name_suffix_max_length;
 	int rom_name_color_red = 255;
 	int rom_name_color_green  =255;
 	int rom_name_color_blue  = 255;
@@ -523,6 +524,23 @@ public:
 	int getRom_name_max_length() const
 	{
 		return rom_name_max_length;
+	}
+
+	const std::string& getRom_name_suffix_max_length() const
+	{
+		return rom_name_suffix_max_length;
+	}
+
+	void setRom_name_suffix_max_length(const std::string& rom_name_suffix_max_length)
+	{
+		if(rom_name_suffix_max_length == "UnicornTrololoHamtaro")
+		{
+			Configuration::rom_name_suffix_max_length.clear();
+		}
+		else
+		{
+			Configuration::rom_name_suffix_max_length = rom_name_suffix_max_length;
+		}
 	}
 
 	void setRom_name_max_length(const std::string& rom_name_max_length)

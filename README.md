@@ -1,3 +1,3 @@
 # MameUIsen
 A gui for Mame
-fipps font by STEFANIE KOERNER (PHEIST)
+<br>fipps font by STEFANIE KOERNER (PHEIST)

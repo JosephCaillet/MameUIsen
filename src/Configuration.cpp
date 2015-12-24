@@ -85,9 +85,10 @@ void Configuration::loadConf()
 	else
 	{
 		string line;
-
+		int numLine = 0;
 		while(getline(confFile, line))
 		{
+			numLine++;
 			if(line[0] != '#')
 			{
 				for(auto & dtf : directiveToFunction)
@@ -95,7 +96,14 @@ void Configuration::loadConf()
 					size_t pos = line.find(dtf.getDirective());
 					if(pos != string::npos)
 					{
-						(this->*dtf.getSetter()) (line.substr(pos + dtf.getDirective().length() + 1));
+						try
+						{
+							(this->*dtf.getSetter())(line.substr(pos + dtf.getDirective().length() + 1));
+						}
+						catch(...)
+						{
+							cerr << "Incorrect value for directive " << dtf.getDirective() << " line " << numLine << ". Default value will be used.";
+						}
 					}
 				}
 			}

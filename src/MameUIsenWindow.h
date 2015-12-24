@@ -41,15 +41,16 @@ private:
 	void lauch();
 
 	void updateAllDisplay(const RomList& romList, const Rom& rom, int currentRomIndex);
-	void displayAll(const Rom& rom);
+	void displayAll(const int currentRomIndex, const RomList& romList);
 	void updateCategoryDisplay(const RomList& romList);
 	void displayCategory();
 	void updateRomInfosDisplay(const Rom& rom, int romIndex, int romTotal);
 	void displayRomInfos();
 	void updateScreenshotDisplay(const Rom& rom);
 	void displayScreenshot();
-	void updateRomsNamesDisplay(const Rom& rom);
-	void displayRomsNames(const Rom& rom);
+	void updateRomsNamesDisplay(const RomList& romList);
+	void displayRomsNames(const RomList& romList, int currentRomIndex);
+	void rebaseRomNamesPosition(RomList& romList);
 
 	event getEvent();
 };

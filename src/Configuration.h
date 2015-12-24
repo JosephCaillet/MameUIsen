@@ -55,7 +55,10 @@ private:
 	int rom_year_color_blue  = 255;
 	int rom_year_color_alpha = 255;
 
-	int rom_name_x;
+	int rom_name_selected_x;
+	int rom_name_selected_y;
+	int rom_name_to_display_above_selected;
+	int rom_name_to_display_under_selected;
 	int rom_name_size;
 	int rom_name_margin_size;
 	int rom_name_max_length;
@@ -457,14 +460,44 @@ public:
 	}
 
 	//Rom name
-	int getRom_name_x() const
+	int getRom_name_selected_x() const
 	{
-		return rom_name_x;
+		return rom_name_selected_x;
 	}
 
-	void setRom_name_x(const std::string& rom_name_x)
+	void setRom_name_selected_x(const std::string& rom_name_x)
 	{
-		Configuration::rom_name_x = std::stoi(rom_name_x);
+		Configuration::rom_name_selected_x = std::stoi(rom_name_x);
+	}
+
+	int getRom_name_selected_y() const
+	{
+		return rom_name_selected_y;
+	}
+
+	void setRom_name_selected_y(const std::string& rom_name_y)
+	{
+		Configuration::rom_name_selected_y = std::stoi(rom_name_y);
+	}
+
+	int getRom_name_to_display_above_selected() const
+	{
+		return rom_name_to_display_above_selected;
+	}
+
+	void setRom_name_to_display_above_selected(const std::string& rom_name_to_display_above_selected)
+	{
+		Configuration::rom_name_to_display_above_selected = std::stoi(rom_name_to_display_above_selected);
+	}
+
+	int getRom_name_to_display_under_selected() const
+	{
+		return rom_name_to_display_under_selected;
+	}
+
+	void setRom_name_to_display_under_selected(const std::string& rom_name_to_display_under_selected)
+	{
+		Configuration::rom_name_to_display_under_selected = std::stoi(rom_name_to_display_under_selected);
 	}
 
 	int getRom_name_size() const

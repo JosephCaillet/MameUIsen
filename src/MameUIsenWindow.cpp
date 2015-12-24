@@ -80,6 +80,7 @@ void MameUIsenWindow::lauch()
 {
 	RomList* romList = romListManager.getNextRomList();
 	Rom* rom = romList->getRom(1);
+	rebaseRomNamesPosition(*romList);
 	unsigned int numRom = 1;
 
 	while(isOpen())
@@ -105,11 +106,13 @@ void MameUIsenWindow::lauch()
 				romList = romListManager.getNextRomList();
 				numRom = 1;
 				rom = romList->getRom(1);
+				rebaseRomNamesPosition(*romList);
 				break;
 			case PREVIOUS_CATEGORY:
 				romList = romListManager.getPreviousRomList();
 				numRom = 1;
 				rom = romList->getRom(1);
+				rebaseRomNamesPosition(*romList);
 				break;
 			case LAUNCH_ROM:
 			{
@@ -122,7 +125,7 @@ void MameUIsenWindow::lauch()
 				close();
 		}
 		updateAllDisplay(*romList, *rom, numRom);
-		displayAll(*rom);
+		displayAll(numRom, *romList);
 	}
 }
 
@@ -131,16 +134,16 @@ void MameUIsenWindow::updateAllDisplay(const RomList& romList, const Rom& rom, i
 	updateCategoryDisplay(romList);
 	updateRomInfosDisplay(rom, currentRomIndex, romList.getRomListSize());
 	updateScreenshotDisplay(rom);
-	updateRomsNamesDisplay(rom);
+	updateRomsNamesDisplay(romList);
 }
 
-void MameUIsenWindow::displayAll(const Rom& rom)
+void MameUIsenWindow::displayAll(const int currentRomIndex, const RomList& romList)
 {
 	clear(sf::Color::Black);
 	displayCategory();
 	displayRomInfos();
 	displayScreenshot();
-	displayRomsNames(rom);
+	displayRomsNames(romList, currentRomIndex);
 	display();
 }
 
@@ -188,14 +191,49 @@ void MameUIsenWindow::displayScreenshot()
 	draw(screenshot);
 }
 
-void MameUIsenWindow::updateRomsNamesDisplay(const Rom& rom)
+void MameUIsenWindow::updateRomsNamesDisplay(const RomList& romList)
 {
-	rom.getTextSprite().setPosition(configuration.getRom_name_x(), 200);
+
 }
 
-void MameUIsenWindow::displayRomsNames(const Rom& rom)
+void MameUIsenWindow::displayRomsNames(const RomList& romList, int currentRomIndex)
 {
-	draw(rom.getTextSprite());
+	int aboveLimit = currentRomIndex - configuration.getRom_name_to_display_above_selected();
+	int underLimit = configuration.getRom_name_to_display_under_selected() + currentRomIndex;
+
+	if(aboveLimit < 1)
+	{
+		aboveLimit = 1;
+	}
+	if(underLimit > romList.getRomListSize())
+	{
+		underLimit = romList.getRomListSize();
+	}
+
+	Rom* rom = romList.getRom(aboveLimit);
+
+	sf::View romNameView = getDefaultView();
+	int offset = (currentRomIndex - 1) * (configuration.getRom_name_size() + configuration.getRom_name_margin_size());
+	romNameView.move(0, offset);
+	setView(romNameView);
+	for(int i = aboveLimit; i <= underLimit; i++, rom = romList.getRom(i))
+	{
+		draw(rom->getTextSprite());
+	}
+	setView(getDefaultView());
+}
+
+void MameUIsenWindow::rebaseRomNamesPosition(RomList& romList)
+{
+	int x = configuration.getRom_name_selected_x();
+	int y = configuration.getRom_name_selected_y();
+
+	Rom* rom = romList.getRom(1);
+	for(int i = 1; i <= romList.getRomListSize(); i++, rom = romList.getRom(i))
+	{
+		rom->getTextSprite().setPosition(x,y);
+		y += configuration.getRom_name_size() + configuration.getRom_name_margin_size();
+	}
 }
 
 event MameUIsenWindow::getEvent()

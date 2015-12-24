@@ -54,9 +54,12 @@ Configuration::Configuration()
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_YEAR_COLOR_BLUE", &Configuration::setRom_year_color_blue));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_YEAR_COLOR_ALPHA", &Configuration::setRom_year_color_alpha));
 
-	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_X", &Configuration::setRom_name_x));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_SELECTED_X", &Configuration::setRom_name_selected_x));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_SELECTED_Y", &Configuration::setRom_name_selected_y));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_TO_DISPLAY_ABOVE_SELECTED", &Configuration::setRom_name_to_display_above_selected));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_TO_DISPLAY_UNDER_SELECTED", &Configuration::setRom_name_to_display_under_selected));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_SIZE", &Configuration::setRom_name_size));
-	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_MARGIN_SIZE", &Configuration::));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_MARGIN_SIZE", &Configuration::setRom_name_margin_size));
 	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_MAX_LENGTH", &Configuration::));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_COLOR_RED", &Configuration::setRom_name_color_red));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_NAME_COLOR_GREEN", &Configuration::setRom_name_color_green));

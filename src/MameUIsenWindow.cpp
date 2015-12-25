@@ -16,7 +16,12 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration(), romListMan
 	}
 
 	romListManager.initText(configuration, font);
-	create(sf::VideoMode(configuration.getWindowWidth(), configuration.getWindowHeight()), "MameUIsen", sf::Style::Titlebar | sf::Style::Close);// | sf::Style::Fullscreen);
+	int sfmlVideoFlags = sf::Style::Titlebar | sf::Style::Close;
+	if(configuration.isFullscreen())
+	{
+		sfmlVideoFlags |= sf::Style::Fullscreen;
+	}
+	create(sf::VideoMode(configuration.getWindowWidth(), configuration.getWindowHeight()), "MameUIsen", sfmlVideoFlags);
 	setVerticalSyncEnabled(true);
 	display();
 	launch();
@@ -83,8 +88,8 @@ void MameUIsenWindow::launch()
 	Rom* rom = romList->getRom(1);
 	rebaseRomNamesPosition(*romList);
 	unsigned int currentRomIndex = 1;
+	screenshot.setScale(configuration.getRom_screenshot_size_factor(), configuration.getRom_screenshot_size_factor());
 	updateAllDisplay(*romList, *rom, currentRomIndex);
-
 	while(isOpen())
 	{
 		event e = getEvent();
@@ -149,9 +154,9 @@ void MameUIsenWindow::updateAllDisplay(const RomList& romList, const Rom& rom, i
 void MameUIsenWindow::displayAll(const int currentRomIndex, const RomList& romList)
 {
 	clear(sf::Color::Black);
+	displayScreenshot();
 	displayCategory();
 	displayRomInfos();
-	displayScreenshot();
 	displayRomsNames(romList, currentRomIndex);
 	display();
 }

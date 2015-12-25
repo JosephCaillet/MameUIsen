@@ -17,6 +17,7 @@ Configuration::Configuration()
 	directiveToFunction.push_back(ConfigDirectiveToFunction("SCREENSHOTS_PATH", &Configuration::setScreenshots_path));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("WINDOW_WIDTH", &Configuration::setWindowWidth));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("WINDOW_HEIGHT", &Configuration::setWindowHeight));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("FULL_SCREEN", &Configuration::setFullscreen));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("FONT_PATH", &Configuration::setFont_path));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("FONT_SIZE_FACTOR", &Configuration::setFont_size_factor));
 
@@ -38,7 +39,7 @@ Configuration::Configuration()
 
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_SCREENSHOT_X", &Configuration::setRom_screenshot_x));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_SCREENSHOT_Y", &Configuration::setRom_screenshot_y));
-	//directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_SCREENSHOT_SIZE_FACTOR", &Configuration::));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_SCREENSHOT_SIZE_FACTOR", &Configuration::setRom_screenshot_size_factor));
 
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_MANUFACTURER_X", &Configuration::setRom_manufacturer_x));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("ROM_MANUFACTURER_Y", &Configuration::setRom_manufacturer_y));

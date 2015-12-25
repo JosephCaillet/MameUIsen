@@ -17,6 +17,7 @@ private:
 	std::string screenshots_path = "../screenshots";
 	int windowWidth = 800;
 	int windowHeight = 600;
+	bool fullscreen = false;
 	std::string font_path = "../rsc/04B_30__.TTF";
 	float font_size_factor = 1.0f;
 
@@ -136,6 +137,19 @@ public:
 		Configuration::windowHeight = std::stoi(windowHeight);
 	}
 
+	bool isFullscreen() const
+	{
+		return fullscreen;
+	}
+
+	void setFullscreen(const std::string& fullscreen)
+	{
+		if(fullscreen == "yes")
+		{
+			Configuration::fullscreen = true;
+		}
+	}
+
 	const std::string& getFont_path() const
 	{
 		return font_path;
@@ -156,7 +170,7 @@ public:
 		Configuration::font_size_factor = std::stof(font_size_factor);
 	}
 
-//Category name
+	//Category name
 	int getCategory_name_x() const
 	{
 		return category_name_x;

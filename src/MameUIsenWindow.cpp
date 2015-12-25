@@ -14,11 +14,12 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration(), romListMan
 	{
 		exit(EXIT_FAILURE);
 	}
+
 	romListManager.initText(configuration, font);
-	create(sf::VideoMode(configuration.getWindowWidth(), configuration.getWindowHeight()), "MameUIsen", sf::Style::Titlebar | sf::Style::Close);
+	create(sf::VideoMode(configuration.getWindowWidth(), configuration.getWindowHeight()), "MameUIsen", sf::Style::Titlebar | sf::Style::Close);// | sf::Style::Fullscreen);
 	setVerticalSyncEnabled(true);
 	display();
-	lauch();
+	launch();
 }
 
 
@@ -76,7 +77,7 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 	return true;
 }
 
-void MameUIsenWindow::lauch()
+void MameUIsenWindow::launch()
 {
 	RomList* romList = romListManager.getNextRomList();
 	Rom* rom = romList->getRom(1);
@@ -162,6 +163,9 @@ void MameUIsenWindow::updateCategoryDisplay(const RomList& romList)
 	stringstream categoryIndex;
 	categoryIndex << romListManager.getCurrentRomSetIndex() << "/" << romListManager.getRomSetNumber();
 	categoryIndexProgress.setString(categoryIndex.str());
+
+	centerElement(categoryName);
+	centerElement(categoryIndexProgress);
 }
 
 void MameUIsenWindow::displayCategory()
@@ -179,6 +183,10 @@ void MameUIsenWindow::updateRomInfosDisplay(const Rom& rom, int romIndex, int ro
 	stringstream romIndexString;
 	romIndexString << romIndex << "/" << romTotal;
 	romIndexProgress.setString(romIndexString.str());
+
+	centerElement(romYear);
+	centerElement(romManufacturer);
+	centerElement(romIndexProgress);
 }
 
 
@@ -192,6 +200,7 @@ void MameUIsenWindow::displayRomInfos()
 void MameUIsenWindow::updateScreenshotDisplay(const Rom& rom)
 {
 	screenshot.setTexture(rom.getTexture(), true);
+	centerElement(screenshot);
 }
 
 void MameUIsenWindow::displayScreenshot()
@@ -215,7 +224,7 @@ void MameUIsenWindow::displayRomsNames(const RomList& romList, int currentRomInd
 	{
 		aboveLimit = 1;
 	}
-	if(underLimit > romList.getRomListSize())
+	if(underLimit > (int)romList.getRomListSize())
 	{
 		underLimit = romList.getRomListSize();
 	}
@@ -236,10 +245,11 @@ void MameUIsenWindow::rebaseRomNamesPosition(RomList& romList)
 	int y = configuration.getRom_name_selected_y();
 
 	Rom* rom = romList.getRom(1);
-	for(int i = 1; i <= romList.getRomListSize(); i++, rom = romList.getRom(i))
+	for(int i = 1; i <= (int)romList.getRomListSize(); i++, rom = romList.getRom(i))
 	{
 		rom->getTextSprite().setPosition(x,y);
 		y += configuration.getRom_name_size() + configuration.getRom_name_margin_size();
+		centerElement(rom->getTextSprite());
 	}
 }
 
@@ -273,4 +283,16 @@ event MameUIsenWindow::getEvent()
 		default:
 			return NO_EVENT;
 	}
+}
+
+void MameUIsenWindow::centerElement(sf::Sprite& sprite)
+{
+	sf::FloatRect fr = sprite.getLocalBounds();
+	sprite.setOrigin(fr.width/2.0f, fr.height/2.0f);
+}
+
+void MameUIsenWindow::centerElement(sf::Text& text)
+{
+	sf::FloatRect fr = text.getLocalBounds();
+	text.setOrigin(fr.width/2.0f, fr.height/2.0f);
 }

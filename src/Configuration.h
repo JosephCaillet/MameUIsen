@@ -17,7 +17,8 @@ private:
 	std::string screenshots_path = "../screenshots";
 	int windowWidth = 800;
 	int windowHeight = 600;
-	std::string font_path = "../rsc/Fipps-Regular.otf";
+	std::string font_path = "../rsc/04B_30__.TTF";
+	float font_size_factor = 1.0f;
 
 	int category_name_x;
 	int category_name_y;
@@ -145,7 +146,17 @@ public:
 		Configuration::font_path = font_path;
 	}
 
-	//Category name
+	float getFont_size_factor() const
+	{
+		return font_size_factor;
+	}
+
+	void setFont_size_factor(const std::string& font_size_factor)
+	{
+		Configuration::font_size_factor = std::stof(font_size_factor);
+	}
+
+//Category name
 	int getCategory_name_x() const
 	{
 		return category_name_x;
@@ -173,7 +184,7 @@ public:
 
 	void setCategory_name_size(const std::string& category_name_size)
 	{
-		Configuration::category_name_size = std::stoi(category_name_size);
+		Configuration::category_name_size = getFont_size_factor() * std::stoi(category_name_size);
 	}
 
 	int getCategory_name_color_red() const
@@ -244,7 +255,7 @@ public:
 
 	void setCategory_index_size(const std::string& category_index_size)
 	{
-		Configuration::category_index_size = std::stoi(category_index_size);
+		Configuration::category_index_size = getFont_size_factor() * std::stoi(category_index_size);
 	}
 
 	int getCategory_index_color_red() const
@@ -346,7 +357,7 @@ public:
 
 	void setRom_manufacturer_size(const std::string& rom_manufacturer_size)
 	{
-		Configuration::rom_manufacturer_size = std::stoi(rom_manufacturer_size);
+		Configuration::rom_manufacturer_size = getFont_size_factor() * std::stoi(rom_manufacturer_size);
 	}
 
 	int getRom_manufacturer_color_red() const
@@ -417,7 +428,7 @@ public:
 
 	void setRom_year_size(const std::string& rom_year_size)
 	{
-		Configuration::rom_year_size = std::stoi(rom_year_size);
+		Configuration::rom_year_size = getFont_size_factor() * std::stoi(rom_year_size);
 	}
 
 	int getRom_year_color_red() const
@@ -508,7 +519,7 @@ public:
 
 	void setRom_name_size(const std::string& rom_name_size)
 	{
-		Configuration::rom_name_size = std::stoi(rom_name_size);
+		Configuration::rom_name_size = getFont_size_factor() * std::stoi(rom_name_size);
 	}
 
 	int getRom_name_margin_size() const
@@ -606,7 +617,7 @@ public:
 
 	void setRom_index_size(const std::string& rom_index_size)
 	{
-		Configuration::rom_index_size = std::stoi(rom_index_size);
+		Configuration::rom_index_size = getFont_size_factor() * std::stoi(rom_index_size);
 	}
 
 	int getRom_index_y() const

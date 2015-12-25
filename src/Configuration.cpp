@@ -17,6 +17,8 @@ Configuration::Configuration()
 	directiveToFunction.push_back(ConfigDirectiveToFunction("SCREENSHOTS_PATH", &Configuration::setScreenshots_path));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("WINDOW_WIDTH", &Configuration::setWindowWidth));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("WINDOW_HEIGHT", &Configuration::setWindowHeight));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("FONT_PATH", &Configuration::setFont_path));
+	directiveToFunction.push_back(ConfigDirectiveToFunction("FONT_SIZE_FACTOR", &Configuration::setFont_size_factor));
 
 	directiveToFunction.push_back(ConfigDirectiveToFunction("CATEGORY_NAME_X", &Configuration::setCategory_name_x));
 	directiveToFunction.push_back(ConfigDirectiveToFunction("CATEGORY_NAME_Y", &Configuration::setCategory_name_y));

@@ -81,7 +81,8 @@ void MameUIsenWindow::lauch()
 	RomList* romList = romListManager.getNextRomList();
 	Rom* rom = romList->getRom(1);
 	rebaseRomNamesPosition(*romList);
-	unsigned int numRom = 1;
+	unsigned int currentRomIndex = 1;
+	updateAllDisplay(*romList, *rom, currentRomIndex);
 
 	while(isOpen())
 	{
@@ -91,28 +92,36 @@ void MameUIsenWindow::lauch()
 			case NO_EVENT:
 				break;
 			case NEXT_ROM:
-				if(numRom != romList->getRomListSize())
+				if(currentRomIndex != romList->getRomListSize())
 				{
-					rom = romList->getRom(++numRom);
+					rom = romList->getRom(++currentRomIndex);
+					updateRomInfosDisplay(*rom, currentRomIndex, romList->getRomListSize());
+					updateScreenshotDisplay(*rom);
+					updateRomsNamesDisplay(currentRomIndex);
 				}
 				break;
 			case PREVIOUS_ROM:
-				if(numRom != 1)
+				if(currentRomIndex != 1)
 				{
-					rom = romList->getRom(--numRom);
+					rom = romList->getRom(--currentRomIndex);
+					updateRomInfosDisplay(*rom, currentRomIndex, romList->getRomListSize());
+					updateScreenshotDisplay(*rom);
+					updateRomsNamesDisplay(currentRomIndex);
 				}
 				break;
 			case NEXT_CATEGORY:
 				romList = romListManager.getNextRomList();
-				numRom = 1;
+				currentRomIndex = 1;
 				rom = romList->getRom(1);
 				rebaseRomNamesPosition(*romList);
+				updateAllDisplay(*romList, *rom, currentRomIndex);
 				break;
 			case PREVIOUS_CATEGORY:
 				romList = romListManager.getPreviousRomList();
-				numRom = 1;
+				currentRomIndex = 1;
 				rom = romList->getRom(1);
 				rebaseRomNamesPosition(*romList);
+				updateAllDisplay(*romList, *rom, currentRomIndex);
 				break;
 			case LAUNCH_ROM:
 			{
@@ -124,8 +133,7 @@ void MameUIsenWindow::lauch()
 			case EXIT:
 				close();
 		}
-		updateAllDisplay(*romList, *rom, numRom);
-		displayAll(numRom, *romList);
+		displayAll(currentRomIndex, *romList);
 	}
 }
 
@@ -134,7 +142,7 @@ void MameUIsenWindow::updateAllDisplay(const RomList& romList, const Rom& rom, i
 	updateCategoryDisplay(romList);
 	updateRomInfosDisplay(rom, currentRomIndex, romList.getRomListSize());
 	updateScreenshotDisplay(rom);
-	updateRomsNamesDisplay(romList);
+	updateRomsNamesDisplay(currentRomIndex);
 }
 
 void MameUIsenWindow::displayAll(const int currentRomIndex, const RomList& romList)
@@ -191,9 +199,11 @@ void MameUIsenWindow::displayScreenshot()
 	draw(screenshot);
 }
 
-void MameUIsenWindow::updateRomsNamesDisplay(const RomList& romList)
+void MameUIsenWindow::updateRomsNamesDisplay(const int currentRomIndex)
 {
-
+	romNameView = getDefaultView();
+	int offset = (currentRomIndex - 1) * (configuration.getRom_name_size() + configuration.getRom_name_margin_size());
+	romNameView.move(0, offset);
 }
 
 void MameUIsenWindow::displayRomsNames(const RomList& romList, int currentRomIndex)
@@ -212,9 +222,6 @@ void MameUIsenWindow::displayRomsNames(const RomList& romList, int currentRomInd
 
 	Rom* rom = romList.getRom(aboveLimit);
 
-	sf::View romNameView = getDefaultView();
-	int offset = (currentRomIndex - 1) * (configuration.getRom_name_size() + configuration.getRom_name_margin_size());
-	romNameView.move(0, offset);
 	setView(romNameView);
 	for(int i = aboveLimit; i <= underLimit; i++, rom = romList.getRom(i))
 	{

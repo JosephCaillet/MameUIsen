@@ -32,6 +32,7 @@ private:
 	sf::Text romYear;
 	sf::Text romManufacturer;
 	sf::Text romIndexProgress;
+	sf::View romNameView;
 
 public:
 	MameUIsenWindow();
@@ -48,7 +49,7 @@ private:
 	void displayRomInfos();
 	void updateScreenshotDisplay(const Rom& rom);
 	void displayScreenshot();
-	void updateRomsNamesDisplay(const RomList& romList);
+	void updateRomsNamesDisplay(const int currentRomIndex);
 	void displayRomsNames(const RomList& romList, int currentRomIndex);
 	void rebaseRomNamesPosition(RomList& romList);
 

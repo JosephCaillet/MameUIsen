@@ -32,6 +32,7 @@ private:
 	sf::Text romYear;
 	sf::Text romManufacturer;
 	sf::Text romIndexProgress;
+	sf::RectangleShape selectedRomIndicator;
 	sf::View romNameView;
 
 public:
@@ -52,6 +53,9 @@ private:
 
 	void updateScreenshotDisplay(const Rom& rom);
 	void displayScreenshot();
+
+	void updateSelectedRomIndicator(const Rom& rom);
+	void displaySelectedRomIndicator();
 
 	void updateRomsNamesDisplay(const int currentRomIndex);
 	void displayRomsNames(const RomList& romList, int currentRomIndex);

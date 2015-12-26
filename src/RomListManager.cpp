@@ -49,7 +49,7 @@ void RomListManager::loadTextures(const Configuration& configuration)
 		if(loadingOk)
 		{
 			rom.setIsTextureCorrectlyLoaded(true);
-			rom.getTexture().setSmooth(true);
+			rom.getTexture().setSmooth(configuration.isRom_screenshot_smooth_zoom());
 		}
 	}
 }

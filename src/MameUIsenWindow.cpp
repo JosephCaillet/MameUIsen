@@ -213,6 +213,16 @@ void MameUIsenWindow::displayScreenshot()
 	draw(screenshot);
 }
 
+void MameUIsenWindow::updateSelectedRomIndicator(const Rom& rom)
+{
+
+}
+
+void MameUIsenWindow::displaySelectedRomIndicator()
+{
+
+}
+
 void MameUIsenWindow::updateRomsNamesDisplay(const int currentRomIndex)
 {
 	romNameView = getDefaultView();

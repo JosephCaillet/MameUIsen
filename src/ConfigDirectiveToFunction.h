@@ -5,34 +5,89 @@
 #ifndef MAMEUISEN_CONFIGDIRECTIVETOFUNCTION_H
 #define MAMEUISEN_CONFIGDIRECTIVETOFUNCTION_H
 
+#define STRIG_FOR_BOOL_TRUE "yes"
+#define STRIG_FOR_BOOL_FALSE "no"
+
 #include "Configuration.h"
 
 class Configuration;
 
-typedef void (Configuration:: * T)(const std::string&);// T represent a pointer on a getter method member of a Configuration object
+//typedef void (Configuration:: * S)(const std::string&);// S represent a pointer on a getter method member of a Configuration object
+//typedef void (Configuration:: * I)(const int&);
+//typedef void (Configuration:: * F)(const float &);
+//typedef void (Configuration:: * B)(const bool &);
 
+template <class T>
 class ConfigDirectiveToFunction
 {
 private:
+	using S = void (T::* )(const std::string&);
+	using I = void (T::* )(const int);
+	using F = void (T::* )(const float);
+	using B = void (T::* )(const bool);
+
+	enum ValueType
+	{
+		STRING, INT, FLOAT, BOOL
+	};
+
+	ValueType valueType;
 	std::string directive;
-	T setter;
+
+	union
+	{
+		S setterS;
+		I setterI;
+		F setterF;
+		B setterB;
+	};
 
 public:
 
 	ConfigDirectiveToFunction()
 	{ }
 
-	ConfigDirectiveToFunction(const std::string& directive, T setter) : directive(directive), setter(setter)
+	ConfigDirectiveToFunction(const std::string& directive, S setter) : valueType(ValueType::STRING), directive(directive), setterS(setter)
 	{ }
+
+	ConfigDirectiveToFunction(const std::string& directive, I setter) : valueType(ValueType::INT), directive(directive), setterI(setter)
+	{ }
+
+	ConfigDirectiveToFunction(const std::string& directive, F setter) : valueType(ValueType::FLOAT), directive(directive), setterF(setter)
+	{ }
+
+	ConfigDirectiveToFunction(const std::string& directive, B setter) : valueType(ValueType::BOOL), directive(directive), setterB(setter)
+	{ }
+
+	void callSetter(Configuration* target, std::string value)
+	{
+		switch(valueType)
+		{
+			case ValueType::STRING:
+				(target->*setterS)(value);
+				break;
+			case ValueType::INT:
+				(target->*setterI)(std::stoi(value));
+				break;
+			case ValueType::FLOAT:
+				(target->*setterF)(std::stof(value));
+				break;
+			case ValueType::BOOL:
+				if(value == STRIG_FOR_BOOL_TRUE)
+				{
+					(target->*setterB)(true);
+				}
+				else if(value == STRIG_FOR_BOOL_FALSE)
+				{
+					(target->*setterB)(false);
+				}
+				break;
+		}
+	}
 
 	const std::string& getDirective() const
 	{
 		return directive;
-	}
-
-	T getSetter() const
-	{
-		return setter;
 	}
 };
 

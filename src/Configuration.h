@@ -207,7 +207,7 @@ public:
 
 	void setCategory_name_size(int category_name_size)
 	{
-		Configuration::category_name_size = category_name_size;
+		Configuration::category_name_size = getFont_size_factor() * category_name_size;
 	}
 
 	int getCategory_name_color_red() const
@@ -277,7 +277,7 @@ public:
 
 	void setCategory_index_size(int category_index_size)
 	{
-		Configuration::category_index_size = category_index_size;
+		Configuration::category_index_size = getFont_size_factor() * category_index_size;
 	}
 
 	int getCategory_index_color_red() const
@@ -387,7 +387,7 @@ public:
 
 	void setRom_manufacturer_size(int rom_manufacturer_size)
 	{
-		Configuration::rom_manufacturer_size = rom_manufacturer_size;
+		Configuration::rom_manufacturer_size = getFont_size_factor() * rom_manufacturer_size;
 	}
 
 	int getRom_manufacturer_color_red() const
@@ -457,7 +457,7 @@ public:
 
 	void setRom_year_size(int rom_year_size)
 	{
-		Configuration::rom_year_size = rom_year_size;
+		Configuration::rom_year_size = getFont_size_factor() * rom_year_size;
 	}
 
 	int getRom_year_color_red() const
@@ -547,7 +547,7 @@ public:
 
 	void setRom_name_size(int rom_name_size)
 	{
-		Configuration::rom_name_size = rom_name_size;
+		Configuration::rom_name_size = getFont_size_factor() * rom_name_size;
 	}
 
 	int getRom_name_margin_size() const
@@ -647,7 +647,7 @@ public:
 
 	void setRom_index_size(int rom_index_size)
 	{
-		Configuration::rom_index_size = rom_index_size;
+		Configuration::rom_index_size = getFont_size_factor() * rom_index_size;
 	}
 
 	int getRom_index_color_red() const

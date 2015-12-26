@@ -82,6 +82,7 @@ private:
 
 	int rom_selection_indicator_vertical_margin;
 	int rom_selection_indicator_horizontal_margin;
+	int rom_selection_indicator_width = -1;
 	int rom_selection_indicator_background_red;
 	int rom_selection_indicator_background_green;
 	int rom_selection_indicator_background_blue;
@@ -708,6 +709,16 @@ public:
 	void setRom_selection_indicator_horizontal_margin(int rom_selection_indicator_horizontal_margin)
 	{
 		Configuration::rom_selection_indicator_horizontal_margin = rom_selection_indicator_horizontal_margin;
+	}
+
+	int getRom_selection_indicator_width() const
+	{
+		return rom_selection_indicator_width;
+	}
+
+	void setRom_selection_indicator_width(int rom_selection_indicator_width)
+	{
+		Configuration::rom_selection_indicator_width = rom_selection_indicator_width;
 	}
 
 	int getRom_selection_indicator_background_red() const

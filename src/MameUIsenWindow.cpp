@@ -230,8 +230,12 @@ void MameUIsenWindow::displayScreenshot()
 void MameUIsenWindow::updateSelectedRomIndicator(const Rom& rom)
 {
 	sf::Text& text = rom.getTextSprite();
-	float width = text.getLocalBounds().width + 2 * configuration.getRom_selection_indicator_horizontal_margin();
-	float height = text.getLocalBounds().height + 2 * configuration.getRom_selection_indicator_vertical_margin();
+	float width = configuration.getRom_selection_indicator_width();
+	float height = text.getLocalBounds().height + 2 * configuration.getRom_selection_indicator_horizontal_margin();
+	if(width == -1)
+	{
+		width = text.getLocalBounds().width + 2 * configuration.getRom_selection_indicator_vertical_margin();
+	}
 	selectedRomIndicator.setSize(sf::Vector2f(width, height));
 	centerElement(selectedRomIndicator);
 }

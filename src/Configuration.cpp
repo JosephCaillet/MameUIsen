@@ -83,6 +83,7 @@ Configuration::Configuration()
 
 	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_VERTICAL_MARGIN", &Configuration::setRom_selection_indicator_vertical_margin));
 	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_HORIZONTAL_MARGIN", &Configuration::setRom_selection_indicator_horizontal_margin));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_WIDTH", &Configuration::setRom_selection_indicator_width));
 	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BACKGROUND_RED", &Configuration::setRom_selection_indicator_background_red));
 	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BACKGROUND_GREEN", &Configuration::setRom_selection_indicator_background_green));
 	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BACKGROUND_BLUE", &Configuration::setRom_selection_indicator_background_blue));

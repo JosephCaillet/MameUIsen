@@ -64,6 +64,7 @@ private:
 	event getEvent();
 	void centerElement(sf::Sprite& sprite);
 	void centerElement(sf::Text& text);
+	void centerElement(sf::RectangleShape& rectangleShape);
 };
 
 #endif //MAMEUISEN_MAMEUISENWINDOW_H

@@ -81,6 +81,17 @@ Configuration::Configuration()
 	directiveToFunction.push_back(cdtf("ROM_INDEX_COLOR_BLUE", &Configuration::setRom_index_color_blue));
 	directiveToFunction.push_back(cdtf("ROM_INDEX_COLOR_ALPHA", &Configuration::setRom_index_color_alpha));
 
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_VERTICAL_MARGIN", &Configuration::setRom_selection_indicator_vertical_margin));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_HORIZONTAL_MARGIN", &Configuration::setRom_selection_indicator_horizontal_margin));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BACKGROUND_RED", &Configuration::setRom_selection_indicator_background_red));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BACKGROUND_GREEN", &Configuration::setRom_selection_indicator_background_green));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BACKGROUND_BLUE", &Configuration::setRom_selection_indicator_background_blue));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BACKGROUND_ALPHA", &Configuration::setRom_selection_indicator_background_alpha));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BORDER_SIZE", &Configuration::setRom_selection_indicator_border_size));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BORDER_RED", &Configuration::setRom_selection_indicator_border_red));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BORDER_GREEN", &Configuration::setRom_selection_indicator_border_green));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BORDER_BLUE", &Configuration::setRom_selection_indicator_border_blue));
+	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BORDER_ALPHA", &Configuration::setRom_selection_indicator_border_alpha));
 	loadConf();
 }
 
@@ -112,7 +123,7 @@ void Configuration::loadConf()
 						}
 						catch(...)
 						{
-							cerr << "Incorrect value for directive " << dtf.getDirective() << " line " << numLine << ". Default value will be used.";
+							cerr << "Incorrect value for directive " << dtf.getDirective() << " line " << numLine << ". Default value will be used." << endl;
 						}
 						break;
 					}

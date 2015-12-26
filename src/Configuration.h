@@ -86,7 +86,7 @@ private:
 	int rom_selection_indicator_background_green;
 	int rom_selection_indicator_background_blue;
 	int rom_selection_indicator_background_alpha;
-	int rom_selection_indicator_border_size;
+	float rom_selection_indicator_border_size;
 	int rom_selection_indicator_border_red;
 	int rom_selection_indicator_border_green;
 	int rom_selection_indicator_border_blue;
@@ -750,12 +750,12 @@ public:
 		Configuration::rom_selection_indicator_background_alpha = rom_selection_indicator_background_alpha;
 	}
 
-	int getRom_selection_indicator_border_size() const
+	float getRom_selection_indicator_border_size() const
 	{
 		return rom_selection_indicator_border_size;
 	}
 
-	void setRom_selection_indicator_border_size(int rom_selection_indicator_border_size)
+	void setRom_selection_indicator_border_size(float rom_selection_indicator_border_size)
 	{
 		Configuration::rom_selection_indicator_border_size = rom_selection_indicator_border_size;
 	}

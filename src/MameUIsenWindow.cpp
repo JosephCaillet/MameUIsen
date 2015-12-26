@@ -3,6 +3,7 @@
 //
 
 #include "MameUIsenWindow.h"
+#include <iostream>
 #include <sstream>
 
 using namespace std;
@@ -48,6 +49,7 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 	romYear.setCharacterSize(configuration.getRom_year_size());
 	romManufacturer.setCharacterSize(configuration.getRom_manufacturer_size());
 	romIndexProgress.setCharacterSize(configuration.getRom_index_size());
+	selectedRomIndicator.setOutlineThickness(configuration.getRom_selection_indicator_border_size());
 
 	//Position
 	categoryName.setPosition(configuration.getCategory_name_x(),configuration.getCategory_name_y());
@@ -56,6 +58,7 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 	romManufacturer.setPosition(configuration.getRom_manufacturer_x(), configuration.getRom_manufacturer_y());
 	romIndexProgress.setPosition(configuration.getRom_index_x(), configuration.getRom_index_y());
 	screenshot.setPosition(configuration.getRom_screenshot_x(), configuration.getRom_screenshot_y());
+	selectedRomIndicator.setPosition(configuration.getRom_name_selected_x(), configuration.getRom_name_selected_y());
 
 	//Color
 	categoryName.setColor(sf::Color(configuration.getCategory_name_color_red(),
@@ -78,7 +81,14 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 										configuration.getRom_index_color_green(),
 										configuration.getRom_index_color_blue(),
 										configuration.getRom_index_color_alpha()));
-
+	selectedRomIndicator.setFillColor(sf::Color(configuration.getRom_selection_indicator_background_red(),
+												configuration.getRom_selection_indicator_background_green(),
+												configuration.getRom_selection_indicator_background_blue(),
+												configuration.getRom_selection_indicator_background_alpha()));
+	selectedRomIndicator.setOutlineColor(sf::Color(configuration.getRom_selection_indicator_border_red(),
+												configuration.getRom_selection_indicator_border_green(),
+												configuration.getRom_selection_indicator_border_blue(),
+												configuration.getRom_selection_indicator_border_alpha()));
 	return true;
 }
 
@@ -104,6 +114,7 @@ void MameUIsenWindow::launch()
 					updateRomInfosDisplay(*rom, currentRomIndex, romList->getRomListSize());
 					updateScreenshotDisplay(*rom);
 					updateRomsNamesDisplay(currentRomIndex);
+					updateSelectedRomIndicator(*rom);
 				}
 				break;
 			case PREVIOUS_ROM:
@@ -113,6 +124,7 @@ void MameUIsenWindow::launch()
 					updateRomInfosDisplay(*rom, currentRomIndex, romList->getRomListSize());
 					updateScreenshotDisplay(*rom);
 					updateRomsNamesDisplay(currentRomIndex);
+					updateSelectedRomIndicator(*rom);
 				}
 				break;
 			case NEXT_CATEGORY:
@@ -149,6 +161,7 @@ void MameUIsenWindow::updateAllDisplay(const RomList& romList, const Rom& rom, i
 	updateRomInfosDisplay(rom, currentRomIndex, romList.getRomListSize());
 	updateScreenshotDisplay(rom);
 	updateRomsNamesDisplay(currentRomIndex);
+	updateSelectedRomIndicator(rom);
 }
 
 void MameUIsenWindow::displayAll(const int currentRomIndex, const RomList& romList)
@@ -157,6 +170,7 @@ void MameUIsenWindow::displayAll(const int currentRomIndex, const RomList& romLi
 	displayScreenshot();
 	displayCategory();
 	displayRomInfos();
+	displaySelectedRomIndicator();
 	displayRomsNames(romList, currentRomIndex);
 	display();
 }
@@ -215,12 +229,16 @@ void MameUIsenWindow::displayScreenshot()
 
 void MameUIsenWindow::updateSelectedRomIndicator(const Rom& rom)
 {
-
+	sf::Text& text = rom.getTextSprite();
+	float width = text.getLocalBounds().width + 2 * configuration.getRom_selection_indicator_horizontal_margin();
+	float height = text.getLocalBounds().height + 2 * configuration.getRom_selection_indicator_vertical_margin();
+	selectedRomIndicator.setSize(sf::Vector2f(width, height));
+	centerElement(selectedRomIndicator);
 }
 
 void MameUIsenWindow::displaySelectedRomIndicator()
 {
-
+	draw(selectedRomIndicator);
 }
 
 void MameUIsenWindow::updateRomsNamesDisplay(const int currentRomIndex)
@@ -303,11 +321,17 @@ event MameUIsenWindow::getEvent()
 void MameUIsenWindow::centerElement(sf::Sprite& sprite)
 {
 	sf::FloatRect fr = sprite.getLocalBounds();
-	sprite.setOrigin(fr.width/2.0f, fr.height/2.0f);
+	sprite.setOrigin(fr.left + fr.width/2.0f, fr.top + fr.height/2.0f);
 }
 
 void MameUIsenWindow::centerElement(sf::Text& text)
 {
 	sf::FloatRect fr = text.getLocalBounds();
-	text.setOrigin(fr.width/2.0f, fr.height/2.0f);
+	text.setOrigin(fr.left + fr.width/2.0f, fr.top + fr.height/2.0f);
+}
+
+void MameUIsenWindow::centerElement(sf::RectangleShape& rectangleShape)
+{
+	sf::FloatRect fr = rectangleShape.getLocalBounds();
+	rectangleShape.setOrigin(fr.left + fr.width/2.0f, fr.top + fr.height/2.0f);
 }

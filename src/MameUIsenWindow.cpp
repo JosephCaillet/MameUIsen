@@ -16,15 +16,26 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration(), romListMan
 		exit(EXIT_FAILURE);
 	}
 
+	if(configuration.getBackground_image_path() != "")
+	{
+		backgroundImageTexture = new sf::Texture;
+		backgroundImageTexture->loadFromFile(configuration.getBackground_image_path());
+		backgroundImageSprite.setTexture(*backgroundImageTexture);
+		backgroundImageSprite.setPosition(0, 0);
+	}
+
 	romListManager.initText(configuration, font);
 	int sfmlVideoFlags = sf::Style::Titlebar | sf::Style::Close;
 	if(configuration.isFullscreen())
 	{
 		sfmlVideoFlags |= sf::Style::Fullscreen;
 	}
+
 	create(sf::VideoMode(configuration.getWindowWidth(), configuration.getWindowHeight()), "MameUIsen", sfmlVideoFlags);
-	setVerticalSyncEnabled(true);
+	setFramerateLimit(60);
+	setMouseCursorVisible(false);
 	display();
+
 	launch();
 }
 
@@ -166,13 +177,19 @@ void MameUIsenWindow::updateAllDisplay(const RomList& romList, const Rom& rom, i
 
 void MameUIsenWindow::displayAll(const int currentRomIndex, const RomList& romList)
 {
-	clear(sf::Color::Black);
+	clear(sf::Color(configuration.getBackground_red(), configuration.getBackground_green(), configuration.getBackground_blue()));
+	displayBackgroundImage();
 	displayScreenshot();
 	displayCategory();
 	displayRomInfos();
 	displaySelectedRomIndicator();
 	displayRomsNames(romList, currentRomIndex);
 	display();
+}
+
+void MameUIsenWindow::displayBackgroundImage()
+{
+	draw(backgroundImageSprite);
 }
 
 void MameUIsenWindow::updateCategoryDisplay(const RomList& romList)

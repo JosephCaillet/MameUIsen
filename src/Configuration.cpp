@@ -23,6 +23,11 @@ Configuration::Configuration()
 	directiveToFunction.push_back(cdtf("FONT_PATH", &Configuration::setFont_path));
 	directiveToFunction.push_back(cdtf("FONT_SIZE_FACTOR", &Configuration::setFont_size_factor));
 
+	directiveToFunction.push_back(cdtf("BACKGROUND_RED", &Configuration::setBackground_red));
+	directiveToFunction.push_back(cdtf("BACKGROUND_GREEN", &Configuration::setBackground_green));
+	directiveToFunction.push_back(cdtf("BACKGROUND_BLUE", &Configuration::setBackground_blue));
+	directiveToFunction.push_back(cdtf("BACKGROUND_IMAGE_PATH", &Configuration::setBackground_image_path));
+
 	directiveToFunction.push_back(cdtf("CATEGORY_NAME_X", &Configuration::setCategory_name_x));
 	directiveToFunction.push_back(cdtf("CATEGORY_NAME_Y", &Configuration::setCategory_name_y));
 	directiveToFunction.push_back(cdtf("CATEGORY_NAME_SIZE", &Configuration::setCategory_name_size));
@@ -116,7 +121,7 @@ void Configuration::loadConf()
 				for(auto & dtf : directiveToFunction)
 				{
 					size_t pos = line.find(dtf.getDirective());
-					if(pos != string::npos)
+					if(pos == 0)
 					{
 						try
 						{

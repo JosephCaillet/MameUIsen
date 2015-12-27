@@ -22,6 +22,11 @@ private:
 	std::string font_path = "../rsc/04B_30__.TTF";
 	float font_size_factor = 1.0f;
 
+	int background_red = 0;
+	int background_green = 0;
+	int background_blue = 0;
+	std::string background_image_path = "";
+
 	int category_name_x;
 	int category_name_y;
 	int category_name_size;
@@ -179,6 +184,46 @@ public:
 	void setFont_size_factor(float font_size_factor)
 	{
 		Configuration::font_size_factor = font_size_factor;
+	}
+
+	int getBackground_red() const
+	{
+		return background_red;
+	}
+
+	void setBackground_red(int background_red)
+	{
+		Configuration::background_red = background_red;
+	}
+
+	int getBackground_green() const
+	{
+		return background_green;
+	}
+
+	void setBackground_green(int background_green)
+	{
+		Configuration::background_green = background_green;
+	}
+
+	int getBackground_blue() const
+	{
+		return background_blue;
+	}
+
+	void setBackground_blue(int background_blue)
+	{
+		Configuration::background_blue = background_blue;
+	}
+
+	const std::string& getBackground_image_path() const
+	{
+		return background_image_path;
+	}
+
+	void setBackground_image_path(const std::string& background_image_path)
+	{
+		Configuration::background_image_path = background_image_path;
 	}
 
 	int getCategory_name_x() const

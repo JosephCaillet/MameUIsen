@@ -34,6 +34,8 @@ private:
 	sf::Text romIndexProgress;
 	sf::RectangleShape selectedRomIndicator;
 	sf::View romNameView;
+	sf::Texture* backgroundImageTexture = nullptr;
+	sf::Sprite backgroundImageSprite;
 
 public:
 	MameUIsenWindow();
@@ -44,6 +46,8 @@ private:
 
 	void updateAllDisplay(const RomList& romList, const Rom& rom, int currentRomIndex);
 	void displayAll(const int currentRomIndex, const RomList& romList);
+
+	void displayBackgroundImage();
 
 	void updateCategoryDisplay(const RomList& romList);
 	void displayCategory();

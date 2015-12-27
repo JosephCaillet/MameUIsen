@@ -40,6 +40,11 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration(), romListMan
 }
 
 
+MameUIsenWindow::~MameUIsenWindow()
+{
+	delete backgroundImageTexture;
+}
+
 bool MameUIsenWindow::loadFontAndInitSprite()
 {
 	if(!font.loadFromFile(configuration.getFont_path()))

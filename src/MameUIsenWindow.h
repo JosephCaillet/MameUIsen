@@ -39,6 +39,7 @@ private:
 
 public:
 	MameUIsenWindow();
+	~MameUIsenWindow();
 
 private:
 	bool loadFontAndInitSprite();

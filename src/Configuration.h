@@ -26,6 +26,11 @@ private:
 	int background_green = 0;
 	int background_blue = 0;
 	std::string background_image_path = "";
+	int background_image_alpha = 255;
+	float background_image_size_factor = 255;
+	int background_image_x_offset = 0;
+	int background_image_y_offset = 0;
+	bool background_image_smooth_zoom = true;
 
 	int category_name_x;
 	int category_name_y;
@@ -224,6 +229,56 @@ public:
 	void setBackground_image_path(const std::string& background_image_path)
 	{
 		Configuration::background_image_path = background_image_path;
+	}
+
+	int getBackground_image_alpha() const
+	{
+		return background_image_alpha;
+	}
+
+	void setBackground_image_alpha(int background_image_alpha)
+	{
+		Configuration::background_image_alpha = background_image_alpha;
+	}
+
+	float getBackground_image_size_factor() const
+	{
+		return background_image_size_factor;
+	}
+
+	void setBackground_image_size_factor(float background_image_size_factor)
+	{
+		Configuration::background_image_size_factor = background_image_size_factor;
+	}
+
+	int getBackground_image_x_offset() const
+	{
+		return background_image_x_offset;
+	}
+
+	void setBackground_image_x_offset(int background_image_x_offset)
+	{
+		Configuration::background_image_x_offset = background_image_x_offset;
+	}
+
+	int getBackground_image_y_offset() const
+	{
+		return background_image_y_offset;
+	}
+
+	void setBackground_image_y_offset(int background_image_y_offset)
+	{
+		Configuration::background_image_y_offset = background_image_y_offset;
+	}
+
+	bool isBackground_image_smooth_zoom() const
+	{
+		return background_image_smooth_zoom;
+	}
+
+	void setBackground_image_smooth_zoom(bool background_image_smooth_zoom)
+	{
+		Configuration::background_image_smooth_zoom = background_image_smooth_zoom;
 	}
 
 	int getCategory_name_x() const

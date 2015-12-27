@@ -27,6 +27,11 @@ Configuration::Configuration()
 	directiveToFunction.push_back(cdtf("BACKGROUND_GREEN", &Configuration::setBackground_green));
 	directiveToFunction.push_back(cdtf("BACKGROUND_BLUE", &Configuration::setBackground_blue));
 	directiveToFunction.push_back(cdtf("BACKGROUND_IMAGE_PATH", &Configuration::setBackground_image_path));
+	directiveToFunction.push_back(cdtf("BACKGROUND_IMAGE_ALPHA", &Configuration::setBackground_image_alpha));
+	directiveToFunction.push_back(cdtf("BACKGROUND_IMAGE_SIZE_FACTOR", &Configuration::setBackground_image_size_factor));
+	directiveToFunction.push_back(cdtf("BACKGROUND_IMAGE_X_OFFSET", &Configuration::setBackground_image_x_offset));
+	directiveToFunction.push_back(cdtf("BACKGROUND_IMAGE_Y_OFFSET", &Configuration::setBackground_image_y_offset));
+	directiveToFunction.push_back(cdtf("BACKGROUND_IMAGE_SMOOTH_ZOOM", &Configuration::setBackground_image_smooth_zoom));
 
 	directiveToFunction.push_back(cdtf("CATEGORY_NAME_X", &Configuration::setCategory_name_x));
 	directiveToFunction.push_back(cdtf("CATEGORY_NAME_Y", &Configuration::setCategory_name_y));
@@ -127,9 +132,10 @@ void Configuration::loadConf()
 						{
 							dtf.callSetter(this, line.substr(pos + dtf.getDirective().length() + 1));
 						}
-						catch(...)
+						catch(const std::exception& exception)
 						{
-							cerr << "Incorrect value for directive " << dtf.getDirective() << " line " << numLine << ". Default value will be used." << endl;
+							cerr << "Incorrect value for directive " << dtf.getDirective() << " line " << numLine << ". Default value will be used.\t";
+							cerr << "Exeption message is: " << exception.what() << endl;
 						}
 						break;
 					}

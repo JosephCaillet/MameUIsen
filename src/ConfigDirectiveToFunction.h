@@ -5,9 +5,11 @@
 #ifndef MAMEUISEN_CONFIGDIRECTIVETOFUNCTION_H
 #define MAMEUISEN_CONFIGDIRECTIVETOFUNCTION_H
 
-#define STRIG_FOR_BOOL_TRUE "yes"
-#define STRIG_FOR_BOOL_FALSE "no"
+#define STRING_FOR_BOOL_TRUE "yes"
+#define STRING_FOR_BOOL_FALSE "no"
 
+#include <stdexcept>
+#include <sstream>
 #include "Configuration.h"
 
 class Configuration;
@@ -73,13 +75,19 @@ public:
 				(target->*setterF)(std::stof(value));
 				break;
 			case ValueType::BOOL:
-				if(value == STRIG_FOR_BOOL_TRUE)
+				if(value == STRING_FOR_BOOL_TRUE)
 				{
 					(target->*setterB)(true);
 				}
-				else if(value == STRIG_FOR_BOOL_FALSE)
+				else if(value == STRING_FOR_BOOL_FALSE)
 				{
 					(target->*setterB)(false);
+				}
+				else
+				{
+					std::stringstream error_msg;
+					error_msg << "Cannot convert \"" << value << "\" to boolean, is neither " << STRING_FOR_BOOL_TRUE <<"(true) or " << STRING_FOR_BOOL_FALSE << "(false).";
+					throw std::invalid_argument(error_msg.str());
 				}
 				break;
 		}

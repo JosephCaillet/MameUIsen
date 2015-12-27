@@ -20,8 +20,13 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration(), romListMan
 	{
 		backgroundImageTexture = new sf::Texture;
 		backgroundImageTexture->loadFromFile(configuration.getBackground_image_path());
+		backgroundImageTexture->setSmooth(configuration.isBackground_image_smooth_zoom());
 		backgroundImageSprite.setTexture(*backgroundImageTexture);
-		backgroundImageSprite.setPosition(0, 0);
+		backgroundImageSprite.setPosition(configuration.getWindowWidth()/2 + configuration.getBackground_image_x_offset(),
+										  configuration.getWindowHeight()/2 + configuration.getBackground_image_y_offset());
+		backgroundImageSprite.setScale(configuration.getBackground_image_size_factor(), configuration.getBackground_image_size_factor());
+		centerElement(backgroundImageSprite);
+		backgroundImageSprite.setColor(sf::Color(255, 255, 255, configuration.getBackground_image_alpha()));
 	}
 
 	romListManager.initText(configuration, font);

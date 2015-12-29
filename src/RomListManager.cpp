@@ -15,6 +15,7 @@ RomListManager::RomListManager()
 {
 	loadCategories();
 	loadRoms();
+	sortRomsList();
 }
 
 //Getters
@@ -170,6 +171,14 @@ void RomListManager::loadRoms()
 				nbLines++;
 			}
 		}
+	}
+}
+
+void RomListManager::sortRomsList()
+{
+	for(unsigned int i = 0; i < romListsArray.size(); i++)
+	{
+		romListsArray[i].sort();
 	}
 }
 

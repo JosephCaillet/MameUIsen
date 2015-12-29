@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "Rom.h"
 
 class RomList
@@ -57,6 +58,11 @@ public:
 	void setLastViewedRomIndex(int lastViewedRomIndex)
 	{
 		RomList::lastViewedRomIndex = lastViewedRomIndex;
+	}
+
+	void sort()
+	{
+		std::sort(romList.begin(), romList.end(), &Rom::compareRom);
 	}
 };
 

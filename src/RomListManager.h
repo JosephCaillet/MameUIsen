@@ -33,6 +33,7 @@ public:
 private:
 	void loadCategories();
 	void loadRoms();
+	void sortRomsList();
 	void updateCurrentRomSetIndex(char sign);
 };
 

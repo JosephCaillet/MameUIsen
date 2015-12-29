@@ -67,6 +67,12 @@ public:
 	{
 		Rom::isTextureCorrectlyLoaded = isTextureCorrectlyLoaded;
 	}
+
+	//Static comparison function
+	static int compareRom(Rom* r1, Rom* r2)
+	{
+		return r1->description < r2->description;
+	}
 };
 
 

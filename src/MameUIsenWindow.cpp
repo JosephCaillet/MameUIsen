@@ -149,16 +149,18 @@ void MameUIsenWindow::launch()
 				}
 				break;
 			case NEXT_CATEGORY:
+				romList->setLastViewedRomIndex(currentRomIndex);
 				romList = romListManager.getNextRomList();
-				currentRomIndex = 1;
-				rom = romList->getRom(1);
+				currentRomIndex = romList->getLastViewedRomIndex();
+				rom = romList->getRom(currentRomIndex);
 				rebaseRomNamesPosition(*romList);
 				updateAllDisplay(*romList, *rom, currentRomIndex);
 				break;
 			case PREVIOUS_CATEGORY:
+				romList->setLastViewedRomIndex(currentRomIndex);
 				romList = romListManager.getPreviousRomList();
-				currentRomIndex = 1;
-				rom = romList->getRom(1);
+				currentRomIndex = romList->getLastViewedRomIndex();
+				rom = romList->getRom(currentRomIndex);
 				rebaseRomNamesPosition(*romList);
 				updateAllDisplay(*romList, *rom, currentRomIndex);
 				break;

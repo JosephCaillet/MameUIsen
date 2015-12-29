@@ -15,6 +15,7 @@ class RomList
 private:
 	std::string name;
 	std::vector<Rom*> romList;
+	int lastViewedRomIndex = 1;
 
 public:
 	//Constructor
@@ -46,6 +47,16 @@ public:
 	void addRom(Rom* rom)
 	{
 		romList.push_back(rom);
+	}
+
+	int getLastViewedRomIndex() const
+	{
+		return lastViewedRomIndex;
+	}
+
+	void setLastViewedRomIndex(int lastViewedRomIndex)
+	{
+		RomList::lastViewedRomIndex = lastViewedRomIndex;
 	}
 };
 

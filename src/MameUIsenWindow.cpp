@@ -8,28 +8,28 @@
 
 using namespace std;
 
-MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration("../config/general.cfg"), romListManager()
+MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration("../config/general.cfg"), theme(configuration.getTheme_path()), romListManager()
 {
-	romListManager.loadTextures(configuration);
+	romListManager.loadTextures(configuration, theme);
 	if(!loadFontAndInitSprite())
 	{
 		exit(EXIT_FAILURE);
 	}
 
-	if(configuration.getBackground_image_path() != "")
+	if(theme.getBackground_image_path() != "")
 	{
 		backgroundImageTexture = new sf::Texture;
-		backgroundImageTexture->loadFromFile(configuration.getBackground_image_path());
-		backgroundImageTexture->setSmooth(configuration.isBackground_image_smooth_zoom());
+		backgroundImageTexture->loadFromFile(theme.getBackground_image_path());
+		backgroundImageTexture->setSmooth(theme.isBackground_image_smooth_zoom());
 		backgroundImageSprite.setTexture(*backgroundImageTexture);
-		backgroundImageSprite.setPosition(configuration.getWindowWidth()/2 + configuration.getBackground_image_x_offset(),
-										  configuration.getWindowHeight()/2 + configuration.getBackground_image_y_offset());
-		backgroundImageSprite.setScale(configuration.getBackground_image_size_factor(), configuration.getBackground_image_size_factor());
+		backgroundImageSprite.setPosition(configuration.getWindowWidth()/2 + theme.getBackground_image_x_offset(),
+										  configuration.getWindowHeight()/2 + theme.getBackground_image_y_offset());
+		backgroundImageSprite.setScale(theme.getBackground_image_size_factor(), theme.getBackground_image_size_factor());
 		centerElement(backgroundImageSprite);
-		backgroundImageSprite.setColor(sf::Color(255, 255, 255, configuration.getBackground_image_alpha()));
+		backgroundImageSprite.setColor(sf::Color(255, 255, 255, theme.getBackground_image_alpha()));
 	}
 
-	romListManager.initText(configuration, font);
+	romListManager.initText(theme, font);
 	int sfmlVideoFlags = sf::Style::Titlebar | sf::Style::Close;
 	if(configuration.isFullscreen())
 	{
@@ -52,7 +52,7 @@ MameUIsenWindow::~MameUIsenWindow()
 
 bool MameUIsenWindow::loadFontAndInitSprite()
 {
-	if(!font.loadFromFile(configuration.getFont_path()))
+	if(!font.loadFromFile(theme.getFont_path()))
 	{
 		return false;
 	}
@@ -65,51 +65,51 @@ bool MameUIsenWindow::loadFontAndInitSprite()
 	romIndexProgress.setFont(font);
 
 	//Size
-	categoryName.setCharacterSize(configuration.getCategory_name_size());
-	categoryIndexProgress.setCharacterSize(configuration.getCategory_index_size());
-	romYear.setCharacterSize(configuration.getRom_year_size());
-	romManufacturer.setCharacterSize(configuration.getRom_manufacturer_size());
-	romIndexProgress.setCharacterSize(configuration.getRom_index_size());
-	selectedRomIndicator.setOutlineThickness(configuration.getRom_selection_indicator_border_size());
+	categoryName.setCharacterSize(theme.getCategory_name_size());
+	categoryIndexProgress.setCharacterSize(theme.getCategory_index_size());
+	romYear.setCharacterSize(theme.getRom_year_size());
+	romManufacturer.setCharacterSize(theme.getRom_manufacturer_size());
+	romIndexProgress.setCharacterSize(theme.getRom_index_size());
+	selectedRomIndicator.setOutlineThickness(theme.getRom_selection_indicator_border_size());
 
 	//Position
-	categoryName.setPosition(configuration.getCategory_name_x(),configuration.getCategory_name_y());
-	categoryIndexProgress.setPosition(configuration.getCategory_index_x(), configuration.getCategory_index_y());
-	romYear.setPosition(configuration.getRom_year_x(), configuration.getRom_year_y());
-	romManufacturer.setPosition(configuration.getRom_manufacturer_x(), configuration.getRom_manufacturer_y());
-	romIndexProgress.setPosition(configuration.getRom_index_x(), configuration.getRom_index_y());
-	screenshot.setPosition(configuration.getRom_screenshot_x(), configuration.getRom_screenshot_y());
-	selectedRomIndicator.setPosition(configuration.getRom_name_selected_x(), configuration.getRom_name_selected_y());
+	categoryName.setPosition(theme.getCategory_name_x(),theme.getCategory_name_y());
+	categoryIndexProgress.setPosition(theme.getCategory_index_x(), theme.getCategory_index_y());
+	romYear.setPosition(theme.getRom_year_x(), theme.getRom_year_y());
+	romManufacturer.setPosition(theme.getRom_manufacturer_x(), theme.getRom_manufacturer_y());
+	romIndexProgress.setPosition(theme.getRom_index_x(), theme.getRom_index_y());
+	screenshot.setPosition(theme.getRom_screenshot_x(), theme.getRom_screenshot_y());
+	selectedRomIndicator.setPosition(theme.getRom_name_selected_x(), theme.getRom_name_selected_y());
 
 	//Color
-	categoryName.setColor(sf::Color(configuration.getCategory_name_color_red(),
-									configuration.getCategory_name_color_green(),
-									configuration.getCategory_name_color_blue(),
-									configuration.getCategory_name_color_alpha()));
-	categoryIndexProgress.setColor(sf::Color(configuration.getCategory_index_color_red(),
-											 configuration.getCategory_index_color_green(),
-											 configuration.getCategory_index_color_blue(),
-											 configuration.getCategory_index_color_alpha()));
-	romYear.setColor(sf::Color(configuration.getRom_year_color_red(),
-							   configuration.getRom_year_color_green(),
-							   configuration.getRom_year_color_blue(),
-							   configuration.getRom_year_color_alpha()));
-	romManufacturer.setColor(sf::Color(configuration.getRom_manufacturer_color_red(),
-									   configuration.getRom_manufacturer_color_green(),
-									   configuration.getRom_manufacturer_color_blue(),
-									   configuration.getRom_manufacturer_color_alpha()));
-	romIndexProgress.setColor(sf::Color(configuration.getRom_index_color_red(),
-										configuration.getRom_index_color_green(),
-										configuration.getRom_index_color_blue(),
-										configuration.getRom_index_color_alpha()));
-	selectedRomIndicator.setFillColor(sf::Color(configuration.getRom_selection_indicator_background_red(),
-												configuration.getRom_selection_indicator_background_green(),
-												configuration.getRom_selection_indicator_background_blue(),
-												configuration.getRom_selection_indicator_background_alpha()));
-	selectedRomIndicator.setOutlineColor(sf::Color(configuration.getRom_selection_indicator_border_red(),
-												configuration.getRom_selection_indicator_border_green(),
-												configuration.getRom_selection_indicator_border_blue(),
-												configuration.getRom_selection_indicator_border_alpha()));
+	categoryName.setColor(sf::Color(theme.getCategory_name_color_red(),
+									theme.getCategory_name_color_green(),
+									theme.getCategory_name_color_blue(),
+									theme.getCategory_name_color_alpha()));
+	categoryIndexProgress.setColor(sf::Color(theme.getCategory_index_color_red(),
+											 theme.getCategory_index_color_green(),
+											 theme.getCategory_index_color_blue(),
+											 theme.getCategory_index_color_alpha()));
+	romYear.setColor(sf::Color(theme.getRom_year_color_red(),
+							   theme.getRom_year_color_green(),
+							   theme.getRom_year_color_blue(),
+							   theme.getRom_year_color_alpha()));
+	romManufacturer.setColor(sf::Color(theme.getRom_manufacturer_color_red(),
+									   theme.getRom_manufacturer_color_green(),
+									   theme.getRom_manufacturer_color_blue(),
+									   theme.getRom_manufacturer_color_alpha()));
+	romIndexProgress.setColor(sf::Color(theme.getRom_index_color_red(),
+										theme.getRom_index_color_green(),
+										theme.getRom_index_color_blue(),
+										theme.getRom_index_color_alpha()));
+	selectedRomIndicator.setFillColor(sf::Color(theme.getRom_selection_indicator_background_red(),
+												theme.getRom_selection_indicator_background_green(),
+												theme.getRom_selection_indicator_background_blue(),
+												theme.getRom_selection_indicator_background_alpha()));
+	selectedRomIndicator.setOutlineColor(sf::Color(theme.getRom_selection_indicator_border_red(),
+												theme.getRom_selection_indicator_border_green(),
+												theme.getRom_selection_indicator_border_blue(),
+												theme.getRom_selection_indicator_border_alpha()));
 	return true;
 }
 
@@ -119,7 +119,7 @@ void MameUIsenWindow::launch()
 	Rom* rom = romList->getRom(1);
 	rebaseRomNamesPosition(*romList);
 	unsigned int currentRomIndex = 1;
-	screenshot.setScale(configuration.getRom_screenshot_size_factor(), configuration.getRom_screenshot_size_factor());
+	screenshot.setScale(theme.getRom_screenshot_size_factor(), theme.getRom_screenshot_size_factor());
 	updateAllDisplay(*romList, *rom, currentRomIndex);
 	while(isOpen())
 	{
@@ -189,7 +189,7 @@ void MameUIsenWindow::updateAllDisplay(const RomList& romList, const Rom& rom, i
 
 void MameUIsenWindow::displayAll(const int currentRomIndex, const RomList& romList)
 {
-	clear(sf::Color(configuration.getBackground_red(), configuration.getBackground_green(), configuration.getBackground_blue()));
+	clear(sf::Color(theme.getBackground_red(), theme.getBackground_green(), theme.getBackground_blue()));
 	displayBackgroundImage();
 	displayScreenshot();
 	displayCategory();
@@ -259,11 +259,11 @@ void MameUIsenWindow::displayScreenshot()
 void MameUIsenWindow::updateSelectedRomIndicator(const Rom& rom)
 {
 	sf::Text& text = rom.getTextSprite();
-	float width = configuration.getRom_selection_indicator_width();
-	float height = text.getLocalBounds().height + 2 * configuration.getRom_selection_indicator_horizontal_margin();
+	float width = theme.getRom_selection_indicator_width();
+	float height = text.getLocalBounds().height + 2 * theme.getRom_selection_indicator_horizontal_margin();
 	if(width == -1)
 	{
-		width = text.getLocalBounds().width + 2 * configuration.getRom_selection_indicator_vertical_margin();
+		width = text.getLocalBounds().width + 2 * theme.getRom_selection_indicator_vertical_margin();
 	}
 	selectedRomIndicator.setSize(sf::Vector2f(width, height));
 	centerElement(selectedRomIndicator);
@@ -277,14 +277,14 @@ void MameUIsenWindow::displaySelectedRomIndicator()
 void MameUIsenWindow::updateRomsNamesDisplay(const int currentRomIndex)
 {
 	romNameView = getDefaultView();
-	int offset = (currentRomIndex - 1) * (configuration.getRom_name_size() + configuration.getRom_name_margin_size());
+	int offset = (currentRomIndex - 1) * (theme.getRom_name_size() + theme.getRom_name_margin_size());
 	romNameView.move(0, offset);
 }
 
 void MameUIsenWindow::displayRomsNames(const RomList& romList, int currentRomIndex)
 {
-	int aboveLimit = currentRomIndex - configuration.getRom_name_to_display_above_selected();
-	int underLimit = configuration.getRom_name_to_display_under_selected() + currentRomIndex;
+	int aboveLimit = currentRomIndex - theme.getRom_name_to_display_above_selected();
+	int underLimit = theme.getRom_name_to_display_under_selected() + currentRomIndex;
 
 	if(aboveLimit < 1)
 	{
@@ -307,14 +307,14 @@ void MameUIsenWindow::displayRomsNames(const RomList& romList, int currentRomInd
 
 void MameUIsenWindow::rebaseRomNamesPosition(RomList& romList)
 {
-	int x = configuration.getRom_name_selected_x();
-	int y = configuration.getRom_name_selected_y();
+	int x = theme.getRom_name_selected_x();
+	int y = theme.getRom_name_selected_y();
 
 	Rom* rom = romList.getRom(1);
 	for(int i = 1; i <= (int)romList.getRomListSize(); i++, rom = romList.getRom(i))
 	{
 		rom->getTextSprite().setPosition(x,y);
-		y += configuration.getRom_name_size() + configuration.getRom_name_margin_size();
+		y += theme.getRom_name_size() + theme.getRom_name_margin_size();
 		centerElement(rom->getTextSprite());
 	}
 }

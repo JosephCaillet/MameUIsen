@@ -9,6 +9,7 @@
 #include "Rom.h"
 #include "RomList.h"
 #include "Configuration.h"
+#include "Theme.h"
 
 class RomListManager
 {
@@ -27,8 +28,8 @@ public:
 	int getCurrentRomSetIndex();
 	int getRomSetNumber();
 	//Member functions
-	void loadTextures(const Configuration& configuration);
-	void initText(const Configuration& configuration, const sf::Font&);
+	void loadTextures(const Configuration& configuration, const Theme& theme);
+	void initText(const Theme& theme, const sf::Font&);
 
 private:
 	void loadCategories();

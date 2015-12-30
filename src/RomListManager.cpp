@@ -7,6 +7,7 @@
 #include <string.h>
 #include <sstream>
 #include "RomListManager.h"
+#include "Theme.h"
 
 using namespace std;
 
@@ -42,7 +43,7 @@ int RomListManager::getRomSetNumber()
 }
 
 //Member Functions
-void RomListManager::loadTextures(const Configuration& configuration)
+void RomListManager::loadTextures(const Configuration& configuration, const Theme& theme)
 {
 	for(auto & rom : roms)
 	{
@@ -50,26 +51,26 @@ void RomListManager::loadTextures(const Configuration& configuration)
 		if(loadingOk)
 		{
 			rom.setIsTextureCorrectlyLoaded(true);
-			rom.getTexture().setSmooth(configuration.isRom_screenshot_smooth_zoom());
+			rom.getTexture().setSmooth(theme.isRom_screenshot_smooth_zoom());
 		}
 	}
 }
 
-void RomListManager::initText(const Configuration& configuration, const sf::Font& font)
+void RomListManager::initText(const Theme& theme, const sf::Font& font)
 {
 	for(auto & rom : roms)
 	{
 		sf::Text& text = rom.getTextSprite();
 		text.setFont(font);
-		text.setColor(sf::Color(configuration.getRom_name_color_red(),
-								configuration.getRom_name_color_green(),
-								configuration.getRom_name_color_blue(),
-								configuration.getRom_name_color_alpha()));
-		text.setCharacterSize(configuration.getRom_name_size());
+		text.setColor(sf::Color(theme.getRom_name_color_red(),
+								theme.getRom_name_color_green(),
+								theme.getRom_name_color_blue(),
+								theme.getRom_name_color_alpha()));
+		text.setCharacterSize(theme.getRom_name_size());
 
-		if((int)rom.getDescription().length() > configuration.getRom_name_max_length())
+		if((int)rom.getDescription().length() > theme.getRom_name_max_length())
 		{
-			text.setString(rom.getDescription().substr(0, configuration.getRom_name_max_length()) + configuration.getRom_name_suffix_max_length());
+			text.setString(rom.getDescription().substr(0, theme.getRom_name_max_length()) + theme.getRom_name_suffix_max_length());
 		}
 		else
 		{

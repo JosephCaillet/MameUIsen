@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "Configuration.h"
+#include "Theme.h"
 #include "RomListManager.h"
 
 enum event
@@ -23,6 +24,7 @@ class MameUIsenWindow : sf::RenderWindow
 {
 private:
 	Configuration configuration;
+	Theme theme;
 	RomListManager romListManager;
 
 	sf::Sprite screenshot;

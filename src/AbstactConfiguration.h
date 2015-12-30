@@ -5,8 +5,6 @@
 #ifndef MAMEUISEN_ABSTACTCONFIGURATION_H
 #define MAMEUISEN_ABSTACTCONFIGURATION_H
 
-#define COMMENT_CHARACTER '#'
-
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -38,12 +36,12 @@ protected:
 	virtual void bindDirectivesToSetters() =0;
 
 public:
-	void loadConfiguration(T* subClass)
+	void loadConfiguration(T* subClass, char commentCharacter = '#')
 	{
 		std::ifstream confFile(configFilePath, std::ios::in);
 		if(!confFile)
 		{
-			std::cerr << "Can't open " << configFilePath << " : " << strerror(errno) << std::endl;
+			std::cerr << "Can't open \"" << configFilePath << "\" : " << strerror(errno) << std::endl;
 			exit(EXIT_FAILURE);
 		}
 		else
@@ -53,7 +51,7 @@ public:
 			while(getline(confFile, line))
 			{
 				numLine++;
-				if(line[0] != COMMENT_CHARACTER)
+				if(line[0] != commentCharacter)
 				{
 					for(auto & dtf : directiveToFunction)
 					{

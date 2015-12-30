@@ -6,11 +6,10 @@
 #define MAMEUISEN_CONFIGURATION_H
 
 #include <string>
-#include <vector>
 #include <iostream>
-#include "ConfigDirectiveToFunction.h"
+#include "AbstactConfiguration.h"
 
-class Configuration
+class Configuration : AbstactConfiguration<Configuration>
 {
 private:
 	std::string mame_path = "mame";
@@ -103,13 +102,8 @@ private:
 	int rom_selection_indicator_border_blue;
 	int rom_selection_indicator_border_alpha;
 
-	std::vector<ConfigDirectiveToFunction<Configuration>> directiveToFunction;
-
-private:
-	void loadConf();
-
 public:
-	Configuration();
+	Configuration(const std::string& configFilePath);
 
 	const std::string& getMame_path() const
 	{
@@ -910,6 +904,9 @@ public:
 	{
 		Configuration::rom_selection_indicator_border_alpha = rom_selection_indicator_border_alpha;
 	}
+
+private:
+	virtual void bindDirectivesToSetters();
 };
 
 

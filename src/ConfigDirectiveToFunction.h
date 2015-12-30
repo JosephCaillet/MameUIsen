@@ -10,14 +10,6 @@
 
 #include <stdexcept>
 #include <sstream>
-#include "Configuration.h"
-
-class Configuration;
-
-//typedef void (Configuration:: * S)(const std::string&);// S represent a pointer on a getter method member of a Configuration object
-//typedef void (Configuration:: * I)(const int&);
-//typedef void (Configuration:: * F)(const float &);
-//typedef void (Configuration:: * B)(const bool &);
 
 template <class T>
 class ConfigDirectiveToFunction
@@ -45,7 +37,6 @@ private:
 	};
 
 public:
-
 	ConfigDirectiveToFunction()
 	{ }
 
@@ -61,7 +52,7 @@ public:
 	ConfigDirectiveToFunction(const std::string& directive, B setter) : valueType(ValueType::BOOL), directive(directive), setterB(setter)
 	{ }
 
-	void callSetter(Configuration* target, std::string value)
+	void callSetter(T* target, std::string value)
 	{
 		switch(valueType)
 		{

@@ -2,15 +2,18 @@
 // Created by joseph on 20/12/15.
 //
 
-#include <fstream>
-#include <iostream>
-#include <string.h>
-
 #include "Configuration.h"
 
 using namespace std;
 
-Configuration::Configuration()
+
+Configuration::Configuration(const std::string& configFilePath) : AbstactConfiguration(configFilePath)
+{
+	bindDirectivesToSetters();
+	loadConfiguration(this);
+}
+
+void Configuration::bindDirectivesToSetters()
 {
 	using cdtf = ConfigDirectiveToFunction<Configuration>;
 	directiveToFunction.push_back(cdtf("MAME_PATH", &Configuration::setMame_path));
@@ -103,44 +106,4 @@ Configuration::Configuration()
 	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BORDER_GREEN", &Configuration::setRom_selection_indicator_border_green));
 	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BORDER_BLUE", &Configuration::setRom_selection_indicator_border_blue));
 	directiveToFunction.push_back(cdtf("ROM_SELECTION_INDICATOR_BORDER_ALPHA", &Configuration::setRom_selection_indicator_border_alpha));
-	loadConf();
-}
-
-void Configuration::loadConf()
-{
-	ifstream confFile("../config/general.cfg", ios::in);
-	if(!confFile)
-	{
-		cerr << "Can't open config/general.cfg : " << strerror(errno) << endl;
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		string line;
-		int numLine = 0;
-		while(getline(confFile, line))
-		{
-			numLine++;
-			if(line[0] != '#')
-			{
-				for(auto & dtf : directiveToFunction)
-				{
-					size_t pos = line.find(dtf.getDirective());
-					if(pos == 0)
-					{
-						try
-						{
-							dtf.callSetter(this, line.substr(pos + dtf.getDirective().length() + 1));
-						}
-						catch(const std::exception& exception)
-						{
-							cerr << "Incorrect value for directive " << dtf.getDirective() << " line " << numLine << ". Default value will be used.\t";
-							cerr << "Exeption message is: " << exception.what() << endl;
-						}
-						break;
-					}
-				}
-			}
-		}
-	}
 }

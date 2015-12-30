@@ -8,7 +8,7 @@
 
 using namespace std;
 
-MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration(), romListManager()
+MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration("../config/general.cfg"), romListManager()
 {
 	romListManager.loadTextures(configuration);
 	if(!loadFontAndInitSprite())

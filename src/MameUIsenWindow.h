@@ -42,10 +42,10 @@ private:
 public:
 	MameUIsenWindow();
 	~MameUIsenWindow();
+	void launch();
 
 private:
 	bool loadFontAndInitSprite();
-	void launch();
 
 	void updateAllDisplay(const RomList& romList, const Rom& rom, int currentRomIndex);
 	void displayAll(const int currentRomIndex, const RomList& romList);

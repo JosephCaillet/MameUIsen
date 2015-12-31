@@ -3,8 +3,6 @@
 //
 
 #include "MameUIsenWindow.h"
-#include <iostream>
-#include <sstream>
 
 using namespace std;
 
@@ -39,9 +37,6 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration("../config/ge
 	create(sf::VideoMode(theme.getWindowWidth(), theme.getWindowHeight()), "MameUIsen", sfmlVideoFlags);
 	setFramerateLimit(60);
 	setMouseCursorVisible(false);
-	display();
-
-	launch();
 }
 
 

@@ -5,14 +5,14 @@
 #ifndef MAMEUISEN_CONFIGDIRECTIVETOFUNCTION_H
 #define MAMEUISEN_CONFIGDIRECTIVETOFUNCTION_H
 
-#define STRING_FOR_BOOL_TRUE "yes"
-#define STRING_FOR_BOOL_FALSE "no"
 
 #include <stdexcept>
 #include <sstream>
 
+#include "ConfigDirectiveToFunctionBase.h"
+
 template <class T>
-class ConfigDirectiveToFunction
+class ConfigDirectiveToFunction : ConfigDirectiveToFunctionBase
 {
 private:
 	using S = void (T::* )(const std::string&);
@@ -52,37 +52,7 @@ public:
 	ConfigDirectiveToFunction(const std::string& directive, B setter) : valueType(ValueType::BOOL), directive(directive), setterB(setter)
 	{ }
 
-	void callSetter(T* target, std::string value)
-	{
-		switch(valueType)
-		{
-			case ValueType::STRING:
-				(target->*setterS)(value);
-				break;
-			case ValueType::INT:
-				(target->*setterI)(std::stoi(value));
-				break;
-			case ValueType::FLOAT:
-				(target->*setterF)(std::stof(value));
-				break;
-			case ValueType::BOOL:
-				if(value == STRING_FOR_BOOL_TRUE)
-				{
-					(target->*setterB)(true);
-				}
-				else if(value == STRING_FOR_BOOL_FALSE)
-				{
-					(target->*setterB)(false);
-				}
-				else
-				{
-					std::stringstream error_msg;
-					error_msg << "Cannot convert \"" << value << "\" to boolean, is neither " << STRING_FOR_BOOL_TRUE <<"(true) or " << STRING_FOR_BOOL_FALSE << "(false).";
-					throw std::invalid_argument(error_msg.str());
-				}
-				break;
-		}
-	}
+	void callSetter(T* target, std::string value);
 
 	const std::string& getDirective() const
 	{
@@ -90,5 +60,6 @@ public:
 	}
 };
 
+#include "ConfigDirectiveToFunction.tpp"
 
 #endif //MAMEUISEN_CONFIGDIRECTIVETOFUNCTION_H

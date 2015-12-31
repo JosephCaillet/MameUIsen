@@ -16,8 +16,6 @@ private:
 	std::string rom_path = "../roms";
 	std::string screenshots_path = "../screenshots";
 	std::string theme_path = "../themes/default/default.theme";
-	int windowWidth = 800;
-	int windowHeight = 600;
 	bool fullscreen = false;
 
 public:
@@ -61,26 +59,6 @@ public:
 	void setScreenshots_path(const std::string& screenshots_path)
 	{
 		Configuration::screenshots_path = screenshots_path;
-	}
-
-	int getWindowWidth() const
-	{
-		return windowWidth;
-	}
-
-	void setWindowWidth(int windowWidth)
-	{
-		Configuration::windowWidth = windowWidth;
-	}
-
-	int getWindowHeight() const
-	{
-		return windowHeight;
-	}
-
-	void setWindowHeight(int windowHeight)
-	{
-		Configuration::windowHeight = windowHeight;
 	}
 
 	bool isFullscreen() const

@@ -24,6 +24,9 @@ void Theme::bindDirectivesToSetters()
 {
 	using tdtf = ConfigDirectiveToFunction<Theme>;
 
+	directiveToFunction.push_back(tdtf("WINDOW_WIDTH", &Theme::setWindowWidth));
+	directiveToFunction.push_back(tdtf("WINDOW_HEIGHT", &Theme::setWindowHeight));
+
 	directiveToFunction.push_back(tdtf("FONT_PATH", &Theme::setFont_path));
 	directiveToFunction.push_back(tdtf("FONT_SIZE_FACTOR", &Theme::setFont_size_factor));
 

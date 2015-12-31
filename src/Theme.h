@@ -10,6 +10,9 @@
 
 class Theme : AbstactConfiguration<Theme>
 {
+	int windowWidth = 800;
+	int windowHeight = 600;
+
 	std::string font_path = "../themes/default/ARCADE_R.TTF";
 	float font_size_factor = 1.0f;
 
@@ -96,6 +99,26 @@ class Theme : AbstactConfiguration<Theme>
 
 public:
 	Theme(const std::string& themeFilePath);
+
+	int getWindowWidth() const
+	{
+		return windowWidth;
+	}
+
+	void setWindowWidth(int windowWidth)
+	{
+		Theme::windowWidth = windowWidth;
+	}
+
+	int getWindowHeight() const
+	{
+		return windowHeight;
+	}
+
+	void setWindowHeight(int windowHeight)
+	{
+		Theme::windowHeight = windowHeight;
+	}
 
 	const std::string& getFont_path() const
 	{

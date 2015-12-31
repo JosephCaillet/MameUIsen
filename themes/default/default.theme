@@ -1,5 +1,9 @@
 #MameUIsen default theme config file
 
+#windows height and width in pixel.
+WINDOW_WIDTH 800
+WINDOW_HEIGHT 600
+
 #Font path including name
 FONT_PATH ../themes/default/ARCADE_R.TTF
 #Font size factor, will affect all text size directive that follow this directive, until this directive is read again.
@@ -13,6 +17,7 @@ BACKGROUND_BLUE 0
 BACKGROUND_IMAGE_PATH ../themes/default/midway_arcade.jpg
 BACKGROUND_IMAGE_ALPHA 100
 BACKGROUND_IMAGE_SIZE_FACTOR 1.25
+#bg image is alway centered.
 BACKGROUND_IMAGE_X_OFFSET 0
 BACKGROUND_IMAGE_Y_OFFSET 0
 BACKGROUND_IMAGE_SMOOTH_ZOOM yes

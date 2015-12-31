@@ -22,8 +22,8 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration("../config/ge
 		backgroundImageTexture->loadFromFile(theme.getBackground_image_path());
 		backgroundImageTexture->setSmooth(theme.isBackground_image_smooth_zoom());
 		backgroundImageSprite.setTexture(*backgroundImageTexture);
-		backgroundImageSprite.setPosition(configuration.getWindowWidth()/2 + theme.getBackground_image_x_offset(),
-										  configuration.getWindowHeight()/2 + theme.getBackground_image_y_offset());
+		backgroundImageSprite.setPosition(theme.getWindowWidth()/2 + theme.getBackground_image_x_offset(),
+										  theme.getWindowHeight()/2 + theme.getBackground_image_y_offset());
 		backgroundImageSprite.setScale(theme.getBackground_image_size_factor(), theme.getBackground_image_size_factor());
 		centerElement(backgroundImageSprite);
 		backgroundImageSprite.setColor(sf::Color(255, 255, 255, theme.getBackground_image_alpha()));
@@ -36,7 +36,7 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration("../config/ge
 		sfmlVideoFlags |= sf::Style::Fullscreen;
 	}
 
-	create(sf::VideoMode(configuration.getWindowWidth(), configuration.getWindowHeight()), "MameUIsen", sfmlVideoFlags);
+	create(sf::VideoMode(theme.getWindowWidth(), theme.getWindowHeight()), "MameUIsen", sfmlVideoFlags);
 	setFramerateLimit(60);
 	setMouseCursorVisible(false);
 	display();

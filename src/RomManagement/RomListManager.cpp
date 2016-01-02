@@ -7,7 +7,6 @@
 #include <string.h>
 #include <sstream>
 #include "RomListManager.h"
-#include "Theme.h"
 
 using namespace std;
 

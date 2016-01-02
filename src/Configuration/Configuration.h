@@ -7,7 +7,7 @@
 
 #include <string>
 #include <iostream>
-#include "AbstactConfiguration.h"
+#include "../lib/EasyConfigurationFileReadingApi/AbstactConfiguration.h"
 
 class Configuration : AbstactConfiguration<Configuration>
 {

@@ -6,7 +6,7 @@
 #define MAMEUISEN_THEME_H
 
 #include <string>
-#include "AbstactConfiguration.h"
+#include "../lib/EasyConfigurationFileReadingApi/AbstactConfiguration.h"
 
 class Theme : AbstactConfiguration<Theme>
 {

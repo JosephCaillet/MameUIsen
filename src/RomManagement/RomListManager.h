@@ -8,8 +8,8 @@
 #include <vector>
 #include "Rom.h"
 #include "RomList.h"
-#include "Configuration.h"
-#include "Theme.h"
+#include "../Configuration/Configuration.h"
+#include "../Configuration/Theme.h"
 
 class RomListManager
 {

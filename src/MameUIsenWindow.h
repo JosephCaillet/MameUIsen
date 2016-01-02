@@ -7,9 +7,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
-#include "Configuration.h"
-#include "Theme.h"
-#include "RomListManager.h"
+#include "Configuration/Configuration.h"
+#include "Configuration/Theme.h"
+#include "RomManagement/RomListManager.h"
 
 enum event
 {

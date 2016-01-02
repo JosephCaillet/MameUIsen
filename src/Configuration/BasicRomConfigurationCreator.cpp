@@ -30,9 +30,21 @@ void BasicRomConfigurationCreator::listRoms()
 			size_t pos = romDirName.find(".zip");
 			if(pos != string::npos)
 			{
+				//removing .zip
 				romDirName.erase(pos);
+				romNameList.push_back(romDirName);
+
+				//asking mame for xml file info corresponding to the game
+				string s = configuration.getMame_path() + " -listxml " + romDirName + " > " + romDirName + ".xml";
+				system(s.c_str());
+
+				//doing somme things with
+				cout << romDirName << " found."<< endl;
+
+				//delete xml file
+				s = romDirName + ".xml";
+				remove(s.c_str());
 			}
-			cout << romDirName << endl;
 		}
 	}
 

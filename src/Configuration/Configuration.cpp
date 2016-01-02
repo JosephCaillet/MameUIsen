@@ -28,6 +28,6 @@ void Configuration::bindDirectivesToSetters()
 	directiveToFunction.push_back(cdtf("MAME_PATH", &Configuration::setMame_path));
 	directiveToFunction.push_back(cdtf("ROMS_PATH", &Configuration::setRom_path));
 	directiveToFunction.push_back(cdtf("SCREENSHOTS_PATH", &Configuration::setScreenshots_path));
-	directiveToFunction.push_back(cdtf("THEME_PATH", &Configuration::setTheme_path));
 	directiveToFunction.push_back(cdtf("FULL_SCREEN", &Configuration::setFullscreen));
+	directiveToFunction.push_back(cdtf("THEME_PATH", &Configuration::setTheme_path));
 }

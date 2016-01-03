@@ -10,7 +10,7 @@ using namespace std;
 BasicRomConfigurationCreator::BasicRomConfigurationCreator(const std::string configFilePath) : configuration(configFilePath)
 { }
 
-void BasicRomConfigurationCreator::listRoms()
+void BasicRomConfigurationCreator::listsRoms()
 {
 	DIR* romDir = nullptr;
 	romDir = opendir(configuration.getRom_path().c_str());
@@ -25,6 +25,7 @@ void BasicRomConfigurationCreator::listRoms()
 	while((currentRomFile = readdir(romDir)) != nullptr)
 	{
 		string romDirName(currentRomFile->d_name);
+
 		if(romDirName != "." && romDirName != "..")
 		{
 			size_t pos = romDirName.find(".zip");
@@ -34,19 +35,26 @@ void BasicRomConfigurationCreator::listRoms()
 				romDirName.erase(pos);
 				romNameList.push_back(romDirName);
 
-				//asking mame for xml file info corresponding to the game
-				string s = configuration.getMame_path() + " -listxml " + romDirName + " > " + romDirName + ".xml";
-				system(s.c_str());
-
-				//doing somme things with
 				cout << romDirName << " found."<< endl;
-
-				//delete xml file
-				s = romDirName + ".xml";
-				remove(s.c_str());
 			}
 		}
 	}
 
 	closedir(romDir);
+}
+
+void BasicRomConfigurationCreator::askMameForRomsXMLFile()
+{
+	string s = configuration.getMame_path() + " -listxml > " + XML_ROM_LIST_MAME;
+	system(s.c_str());
+}
+
+void BasicRomConfigurationCreator::deleteMameRomsXMLFile()
+{
+	remove(XML_ROM_LIST_MAME);
+}
+
+void BasicRomConfigurationCreator::parseXML()
+{
+
 }

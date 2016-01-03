@@ -5,6 +5,8 @@
 #ifndef MAMEUISEN_BASICROMCONFIGURATIONCREATOR_H
 #define MAMEUISEN_BASICROMCONFIGURATIONCREATOR_H
 
+#define XML_ROM_LIST_MAME "temporary_mame_roms_info.xml"
+
 #include <vector>
 #include "Configuration.h"
 
@@ -18,7 +20,10 @@ private:
 
 public:
 	BasicRomConfigurationCreator(const std::string);
-	void listRoms();
+	void listsRoms();
+	void askMameForRomsXMLFile();
+	void deleteMameRomsXMLFile();
+	void parseXML();
 };
 
 

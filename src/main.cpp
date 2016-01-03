@@ -10,10 +10,10 @@ int main()
 	ConfigDirectiveToFunctionBase::setStringForBoolFalse("no");
 
 	BasicRomConfigurationCreator basicRomConfigurationCreator("../config/general.cfg");
-	basicRomConfigurationCreator.listRoms();
+	basicRomConfigurationCreator.listsRoms();
 
-	MameUIsenWindow isenWindow;
-	isenWindow.launch();
+	//MameUIsenWindow isenWindow;
+	//isenWindow.launch();
 
 	return 0;
 }

@@ -11,6 +11,10 @@ int main()
 
 	BasicRomConfigurationCreator basicRomConfigurationCreator("../config/general.cfg");
 	basicRomConfigurationCreator.listsRoms();
+	//basicRomConfigurationCreator.askMameForRomsXMLFile();
+	basicRomConfigurationCreator.parseXML();
+	basicRomConfigurationCreator.disp();
+	//basicRomConfigurationCreator.deleteMameRomsXMLFile();
 
 	//MameUIsenWindow isenWindow;
 	//isenWindow.launch();

@@ -7,8 +7,10 @@
 
 #define XML_ROM_LIST_MAME "temporary_mame_roms_info.xml"
 
-#include <vector>
+#include <queue>
+#include <set>
 #include "Configuration.h"
+#include "../RomManagement/Rom.h"
 
 typedef struct dirent dirent;
 
@@ -16,7 +18,8 @@ class BasicRomConfigurationCreator
 {
 private:
 	Configuration configuration;
-	std::vector<std::string> romNameList;
+	std::priority_queue<std::string, std::vector<std::string>, std::greater<std::string>> romsNamesList;
+	std::set<Rom> romsList;
 
 public:
 	BasicRomConfigurationCreator(const std::string);
@@ -24,6 +27,7 @@ public:
 	void askMameForRomsXMLFile();
 	void deleteMameRomsXMLFile();
 	void parseXML();
+	void disp();
 };
 
 

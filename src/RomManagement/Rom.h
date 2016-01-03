@@ -68,12 +68,22 @@ public:
 		Rom::isTextureCorrectlyLoaded = isTextureCorrectlyLoaded;
 	}
 
+	//Operators
+	friend bool operator<(const Rom& r1, const Rom &r2)
+	{
+		return r1.filename < r2.filename;
+	}
+
+	friend bool operator==(const Rom& r1, const Rom &r2)
+	{
+		return r1.filename == r2.filename;
+	}
+
 	//Static comparison function
 	static int compareRom(Rom* r1, Rom* r2)
 	{
 		return r1->description < r2->description;
 	}
 };
-
 
 #endif //MAMEUISEN_ROM_H

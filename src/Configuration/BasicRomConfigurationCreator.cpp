@@ -3,7 +3,9 @@
 //
 
 #include <dirent.h>
+#include <iomanip>
 #include "BasicRomConfigurationCreator.h"
+#include "../lib/tinyxml2/tinyxml2.h"
 
 using namespace std;
 
@@ -12,6 +14,8 @@ BasicRomConfigurationCreator::BasicRomConfigurationCreator(const std::string con
 
 void BasicRomConfigurationCreator::listsRoms()
 {
+	cout << "-> Listing existing roms..." << endl;
+
 	DIR* romDir = nullptr;
 	romDir = opendir(configuration.getRom_path().c_str());
 
@@ -21,6 +25,8 @@ void BasicRomConfigurationCreator::listsRoms()
 	}
 
 	dirent* currentRomFile = nullptr;
+
+	cout << "Founded roms are :" << endl;
 
 	while((currentRomFile = readdir(romDir)) != nullptr)
 	{
@@ -33,9 +39,9 @@ void BasicRomConfigurationCreator::listsRoms()
 			{
 				//removing .zip
 				romDirName.erase(pos);
-				romNameList.push_back(romDirName);
+				romsNamesList.push(romDirName);
 
-				cout << romDirName << " found."<< endl;
+				cout << romDirName << endl;
 			}
 		}
 	}
@@ -45,16 +51,80 @@ void BasicRomConfigurationCreator::listsRoms()
 
 void BasicRomConfigurationCreator::askMameForRomsXMLFile()
 {
+	cout << "-> Asking mame for roms list in a temporary file..." << endl;
+
 	string s = configuration.getMame_path() + " -listxml > " + XML_ROM_LIST_MAME;
 	system(s.c_str());
 }
 
 void BasicRomConfigurationCreator::deleteMameRomsXMLFile()
 {
+	cout << "-> Deleting temporary file..." << endl;
 	remove(XML_ROM_LIST_MAME);
 }
 
 void BasicRomConfigurationCreator::parseXML()
 {
+	cout << "-> Loading roms list file..." << endl;
 
+	tinyxml2::XMLDocument xmlMameRomsDocument;
+	xmlMameRomsDocument.LoadFile(XML_ROM_LIST_MAME);
+
+	if(xmlMameRomsDocument.ErrorID() != tinyxml2::XML_NO_ERROR)
+	{
+		string s;
+		s = s + "Error while opening \"" + XML_ROM_LIST_MAME + "\" : " + xmlMameRomsDocument.ErrorName();
+		cerr << s;
+		exit(EXIT_FAILURE);
+	}
+
+	tinyxml2::XMLElement* game = nullptr;
+	game = xmlMameRomsDocument.FirstChildElement("mame")->FirstChildElement("game");
+	if(game == nullptr)
+	{
+		cerr << "Error while parsing\"" << XML_ROM_LIST_MAME << ", no <game> element find in a root <mame> element.";
+		exit(EXIT_FAILURE);
+	}
+
+	cout << "-> Parsing roms list file..." << endl;
+
+	cout << "Founded roms infos are :" << endl;
+
+	while(game != nullptr)
+	{
+		if(game->Attribute("isdevice") != nullptr)//<game> representing a rom does not have this attribute, and mame sorts all <game> with this attribute, that's why we stop parsing when reading it.
+		{
+			break;
+		}
+
+		tinyxml2::XMLElement* description = nullptr;
+		tinyxml2::XMLElement* year = nullptr;
+		tinyxml2::XMLElement* manufacturer = nullptr;
+
+		description = game->FirstChildElement("description");
+		year = game->FirstChildElement("year");
+		manufacturer = game->FirstChildElement("manufacturer");
+
+		if(strcmp(game->Attribute("name"), romsNamesList.top().c_str()) == 0)
+		{
+			romsNamesList.pop();
+			romsList.insert(Rom(
+					string(description->GetText()),
+					string(game->Attribute("name")),
+					string(manufacturer->GetText()),
+					string(year->GetText())
+			));
+			cout << right << setw(10) << game->Attribute("name") << setw(50) << description->GetText() << setw(6) << year->GetText() << setw(30) << manufacturer->GetText() << endl;
+		}
+
+		game = game->NextSiblingElement();
+	}
+}
+
+void BasicRomConfigurationCreator::disp()
+{
+	for (set<Rom>::iterator i = romsList.begin(); i != romsList.end(); i++) {
+		cout << i->getFilename() << endl;
+	}
+	std::cout << std::endl;
 }

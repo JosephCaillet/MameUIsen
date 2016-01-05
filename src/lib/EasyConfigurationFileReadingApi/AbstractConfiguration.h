@@ -46,7 +46,7 @@ protected:
 	void bind(const std::string& directive, B setter);
 
 public:
-	void loadConfiguration(T* subClass, char commentCharacter = '#');
+	void loadConfiguration(char commentCharacter = '#');
 };
 
 #include "AbstractConfiguration.tpp"

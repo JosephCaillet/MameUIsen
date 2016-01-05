@@ -9,15 +9,15 @@ int main()
 	ConfigDirectiveToFunctionBase::setStringForBoolTrue("yes");
 	ConfigDirectiveToFunctionBase::setStringForBoolFalse("no");
 
-	BasicRomConfigurationCreator basicRomConfigurationCreator("../config/general.cfg");
+	/*BasicRomConfigurationCreator basicRomConfigurationCreator("../config/general.cfg");
 	basicRomConfigurationCreator.listsRoms();
 	//basicRomConfigurationCreator.askMameForRomsXMLFile();
 	basicRomConfigurationCreator.parseXML();
 	//basicRomConfigurationCreator.disp();
 	//basicRomConfigurationCreator.deleteMameRomsXMLFile();
-
-	//MameUIsenWindow isenWindow;
-	//isenWindow.launch();
+*/
+	MameUIsenWindow isenWindow;
+	isenWindow.launch();
 
 	return 0;
 }

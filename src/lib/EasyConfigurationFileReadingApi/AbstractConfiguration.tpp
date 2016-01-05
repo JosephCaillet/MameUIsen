@@ -5,7 +5,7 @@
 #include "AbstractConfiguration.h"
 
 template<class T>
-void AbstractConfiguration<T>::loadConfiguration(T* subClass, char commentCharacter)
+void AbstractConfiguration<T>::loadConfiguration(char commentCharacter)
 {
 	std::ifstream confFile(configFilePath, std::ios::in);
 	if(!confFile)
@@ -29,7 +29,7 @@ void AbstractConfiguration<T>::loadConfiguration(T* subClass, char commentCharac
 					{
 						try
 						{
-							dtf.callSetter(subClass, line.substr(pos + dtf.getDirective().length() + 1));
+							dtf.callSetter((T*)this, line.substr(pos + dtf.getDirective().length() + 1));
 						}
 						catch(const std::exception& exception)
 						{

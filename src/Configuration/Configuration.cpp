@@ -12,7 +12,7 @@ Configuration::Configuration(const std::string& configFilePath) : AbstractConfig
 	if(configFilePath != "")
 	{
 		bindDirectivesToSetters();
-		loadConfiguration(this);
+		loadConfiguration();
 	}
 	else
 	{

@@ -12,7 +12,7 @@ Theme::Theme(const std::string& themeFilePath) : AbstractConfiguration(themeFile
 	if(themeFilePath != "")
 	{
 		bindDirectivesToSetters();
-		loadConfiguration(this);
+		loadConfiguration();
 	}
 	else
 	{

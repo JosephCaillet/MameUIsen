@@ -7,33 +7,35 @@
 
 #include <string>
 
-class ConfigDirectiveToFunctionBase
+namespace ecfra
 {
-protected:
-	static std::string stringForBoolTrue;
-	static std::string stringForBoolFalse;
-
-public:
-	static const std::string& getStringForBoolTrue()
+	class ConfigDirectiveToFunctionBase
 	{
-		return stringForBoolTrue;
-	}
+	protected:
+		static std::string stringForBoolTrue;
+		static std::string stringForBoolFalse;
 
-	static void setStringForBoolTrue(const std::string& stringForBoolTrue)
-	{
-		ConfigDirectiveToFunctionBase::stringForBoolTrue = stringForBoolTrue;
-	}
+	public:
+		static const std::string& getStringForBoolTrue()
+		{
+			return stringForBoolTrue;
+		}
 
-	static const std::string& getStringForBoolFalse()
-	{
-		return stringForBoolFalse;
-	}
+		static void setStringForBoolTrue(const std::string& stringForBoolTrue)
+		{
+			ConfigDirectiveToFunctionBase::stringForBoolTrue = stringForBoolTrue;
+		}
 
-	static void setStringForBoolFalse(const std::string& stringForBoolFalse)
-	{
-		ConfigDirectiveToFunctionBase::stringForBoolFalse = stringForBoolFalse;
-	}
-};
+		static const std::string& getStringForBoolFalse()
+		{
+			return stringForBoolFalse;
+		}
 
+		static void setStringForBoolFalse(const std::string& stringForBoolFalse)
+		{
+			ConfigDirectiveToFunctionBase::stringForBoolFalse = stringForBoolFalse;
+		}
+	};
+}
 
 #endif //MAMEUISEN_CONFIGDIRECTIVETOFUNCTIONBASE_H

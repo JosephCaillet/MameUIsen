@@ -8,7 +8,7 @@
 #include <string>
 #include "../lib/EasyConfigurationFileReadingApi/AbstractConfiguration.h"
 
-class Theme : AbstractConfiguration<Theme>
+class Theme : ecfra::AbstractConfiguration<Theme>
 {
 	int windowWidth = 800;
 	int windowHeight = 600;

@@ -11,44 +11,51 @@
 #include <cstring>
 #include "ConfigDirectiveToFunction.h"
 
-template<class T>
-class AbstractConfiguration
+namespace ecfra
 {
-private:
-	using S = void (T::* )(const std::string&);
-	using I = void (T::* )(const int);
-	using F = void (T::* )(const float);
-	using B = void (T::* )(const bool);
-
-protected:
-	std::vector<ConfigDirectiveToFunction<T>> directiveToFunction;
-	std::string configFilePath;
-
-public:
-	AbstractConfiguration(const std::string& configFilePath) : configFilePath(configFilePath)
-	{ }
-
-	const std::string& getConfigFilePath() const
+	template<class T>
+	class AbstractConfiguration
 	{
-		return configFilePath;
-	}
+	private:
+		using S = void (T::*)(const std::string&);
+		using I = void (T::*)(const int);
+		using F = void (T::*)(const float);
+		using B = void (T::*)(const bool);
 
-	void setConfigFilePath(const std::string& configFilePath)
-	{
-		AbstractConfiguration::configFilePath = configFilePath;
-	}
+	protected:
+		std::vector<ConfigDirectiveToFunction<T>> directiveToFunction;
+		std::string configFilePath;
 
-protected:
-	virtual void bindDirectivesToSetters() =0;
-	void bind(const std::string& directive, S setter);
-	void bind(const std::string& directive, I setter);
-	void bind(const std::string& directive, F setter);
-	void bind(const std::string& directive, B setter);
+	public:
+		AbstractConfiguration(const std::string& configFilePath) : configFilePath(configFilePath)
+		{ }
 
-public:
-	void loadConfiguration(char commentCharacter = '#');
-};
+		const std::string& getConfigFilePath() const
+		{
+			return configFilePath;
+		}
 
-#include "AbstractConfiguration.tpp"
+		void setConfigFilePath(const std::string& configFilePath)
+		{
+			AbstractConfiguration::configFilePath = configFilePath;
+		}
+
+	protected:
+		virtual void bindDirectivesToSetters() = 0;
+
+		void bind(const std::string& directive, S setter);
+
+		void bind(const std::string& directive, I setter);
+
+		void bind(const std::string& directive, F setter);
+
+		void bind(const std::string& directive, B setter);
+
+	public:
+		void loadConfiguration(char commentCharacter = '#');
+	};
+
+	#include "AbstractConfiguration.tpp"
+}
 
 #endif //MAMEUISEN_ABSTRACTCONFIGURATION_H

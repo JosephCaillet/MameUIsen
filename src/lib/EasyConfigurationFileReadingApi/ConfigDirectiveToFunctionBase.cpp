@@ -4,5 +4,5 @@
 
 #include "ConfigDirectiveToFunctionBase.h"
 
-std::string ConfigDirectiveToFunctionBase::stringForBoolTrue = "true";
-std::string ConfigDirectiveToFunctionBase::stringForBoolFalse = "false";
+std::string ecfra::ConfigDirectiveToFunctionBase::stringForBoolTrue = "true";
+std::string ecfra::ConfigDirectiveToFunctionBase::stringForBoolFalse = "false";

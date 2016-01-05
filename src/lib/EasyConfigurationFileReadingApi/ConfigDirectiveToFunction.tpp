@@ -5,7 +5,7 @@
 #include "AbstractConfiguration.h"
 
 template<class T>
-void ConfigDirectiveToFunction<T>::callSetter(T* target, std::string value)
+void ecfra::ConfigDirectiveToFunction<T>::callSetter(T* target, std::string value)
 {
 	switch(valueType)
 	{

@@ -9,7 +9,7 @@
 #include <iostream>
 #include "../lib/EasyConfigurationFileReadingApi/AbstractConfiguration.h"
 
-class Configuration : AbstractConfiguration<Configuration>
+class Configuration : ecfra::AbstractConfiguration<Configuration>
 {
 private:
 	std::string mame_path = "mame";

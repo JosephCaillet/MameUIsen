@@ -5,7 +5,7 @@
 #include "AbstractConfiguration.h"
 
 template<class T>
-void AbstractConfiguration<T>::loadConfiguration(char commentCharacter)
+void ecfra::AbstractConfiguration<T>::loadConfiguration(char commentCharacter)
 {
 	std::ifstream confFile(configFilePath, std::ios::in);
 	if(!confFile)
@@ -45,7 +45,7 @@ void AbstractConfiguration<T>::loadConfiguration(char commentCharacter)
 }
 
 template<class T>
-void AbstractConfiguration<T>::bind(const std::string& directive, AbstractConfiguration::S setter)
+void ecfra::AbstractConfiguration<T>::bind(const std::string& directive, AbstractConfiguration::S setter)
 {
 	directiveToFunction.push_back(ConfigDirectiveToFunction<T>(directive, setter));
 }

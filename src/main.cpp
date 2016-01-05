@@ -6,8 +6,8 @@ using namespace std;
 
 int main()
 {
-	ConfigDirectiveToFunctionBase::setStringForBoolTrue("yes");
-	ConfigDirectiveToFunctionBase::setStringForBoolFalse("no");
+	ecfra::ConfigDirectiveToFunctionBase::setStringForBoolTrue("yes");
+	ecfra::ConfigDirectiveToFunctionBase::setStringForBoolFalse("no");
 
 	/*BasicRomConfigurationCreator basicRomConfigurationCreator("../config/general.cfg");
 	basicRomConfigurationCreator.listsRoms();

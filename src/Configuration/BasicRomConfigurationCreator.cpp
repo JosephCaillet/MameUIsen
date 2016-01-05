@@ -4,6 +4,7 @@
 
 #include <dirent.h>
 #include <iomanip>
+#include <fstream>
 #include "BasicRomConfigurationCreator.h"
 #include "../lib/tinyxml2/tinyxml2.h"
 
@@ -118,6 +119,51 @@ void BasicRomConfigurationCreator::parseXML()
 		}
 
 		game = game->NextSiblingElement();
+	}
+}
+
+void BasicRomConfigurationCreator::createCategoriesAndGamesConfiguration(const std::string& catlistFilePath)
+{
+	listsRoms();
+	askMameForRomsXMLFile();
+	parseXML();
+	bool multipleCategories = true;
+	if(catlistFilePath == "")
+	{
+		multipleCategories = false;
+	}
+	writeCategoriesConfig(multipleCategories);
+	writeGamesConfig(multipleCategories);
+	deleteMameRomsXMLFile();
+}
+
+void BasicRomConfigurationCreator::writeCategoriesConfig(bool multipleCategories)
+{
+	cout << "-> Writing category configuration file..." << endl;
+
+	ofstream catConfFile("../config/categories.cfg", ios::trunc);
+	if(!catConfFile)
+	{
+		cerr << "Can't open config/categories.cfg : " << strerror(errno) << endl;
+		exit(EXIT_FAILURE);
+	}
+	catConfFile << "0 " << configuration.getAll_roms_category_name() << endl;
+}
+
+void BasicRomConfigurationCreator::writeGamesConfig(bool multipleCategories)
+{
+	cout << "-> Writing roms configuration file (with single category option)..." << endl;
+
+	ofstream gamesConfFile("../config/games.cfg", ios::trunc);
+	if(!gamesConfFile)
+	{
+		cerr << "Can't open config/games.cfg : " << strerror(errno) << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	for(const auto& rom : romsList)
+	{
+		gamesConfFile << rom.getDescription() << ";" << rom.getFilename() << ";" <<  rom.getManufacturer()<< ";" << rom.getYear() << ";" << "0" << endl;
 	}
 }
 

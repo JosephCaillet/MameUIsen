@@ -16,6 +16,7 @@ private:
 	std::string rom_path = "../roms";
 	std::string screenshots_path = "../screenshots";
 	std::string theme_path = "../themes/default/default.theme";
+	std::string all_roms_category_name = "All";
 	bool fullscreen = false;
 
 public:
@@ -49,6 +50,16 @@ public:
 	void setTheme_path(const std::string& theme_path)
 	{
 		Configuration::theme_path = theme_path;
+	}
+
+	const std::string& getAll_roms_category_name() const
+	{
+		return all_roms_category_name;
+	}
+
+	void setAll_roms_category_name(const std::string& all_roms_category_name)
+	{
+		Configuration::all_roms_category_name = all_roms_category_name;
 	}
 
 	const std::string& getScreenshots_path() const

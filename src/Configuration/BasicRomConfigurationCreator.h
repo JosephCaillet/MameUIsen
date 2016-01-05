@@ -27,6 +27,9 @@ public:
 	void askMameForRomsXMLFile();
 	void deleteMameRomsXMLFile();
 	void parseXML();
+	void createCategoriesAndGamesConfiguration(const std::string& catlistFilePath = "");
+	void writeCategoriesConfig(bool multipleCategories);
+	void writeGamesConfig(bool multipleCategories);
 	void disp();
 };
 

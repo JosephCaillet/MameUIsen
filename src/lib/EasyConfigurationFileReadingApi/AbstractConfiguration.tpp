@@ -2,10 +2,10 @@
 // Created by joseph on 31/12/15.
 //
 
-#include "AbstactConfiguration.h"
+#include "AbstractConfiguration.h"
 
 template<class T>
-void AbstactConfiguration<T>::loadConfiguration(T* subClass, char commentCharacter)
+void AbstractConfiguration<T>::loadConfiguration(T* subClass, char commentCharacter)
 {
 	std::ifstream confFile(configFilePath, std::ios::in);
 	if(!confFile)
@@ -42,4 +42,28 @@ void AbstactConfiguration<T>::loadConfiguration(T* subClass, char commentCharact
 			}
 		}
 	}
+}
+
+template<class T>
+void AbstractConfiguration<T>::bind(const std::string& directive, AbstractConfiguration::S setter)
+{
+	directiveToFunction.push_back(ConfigDirectiveToFunction<T>(directive, setter));
+}
+
+template<class T>
+void AbstractConfiguration<T>::bind(const std::string& directive, AbstractConfiguration::I setter)
+{
+	directiveToFunction.push_back(ConfigDirectiveToFunction<T>(directive, setter));
+}
+
+template<class T>
+void AbstractConfiguration<T>::bind(const std::string& directive, AbstractConfiguration::F setter)
+{
+	directiveToFunction.push_back(ConfigDirectiveToFunction<T>(directive, setter));
+}
+
+template<class T>
+void AbstractConfiguration<T>::bind(const std::string& directive, AbstractConfiguration::B setter)
+{
+	directiveToFunction.push_back(ConfigDirectiveToFunction<T>(directive, setter));
 }

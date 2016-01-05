@@ -26,7 +26,7 @@ void BasicRomConfigurationCreator::listsRoms()
 
 	dirent* currentRomFile = nullptr;
 
-	cout << "Founded roms are :" << endl;
+	cout << "Found roms are :" << endl;
 
 	while((currentRomFile = readdir(romDir)) != nullptr)
 	{
@@ -88,7 +88,7 @@ void BasicRomConfigurationCreator::parseXML()
 
 	cout << "-> Parsing roms list file..." << endl;
 
-	cout << "Founded roms infos are :" << endl;
+	cout << "Found roms infos are :" << endl;
 
 	while(game != nullptr)
 	{

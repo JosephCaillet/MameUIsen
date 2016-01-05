@@ -7,7 +7,7 @@
 using namespace std;
 
 
-Configuration::Configuration(const std::string& configFilePath) : AbstactConfiguration(configFilePath)
+Configuration::Configuration(const std::string& configFilePath) : AbstractConfiguration(configFilePath)
 {
 	if(configFilePath != "")
 	{
@@ -22,12 +22,10 @@ Configuration::Configuration(const std::string& configFilePath) : AbstactConfigu
 
 void Configuration::bindDirectivesToSetters()
 {
-	using cdtf = ConfigDirectiveToFunction<Configuration>;
-
-	directiveToFunction.push_back(cdtf("MAME_PATH", &Configuration::setMame_path));
-	directiveToFunction.push_back(cdtf("MAME_PATH", &Configuration::setMame_path));
-	directiveToFunction.push_back(cdtf("ROMS_PATH", &Configuration::setRom_path));
-	directiveToFunction.push_back(cdtf("SCREENSHOTS_PATH", &Configuration::setScreenshots_path));
-	directiveToFunction.push_back(cdtf("FULL_SCREEN", &Configuration::setFullscreen));
-	directiveToFunction.push_back(cdtf("THEME_PATH", &Configuration::setTheme_path));
+	bind("MAME_PATH", &Configuration::setMame_path);
+	bind("MAME_PATH", &Configuration::setMame_path);
+	bind("ROMS_PATH", &Configuration::setRom_path);
+	bind("SCREENSHOTS_PATH", &Configuration::setScreenshots_path);
+	bind("FULL_SCREEN", &Configuration::setFullscreen);
+	bind("THEME_PATH", &Configuration::setTheme_path);
 }

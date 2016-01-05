@@ -6,9 +6,9 @@
 #define MAMEUISEN_THEME_H
 
 #include <string>
-#include "../lib/EasyConfigurationFileReadingApi/AbstactConfiguration.h"
+#include "../lib/EasyConfigurationFileReadingApi/AbstractConfiguration.h"
 
-class Theme : AbstactConfiguration<Theme>
+class Theme : AbstractConfiguration<Theme>
 {
 	int windowWidth = 800;
 	int windowHeight = 600;

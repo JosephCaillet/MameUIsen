@@ -7,9 +7,9 @@
 
 #include <string>
 #include <iostream>
-#include "../lib/EasyConfigurationFileReadingApi/AbstactConfiguration.h"
+#include "../lib/EasyConfigurationFileReadingApi/AbstractConfiguration.h"
 
-class Configuration : AbstactConfiguration<Configuration>
+class Configuration : AbstractConfiguration<Configuration>
 {
 private:
 	std::string mame_path = "mame";

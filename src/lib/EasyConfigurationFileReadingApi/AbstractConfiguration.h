@@ -12,14 +12,20 @@
 #include "ConfigDirectiveToFunction.h"
 
 template<class T>
-class AbstactConfiguration
+class AbstractConfiguration
 {
+private:
+	using S = void (T::* )(const std::string&);
+	using I = void (T::* )(const int);
+	using F = void (T::* )(const float);
+	using B = void (T::* )(const bool);
+
 protected:
 	std::vector<ConfigDirectiveToFunction<T>> directiveToFunction;
 	std::string configFilePath;
 
 public:
-	AbstactConfiguration(const std::string& configFilePath) : configFilePath(configFilePath)
+	AbstractConfiguration(const std::string& configFilePath) : configFilePath(configFilePath)
 	{ }
 
 	const std::string& getConfigFilePath() const
@@ -29,16 +35,20 @@ public:
 
 	void setConfigFilePath(const std::string& configFilePath)
 	{
-		AbstactConfiguration::configFilePath = configFilePath;
+		AbstractConfiguration::configFilePath = configFilePath;
 	}
 
 protected:
 	virtual void bindDirectivesToSetters() =0;
+	void bind(const std::string& directive, S setter);
+	void bind(const std::string& directive, I setter);
+	void bind(const std::string& directive, F setter);
+	void bind(const std::string& directive, B setter);
 
 public:
 	void loadConfiguration(T* subClass, char commentCharacter = '#');
 };
 
-#include "AbstactConfiguration.tpp"
+#include "AbstractConfiguration.tpp"
 
 #endif //MAMEUISEN_ABSTACTCONFIGURATION_H

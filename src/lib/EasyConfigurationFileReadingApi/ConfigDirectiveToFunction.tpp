@@ -2,7 +2,7 @@
 // Created by joseph on 31/12/15.
 //
 
-#include "AbstactConfiguration.h"
+#include "AbstractConfiguration.h"
 
 template<class T>
 void ConfigDirectiveToFunction<T>::callSetter(T* target, std::string value)

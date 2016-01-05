@@ -13,7 +13,7 @@ int main()
 	basicRomConfigurationCreator.listsRoms();
 	//basicRomConfigurationCreator.askMameForRomsXMLFile();
 	basicRomConfigurationCreator.parseXML();
-	basicRomConfigurationCreator.disp();
+	//basicRomConfigurationCreator.disp();
 	//basicRomConfigurationCreator.deleteMameRomsXMLFile();
 
 	//MameUIsenWindow isenWindow;

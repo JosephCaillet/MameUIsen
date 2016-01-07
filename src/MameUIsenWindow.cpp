@@ -35,7 +35,7 @@ MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration("../config/ge
 	}
 
 	create(sf::VideoMode(theme.getWindowWidth(), theme.getWindowHeight()), "MameUIsen", sfmlVideoFlags);
-	setFramerateLimit(60);
+	setFramerateLimit(configuration.getFps_rate());
 	setMouseCursorVisible(false);
 }
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MameUIsenWindow.h"
+#include "Configuration/BasicRomConfigurationCreator.h"
 
 using namespace std;
 

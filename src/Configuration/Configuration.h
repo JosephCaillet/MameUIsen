@@ -18,6 +18,7 @@ private:
 	std::string theme_path = "../themes/default/default.theme";
 	std::string all_roms_category_name = "All";
 	bool fullscreen = false;
+	int fps_rate = 60;
 
 public:
 	Configuration(const std::string& configFilePath);
@@ -80,6 +81,16 @@ public:
 	void setFullscreen(bool fullscreen)
 	{
 		Configuration::fullscreen = fullscreen;
+	}
+
+	int getFps_rate() const
+	{
+		return fps_rate;
+	}
+
+	void setFps_rate(int fps_rate)
+	{
+		Configuration::fps_rate = fps_rate;
 	}
 
 private:

@@ -27,6 +27,7 @@ void Configuration::bindDirectivesToSetters()
 	bind("ROMS_PATH", &Configuration::setRom_path);
 	bind("SCREENSHOTS_PATH", &Configuration::setScreenshots_path);
 	bind("FULL_SCREEN", &Configuration::setFullscreen);
+	bind("FPS_RATE", &Configuration::setFps_rate);
 	bind("ALL_ROMS_CATEGORY_NAME", &Configuration::setAll_roms_category_name);
 	bind("THEME_PATH", &Configuration::setTheme_path);
 }

@@ -10,7 +10,7 @@
 
 class Rom
 {
-private:
+protected:
 	std::string description;
 	std::string filename;
 	std::string manufacturer;
@@ -66,17 +66,6 @@ public:
 	void setIsTextureCorrectlyLoaded(bool isTextureCorrectlyLoaded)
 	{
 		Rom::isTextureCorrectlyLoaded = isTextureCorrectlyLoaded;
-	}
-
-	//Operators
-	friend bool operator<(const Rom& r1, const Rom &r2)
-	{
-		return r1.filename < r2.filename;
-	}
-
-	friend bool operator==(const Rom& r1, const Rom &r2)
-	{
-		return r1.filename == r2.filename;
 	}
 
 	//Static comparison function

@@ -109,7 +109,7 @@ void BasicRomConfigurationCreator::parseXML()
 		if(strcmp(game->Attribute("name"), romsNamesList.top().c_str()) == 0)
 		{
 			romsNamesList.pop();
-			romsList.insert(Rom(
+			romsList.insert(RomWithCategories(
 					string(description->GetText()),
 					string(game->Attribute("name")),
 					string(manufacturer->GetText()),
@@ -125,19 +125,55 @@ void BasicRomConfigurationCreator::parseXML()
 void BasicRomConfigurationCreator::createCategoriesAndGamesConfiguration(const std::string& catlistFilePath)
 {
 	listsRoms();
-	askMameForRomsXMLFile();
+	//askMameForRomsXMLFile();
 	parseXML();
-	bool multipleCategories = true;
-	if(catlistFilePath == "")
-	{
-		multipleCategories = false;
-	}
-	writeCategoriesConfig(multipleCategories);
-	writeGamesConfig(multipleCategories);
-	deleteMameRomsXMLFile();
+	linkRomsToCategories(catlistFilePath);
+	writeCategoriesConfig();
+	writeGamesConfig();
+	//deleteMameRomsXMLFile();
 }
 
-void BasicRomConfigurationCreator::writeCategoriesConfig(bool multipleCategories)
+void BasicRomConfigurationCreator::linkRomsToCategories(const string& catlistFilePath)
+{
+	categoriesList.push_back(configuration.getAll_roms_category_name());
+	for(auto& rom : romsList)
+	{
+		//std::set iterators are always const to avoid changing datas used to sort the set.
+		//But as addCategoryNumber() do not change a data used to sort, i need to force the reference to be non const.
+		//I could have set datas changed by addCategoryNumber() mutable, but in this case i have to declare
+		//addCategoryNumber() const (to be able to call id here, anI do not want to do that, because
+		// this function is not really const, as it updates members.
+		RomWithCategories& r = const_cast<RomWithCategories&>(rom);
+		r.addCategoryNumber(0);
+		cout << "rest" <<endl;
+		r.getCategoryNubers();
+	}
+
+	if(catlistFilePath != "")
+	{
+		cout << "-> Reading file associating categories and roms...";
+
+		ifstream romsCategoriesFile(catlistFilePath, ios::in);
+		if(!romsCategoriesFile)
+		{
+			cerr << "Can't open \"" << catlistFilePath << "\" : " << strerror(errno) << endl;
+			exit(EXIT_FAILURE);
+		}
+
+		string line;
+
+		for(int i = 0; i< 10; i++)
+		{
+			getline(romsCategoriesFile, line);
+			if(line[0] == '[')
+			{
+				cout << "Category found : " << line.substr(1, line.length()-3) << endl;
+			}
+		}
+	}
+}
+
+void BasicRomConfigurationCreator::writeCategoriesConfig()
 {
 	cout << "-> Writing category configuration file..." << endl;
 
@@ -147,12 +183,16 @@ void BasicRomConfigurationCreator::writeCategoriesConfig(bool multipleCategories
 		cerr << "Can't open config/categories.cfg : " << strerror(errno) << endl;
 		exit(EXIT_FAILURE);
 	}
-	catConfFile << "0 " << configuration.getAll_roms_category_name() << endl;
+
+	for(unsigned int i=0; i<categoriesList.size(); i++)
+	{
+		catConfFile << i << " " << categoriesList[i] << endl;
+	}
 }
 
-void BasicRomConfigurationCreator::writeGamesConfig(bool multipleCategories)
+void BasicRomConfigurationCreator::writeGamesConfig()
 {
-	cout << "-> Writing roms configuration file (with single category option)..." << endl;
+	cout << "-> Writing roms configuration file..." << endl;
 
 	ofstream gamesConfFile("../config/games.cfg", ios::trunc);
 	if(!gamesConfFile)
@@ -163,13 +203,13 @@ void BasicRomConfigurationCreator::writeGamesConfig(bool multipleCategories)
 
 	for(const auto& rom : romsList)
 	{
-		gamesConfFile << rom.getDescription() << ";" << rom.getFilename() << ";" <<  rom.getManufacturer()<< ";" << rom.getYear() << ";" << "0" << endl;
+		gamesConfFile << rom.getDescription() << ";" << rom.getFilename() << ";" <<  rom.getManufacturer()<< ";" << rom.getYear() << ";" << rom.getCategoryNubers() << endl;
 	}
 }
 
 void BasicRomConfigurationCreator::disp()
 {
-	for (set<Rom>::iterator i = romsList.begin(); i != romsList.end(); i++) {
+	for (set<RomWithCategories>::iterator i = romsList.begin(); i != romsList.end(); i++) {
 		cout << i->getFilename() << endl;
 	}
 	std::cout << std::endl;

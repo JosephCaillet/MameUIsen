@@ -11,6 +11,7 @@
 #include <set>
 #include "Configuration.h"
 #include "../RomManagement/Rom.h"
+#include "../RomManagement/RomWithCategories.h"
 
 typedef struct dirent dirent;
 
@@ -19,7 +20,8 @@ class BasicRomConfigurationCreator
 private:
 	Configuration configuration;
 	std::priority_queue<std::string, std::vector<std::string>, std::greater<std::string>> romsNamesList;
-	std::set<Rom> romsList;
+	std::vector<std::string> categoriesList;
+	std::set<RomWithCategories> romsList;
 
 public:
 	BasicRomConfigurationCreator(const std::string);
@@ -28,8 +30,9 @@ public:
 	void deleteMameRomsXMLFile();
 	void parseXML();
 	void createCategoriesAndGamesConfiguration(const std::string& catlistFilePath = "");
-	void writeCategoriesConfig(bool multipleCategories);
-	void writeGamesConfig(bool multipleCategories);
+	void linkRomsToCategories(const std::string& catlistFilePath);
+	void writeCategoriesConfig();
+	void writeGamesConfig();
 	void disp();
 };
 

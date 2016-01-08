@@ -15,7 +15,7 @@ BasicRomConfigurationCreator::BasicRomConfigurationCreator(const std::string con
 
 void BasicRomConfigurationCreator::listsRoms()
 {
-	cout << "-> Listing existing roms..." << endl;
+	cout << endl << "-> Listing existing roms..." << endl;
 
 	DIR* romDir = nullptr;
 	romDir = opendir(configuration.getRom_path().c_str());
@@ -52,7 +52,7 @@ void BasicRomConfigurationCreator::listsRoms()
 
 void BasicRomConfigurationCreator::askMameForRomsXMLFile()
 {
-	cout << "-> Asking mame for roms list in a temporary file..." << endl;
+	cout << endl << "-> Asking mame for roms list in a temporary file..." << endl;
 
 	string s = configuration.getMame_path() + " -listxml > " + XML_ROM_LIST_MAME;
 	system(s.c_str());
@@ -60,13 +60,13 @@ void BasicRomConfigurationCreator::askMameForRomsXMLFile()
 
 void BasicRomConfigurationCreator::deleteMameRomsXMLFile()
 {
-	cout << "-> Deleting temporary file..." << endl;
+	cout << endl << "-> Deleting temporary file..." << endl;
 	remove(XML_ROM_LIST_MAME);
 }
 
 void BasicRomConfigurationCreator::parseXML()
 {
-	cout << "-> Loading roms list file..." << endl;
+	cout << endl << "-> Loading roms list file..." << endl;
 
 	tinyxml2::XMLDocument xmlMameRomsDocument;
 	xmlMameRomsDocument.LoadFile(XML_ROM_LIST_MAME);
@@ -87,7 +87,7 @@ void BasicRomConfigurationCreator::parseXML()
 		exit(EXIT_FAILURE);
 	}
 
-	cout << "-> Parsing roms list file..." << endl;
+	cout << endl << "-> Parsing roms list file..." << endl;
 
 	cout << "Found roms infos are :" << endl;
 
@@ -145,13 +145,11 @@ void BasicRomConfigurationCreator::linkRomsToCategories(const string& catlistFil
 		// this function is not really const, as it updates members.
 		RomWithCategories& r = const_cast<RomWithCategories&>(rom);
 		r.addCategoryNumber(0);
-		cout << "rest" <<endl;
-		r.getCategoryNubers();
 	}
 
 	if(catlistFilePath != "")
 	{
-		cout << "-> Reading file associating categories and roms...";
+		cout << endl << "-> Reading file associating categories and roms..." << endl;
 
 		ifstream romsCategoriesFile(catlistFilePath, ios::in);
 		if(!romsCategoriesFile)
@@ -161,21 +159,31 @@ void BasicRomConfigurationCreator::linkRomsToCategories(const string& catlistFil
 		}
 
 		string line;
+		string categoryName;
+		int categoryIndex = 0;
+		bool romFoundInCurrentCategory = false;
 
-		for(int i = 0; i< 10; i++)
+		while(getline(romsCategoriesFile, line))
 		{
-			getline(romsCategoriesFile, line);
+			if(line.empty())
+			{
+				continue;
+			}
+
 			if(line[0] == '[')
 			{
-				cout << "Category found : " << line.substr(1, line.length()-3) << endl;
+				categoryName = line.substr(1, line.length()-2);
+				cout << "Exploring category " << categoryName << "..." << endl;
+				continue;
 			}
+			cout << "\t" << line << endl;
 		}
 	}
 }
 
 void BasicRomConfigurationCreator::writeCategoriesConfig()
 {
-	cout << "-> Writing category configuration file..." << endl;
+	cout << endl << "-> Writing category configuration file..." << endl;
 
 	ofstream catConfFile("../config/categories.cfg", ios::trunc);
 	if(!catConfFile)
@@ -192,7 +200,7 @@ void BasicRomConfigurationCreator::writeCategoriesConfig()
 
 void BasicRomConfigurationCreator::writeGamesConfig()
 {
-	cout << "-> Writing roms configuration file..." << endl;
+	cout << endl << "-> Writing roms configuration file..." << endl;
 
 	ofstream gamesConfFile("../config/games.cfg", ios::trunc);
 	if(!gamesConfFile)

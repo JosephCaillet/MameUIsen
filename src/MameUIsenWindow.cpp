@@ -6,7 +6,8 @@
 
 using namespace std;
 
-MameUIsenWindow::MameUIsenWindow() : RenderWindow(), configuration("../config/general.cfg"), theme(configuration.getTheme_path()), romListManager()
+MameUIsenWindow::MameUIsenWindow(const std::string& configFilePath)
+		: RenderWindow(), configuration(configFilePath), theme(configuration.getTheme_path()), romListManager()
 {
 	romListManager.loadTextures(configuration, theme);
 	if(!loadFontAndInitSprite())

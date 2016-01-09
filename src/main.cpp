@@ -1,19 +1,27 @@
 #include <iostream>
 #include "MameUIsenWindow.h"
 #include "Configuration/BasicRomConfigurationCreator.h"
+#include "Configuration/CommandLineOptionsParser.h"
 
 using namespace std;
 
-int main()
+int main(int argc, char** argv)
 {
 	ecfra::ConfigDirectiveToFunctionBase::setStringForBoolTrue("yes");
 	ecfra::ConfigDirectiveToFunctionBase::setStringForBoolFalse("no");
 
-	BasicRomConfigurationCreator basicRomConfigurationCreator("../config/general.cfg");
-	basicRomConfigurationCreator.createCategoriesAndGamesConfiguration("../config/Genre.ini");
+	CommandLineOptionsParser clop(argc, argv);
 
-	MameUIsenWindow isenWindow;
-	isenWindow.launch();
+	if(clop.isBuildingCategoriesAndRomsAsked())
+	{
+		BasicRomConfigurationCreator basicRomConfigurationCreator(clop.getConfigFilePath());
+		basicRomConfigurationCreator.createCategoriesAndGamesConfiguration(clop.getLinkingCategoriesToRomFilePath());
+	}
+	else
+	{
+		MameUIsenWindow isenWindow(clop.getConfigFilePath());
+		isenWindow.launch();
+	}
 
 	return 0;
 }

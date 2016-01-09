@@ -40,7 +40,7 @@ private:
 	sf::Sprite backgroundImageSprite;
 
 public:
-	MameUIsenWindow();
+	MameUIsenWindow(const std::string& configFilePath);
 	~MameUIsenWindow();
 	void launch();
 

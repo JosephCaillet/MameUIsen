@@ -24,12 +24,12 @@ private:
 	std::set<RomWithCategories> romsList;
 
 public:
-	BasicRomConfigurationCreator(const std::string);
+	BasicRomConfigurationCreator(const std::string configFilePath);
 	void listsRoms();
 	void askMameForRomsXMLFile();
 	void deleteMameRomsXMLFile();
 	void parseXML();
-	void createCategoriesAndGamesConfiguration(const std::string& catlistFilePath = "");
+	void createCategoriesAndGamesConfiguration(const std::string& catlistFilePath);
 	void linkRomsToCategories(const std::string& catlistFilePath);
 	void writeCategoriesConfig();
 	void writeGamesConfig();

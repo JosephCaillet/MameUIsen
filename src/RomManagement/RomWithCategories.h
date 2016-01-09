@@ -14,8 +14,11 @@ private:
 	std::vector<int> categoryNumbers;
 
 public:
-	RomWithCategories(const std::string& description="", const std::string& filename="", const std::string& manufacturer="", const std::string year="")
+	RomWithCategories(const std::string& description, const std::string& filename, const std::string& manufacturer, const std::string year)
 			: Rom(description, filename, manufacturer, year)
+	{ }
+
+	RomWithCategories(const std::string& filename="") : Rom("", filename, "", "")
 	{ }
 
 	void addCategoryNumber(const int num)

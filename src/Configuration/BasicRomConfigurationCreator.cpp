@@ -160,7 +160,7 @@ void BasicRomConfigurationCreator::linkRomsToCategories(const string& catlistFil
 
 		string line;
 		string categoryName;
-		int categoryIndex = 0;
+		int categoryIndex = 1;
 		bool romFoundInCurrentCategory = false;
 
 		while(getline(romsCategoriesFile, line))
@@ -172,11 +172,28 @@ void BasicRomConfigurationCreator::linkRomsToCategories(const string& catlistFil
 
 			if(line[0] == '[')
 			{
+				if(romFoundInCurrentCategory)
+				{
+					romFoundInCurrentCategory = false;
+					categoryIndex++;
+					categoriesList.push_back(categoryName);
+				}
+
 				categoryName = line.substr(1, line.length()-2);
 				cout << "Exploring category " << categoryName << "..." << endl;
 				continue;
 			}
-			cout << "\t" << line << endl;
+
+			std::set<RomWithCategories>::iterator romwcIterator;
+			romwcIterator = romsList.find(RomWithCategories(line));
+			if(romwcIterator != romsList.end())
+			{
+				cout << "\tFound : " << line << endl;
+				const RomWithCategories& romFoundConst = *romwcIterator;
+				RomWithCategories& romFound = const_cast<RomWithCategories&>(romFoundConst);//see comment above
+				romFound.addCategoryNumber(categoryIndex);
+				romFoundInCurrentCategory = true;
+			}
 		}
 	}
 }

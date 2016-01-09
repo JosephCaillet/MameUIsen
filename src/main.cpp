@@ -10,10 +10,10 @@ int main()
 	ecfra::ConfigDirectiveToFunctionBase::setStringForBoolFalse("no");
 
 	BasicRomConfigurationCreator basicRomConfigurationCreator("../config/general.cfg");
-	basicRomConfigurationCreator.createCategoriesAndGamesConfiguration("../config/Catlist.ini");
+	basicRomConfigurationCreator.createCategoriesAndGamesConfiguration("../config/Genre.ini");
 
-	//MameUIsenWindow isenWindow;
-	//isenWindow.launch();
+	MameUIsenWindow isenWindow;
+	isenWindow.launch();
 
 	return 0;
 }

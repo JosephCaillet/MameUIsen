@@ -202,10 +202,10 @@ void BasicRomConfigurationCreator::writeCategoriesConfig()
 {
 	cout << endl << "-> Writing category configuration file..." << endl;
 
-	ofstream catConfFile("../config/categories.cfg", ios::trunc);
+	ofstream catConfFile(configuration.getCategories_config_path(), ios::trunc);
 	if(!catConfFile)
 	{
-		cerr << "Can't open config/categories.cfg : " << strerror(errno) << endl;
+		cerr << "Can't open \"" << configuration.getCategories_config_path() << "\" : " << strerror(errno) << endl;
 		exit(EXIT_FAILURE);
 	}
 
@@ -219,10 +219,10 @@ void BasicRomConfigurationCreator::writeGamesConfig()
 {
 	cout << endl << "-> Writing roms configuration file..." << endl;
 
-	ofstream gamesConfFile("../config/games.cfg", ios::trunc);
+	ofstream gamesConfFile(configuration.getGames_config_path(), ios::trunc);
 	if(!gamesConfFile)
 	{
-		cerr << "Can't open config/games.cfg : " << strerror(errno) << endl;
+		cerr << "Can't open \"" << configuration.getGames_config_path() << "\" : " << strerror(errno) << endl;
 		exit(EXIT_FAILURE);
 	}
 

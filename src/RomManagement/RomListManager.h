@@ -20,7 +20,7 @@ private:
 
 public:
 	//Constructor
-	RomListManager();
+	RomListManager(const Configuration& configuration);
 
 	//Getters
 	RomList* getPreviousRomList();
@@ -32,8 +32,8 @@ public:
 	void initText(const Theme& theme, const sf::Font&);
 
 private:
-	void loadCategories();
-	void loadRoms();
+	void loadCategories(const Configuration& configuration);
+	void loadRoms(const Configuration& configuration);
 	void sortRomsList();
 	void updateCurrentRomSetIndex(char sign);
 };

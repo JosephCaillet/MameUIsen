@@ -11,10 +11,10 @@
 using namespace std;
 
 //Constructors
-RomListManager::RomListManager()
+RomListManager::RomListManager(const Configuration& configuration)
 {
-	loadCategories();
-	loadRoms();
+	loadCategories(configuration);
+	loadRoms(configuration);
 	sortRomsList();
 }
 
@@ -78,12 +78,12 @@ void RomListManager::initText(const Theme& theme, const sf::Font& font)
 	}
 }
 
-void RomListManager::loadCategories()
+void RomListManager::loadCategories(const Configuration& configuration)
 {
-	ifstream categoriesConfFile("../config/categories.cfg", ios::in);
+	ifstream categoriesConfFile(configuration.getCategories_config_path(), ios::in);
 	if(!categoriesConfFile)
 	{
-		cerr << "Can't open config/categories.cfg : " << strerror(errno) << endl;
+		cerr << "Can't open \"" << configuration.getCategories_config_path() << "\" : " << strerror(errno) << endl;
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -116,12 +116,12 @@ void RomListManager::loadCategories()
 	}
 }
 
-void RomListManager::loadRoms()
+void RomListManager::loadRoms(const Configuration& configuration)
 {
-	ifstream romsConfFile("../config/games.cfg", ios::in);
+	ifstream romsConfFile(configuration.getGames_config_path(), ios::in);
 	if(!romsConfFile)
 	{
-		cerr << "Can't open config/games.cfg : " << strerror(errno) << endl;
+		cerr << "Can't open \"" << configuration.getGames_config_path() << "\" : " << strerror(errno) << endl;
 		exit(EXIT_FAILURE);
 	}
 	else

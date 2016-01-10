@@ -17,6 +17,8 @@ private:
 	std::string screenshots_path = "../screenshots";
 	std::string theme_path = "../themes/default/default.theme";
 	std::string all_roms_category_name = "All";
+	std::string categories_config_path = "../config/categories.cfg";
+	std::string games_config_path = "../config/games.cfg";
 	bool fullscreen = false;
 	int fps_rate = 20;
 
@@ -71,6 +73,26 @@ public:
 	void setScreenshots_path(const std::string& screenshots_path)
 	{
 		Configuration::screenshots_path = screenshots_path;
+	}
+
+	const std::string& getCategories_config_path() const
+	{
+		return categories_config_path;
+	}
+
+	void setCategories_config_path(const std::string& categories_config_path)
+	{
+		Configuration::categories_config_path = categories_config_path;
+	}
+
+	const std::string& getGames_config_path() const
+	{
+		return games_config_path;
+	}
+
+	void setGames_config_path(const std::string& games_config_path)
+	{
+		Configuration::games_config_path = games_config_path;
 	}
 
 	bool isFullscreen() const

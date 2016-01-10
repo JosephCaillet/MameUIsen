@@ -26,6 +26,8 @@ void Configuration::bindDirectivesToSetters()
 	bind("MAME_PATH", &Configuration::setMame_path);
 	bind("ROMS_PATH", &Configuration::setRom_path);
 	bind("SCREENSHOTS_PATH", &Configuration::setScreenshots_path);
+	bind("CATEGORIES_CONFIG_PATH", &Configuration::setCategories_config_path);
+	bind("GAMES_CONFIG_PATH", &Configuration::setGames_config_path);
 	bind("FULL_SCREEN", &Configuration::setFullscreen);
 	bind("FPS_RATE", &Configuration::setFps_rate);
 	bind("ALL_ROMS_CATEGORY_NAME", &Configuration::setAll_roms_category_name);

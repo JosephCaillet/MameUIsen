@@ -39,6 +39,7 @@ MameUIsenWindow::MameUIsenWindow(const std::string& configFilePath)
 	create(sf::VideoMode(theme.getWindowWidth(), theme.getWindowHeight()), "MameUIsen", sfmlVideoFlags);
 	setFramerateLimit(configuration.getFps_rate());
 	setMouseCursorVisible(false);
+	updateJoystickStatus();
 }
 
 
@@ -343,8 +344,94 @@ event MameUIsenWindow::getEvent()
 				default:
 					return NO_EVENT;
 			}
-		default:
+		case sf::Event::JoystickConnected:
+			updateJoystickStatus();
+			cout << "Joystick connected : " << event.joystickConnect.joystickId << endl;
 			return NO_EVENT;
+		case sf::Event::JoystickDisconnected:
+			updateJoystickStatus();
+			cout << "Joystick disconnected : " << event.joystickConnect.joystickId << endl;
+			return NO_EVENT;
+		/*case sf::Event::JoystickButtonPressed:
+			std::cout << "joystick button pressed!" << std::endl;
+			std::cout << "joystick id: " << event.joystickButton.joystickId << std::endl;
+			std::cout << "button: " << event.joystickButton.button << std::endl;
+			return NO_EVENT;
+		case sf::Event::JoystickButtonReleased:
+			std::cout << "joystick button released!" << std::endl;
+			std::cout << "joystick id: " << event.joystickButton.joystickId << std::endl;
+			std::cout << "button: " << event.joystickButton.button << std::endl;
+			return NO_EVENT;
+		case sf::Event::JoystickMoved:
+			std::cout << event.joystickMove.axis << " axis moved!" << std::endl;
+			std::cout << "joystick id: " << event.joystickMove.joystickId << std::endl;
+			std::cout << "new position: " << event.joystickMove.position << std::endl;
+			return NO_EVENT;*/
+		default:
+			if(joystickId != -1)
+			{
+				return getJoystickEvent();
+			}
+			else
+			{
+				return NO_EVENT;
+			}
+	}
+}
+
+void MameUIsenWindow::updateJoystickStatus()
+{
+	if(configuration.isJoystick_enabled())
+	{
+		if(sf::Joystick::isConnected(1))
+		{
+			joystickId = 1;
+		}
+		else if(sf::Joystick::isConnected(0))
+		{
+			joystickId = 0;
+		}
+		else
+		{
+			joystickId = -1;
+		}
+	}
+}
+
+event MameUIsenWindow::getJoystickEvent()
+{
+	static sf::Clock clock;
+	if(clock.getElapsedTime().asMilliseconds() >= configuration.getJoystick_delay())
+	{
+		clock.restart();
+		if(sf::Joystick::getAxisPosition(joystickId, sf::Joystick::X) < 0)
+		{
+			return PREVIOUS_CATEGORY;
+		}
+		else if(sf::Joystick::getAxisPosition(joystickId, sf::Joystick::X) > 0)
+		{
+			return NEXT_CATEGORY;
+		}
+		else if(sf::Joystick::getAxisPosition(joystickId, sf::Joystick::Y) < 0)
+		{
+			return PREVIOUS_ROM;
+		}
+		else if(sf::Joystick::getAxisPosition(joystickId, sf::Joystick::Y) > 0)
+		{
+			return NEXT_ROM;
+		}
+		else if(sf::Joystick::isButtonPressed(joystickId, 0))
+		{
+			return LAUNCH_ROM;
+		}
+		else
+		{
+			return NO_EVENT;
+		}
+	}
+	else
+	{
+		return NO_EVENT;
 	}
 }
 

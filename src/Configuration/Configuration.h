@@ -19,6 +19,8 @@ private:
 	std::string all_roms_category_name = "All";
 	std::string categories_config_path = "../config/categories.cfg";
 	std::string games_config_path = "../config/games.cfg";
+	bool joystick_enabled = false;
+	int joystick_delay = 250;
 	bool fullscreen = false;
 	int fps_rate = 20;
 
@@ -93,6 +95,26 @@ public:
 	void setGames_config_path(const std::string& games_config_path)
 	{
 		Configuration::games_config_path = games_config_path;
+	}
+
+	bool isJoystick_enabled() const
+	{
+		return joystick_enabled;
+	}
+
+	void setJoystick_enabled(bool joystick_enabled)
+	{
+		Configuration::joystick_enabled = joystick_enabled;
+	}
+
+	int getJoystick_delay() const
+	{
+		return joystick_delay;
+	}
+
+	void setJoystick_delay(int joystick_delay)
+	{
+		Configuration::joystick_delay = joystick_delay;
 	}
 
 	bool isFullscreen() const

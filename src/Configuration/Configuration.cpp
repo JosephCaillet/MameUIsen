@@ -28,6 +28,8 @@ void Configuration::bindDirectivesToSetters()
 	bind("SCREENSHOTS_PATH", &Configuration::setScreenshots_path);
 	bind("CATEGORIES_CONFIG_PATH", &Configuration::setCategories_config_path);
 	bind("GAMES_CONFIG_PATH", &Configuration::setGames_config_path);
+	bind("JOYSTICK_ENABLED", &Configuration::setJoystick_enabled);
+	bind("JOYSTICK_DELAY", &Configuration::setJoystick_delay);
 	bind("FULL_SCREEN", &Configuration::setFullscreen);
 	bind("FPS_RATE", &Configuration::setFps_rate);
 	bind("ALL_ROMS_CATEGORY_NAME", &Configuration::setAll_roms_category_name);

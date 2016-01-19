@@ -39,6 +39,8 @@ private:
 	sf::Texture* backgroundImageTexture = nullptr;
 	sf::Sprite backgroundImageSprite;
 
+	int joystickId = -1;
+
 public:
 	MameUIsenWindow(const std::string& configFilePath);
 	~MameUIsenWindow();
@@ -69,6 +71,9 @@ private:
 	void rebaseRomNamesPosition(RomList& romList);
 
 	event getEvent();
+	void updateJoystickStatus();
+	event getJoystickEvent();
+
 	void centerElement(sf::Sprite& sprite);
 	void centerElement(sf::Text& text);
 	void centerElement(sf::RectangleShape& rectangleShape);

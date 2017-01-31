@@ -134,6 +134,7 @@ void MameUIsenWindow::launch()
 					updateScreenshotDisplay(*rom);
 					updateRomsNamesDisplay(currentRomIndex);
 					updateSelectedRomIndicator(*rom);
+					cout << ""; //don't know why, but without this line, sfml will retun a closed event, tha close the program.
 				}
 				break;
 			case PREVIOUS_ROM:
@@ -144,6 +145,7 @@ void MameUIsenWindow::launch()
 					updateScreenshotDisplay(*rom);
 					updateRomsNamesDisplay(currentRomIndex);
 					updateSelectedRomIndicator(*rom);
+					cout << "";
 				}
 				break;
 			case NEXT_CATEGORY:
@@ -170,6 +172,7 @@ void MameUIsenWindow::launch()
 				break;
 			}
 			case EXIT:
+				cout << "Exiting..." << endl;
 				close();
 		}
 		displayAll(currentRomIndex, *romList);

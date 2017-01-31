@@ -109,6 +109,12 @@ private:
 				 "SOFTWARE." << endl << endl;
 		cout << "Usage : " << endl;
 		cout << "MameUIsen [ [-h | --help] | [ [-cf | --config-file] config_file_path] [ [-b | --build-category-rom-config-files] [bindingCatRomFile] ] ]" << endl;
+		cout <<	"MameUIsen [-h | --help] : view help.\n"
+				"MameUIsen : start MameUIsen.\n"
+				"MameUIsen [-cf | --config-file] config_file_path] : launch MameUISen using an other config file, specified by the `config_file_path` argument.\n"
+				"MameUIsen [-b | --build-category-rom-config-files] [bindingCatRomFile] : rebuild MameUIsen games config file, using `bindingCatRomFile` file. "
+				"If this argument is not specified, MameUIsen will not sort games by categories. A default file is provided here : `config/Genre.ini`." << endl;
+
 		cout << "See readme for more details." << endl;
 		exit(EXIT_SUCCESS);
 	}
